@@ -2,9 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { forkJoin, Observable, of } from 'rxjs';
 import { catchError, filter, map, tap } from 'rxjs/operators';
-import { Assignment } from '../assignments/assignment.model';
+import { Assignment } from '../model/assignment.model';
 import { LoggingService } from './logging.service';
-import { assignmentsGeneres } from './data';
+import { assignmentsGeneres } from '../../../assignments.data';
+import { Eleve } from '../model/eleve.model';
+import { Matiere } from '../model/matiere.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +16,10 @@ export class AssignmentsService {
 
   constructor(private loggingService:LoggingService, private http:HttpClient) { }
 
-  //uri = "http://localhost:8010/api/assignments";
-  uri = "https://assignments-backend.herokuapp.com/api/assignments"
+  uri = "http://localhost:8010/api/assignments";
+  base_uri = "http://localhost:8010/api/";
+  // base_uri = "https://assignments-backend.herokuapp.com/api/"
+  // uri = "https://assignments-backend.herokuapp.com/api/assignments"
 
   getAssignments():Observable<Assignment[]> {
     console.log("Dans le service de gestion des assignments...")
@@ -85,6 +89,16 @@ export class AssignmentsService {
     return this.http.post(this.uri, assignment);
   }
 
+  addAssignments(assignment: Assignment, eleves: Eleve[]):Observable<any> {
+    const assignmentsPromise = [];
+    eleves.forEach((e) => {
+      const assignment_ = assignment;
+      assignment_.eleve = e;
+      assignmentsPromise.push(this.addAssignment(assignment_));
+    })
+    return forkJoin(assignmentsPromise);
+  }
+
   updateAssignment(assignment:Assignment):Observable<any> {
     // besoin de ne rien faire puisque l'assignment passé en paramètre
     // est déjà un élément du tableau
@@ -128,19 +142,37 @@ export class AssignmentsService {
 
   // autre version qui permet de récupérer un subscribe une fois que tous les inserts
   // ont été effectués
-  peuplerBDAvecForkJoin(): Observable<any> {
+  peuplerBDAvecForkJoin(eleves: Eleve[], matieres: Matiere[]): Observable<any> {
     const appelsVersAddAssignment = [];
 
     assignmentsGeneres.forEach((a) => {
       const nouvelAssignment = new Assignment();
-
+      const randEleve = Math.floor(Math.random() * eleves.length);
+      const randMatiere = Math.floor(Math.random() * matieres.length);
       nouvelAssignment.id = a.id;
-      nouvelAssignment.nom = a.nom;
+      nouvelAssignment.nom = `${a.nom.charAt(0).toLocaleUpperCase()}${a.nom.substr(1)}`;
+      nouvelAssignment.description = a.description;
       nouvelAssignment.dateDeRendu = new Date(a.dateDeRendu);
       nouvelAssignment.rendu = a.rendu;
-
+      nouvelAssignment.matiere = matieres[randMatiere];
+      nouvelAssignment.eleve = eleves[randEleve];
+      console.log("~#", nouvelAssignment);
       appelsVersAddAssignment.push(this.addAssignment(nouvelAssignment));
     });
     return forkJoin(appelsVersAddAssignment); // renvoie un seul Observable pour dire que c'est fini
   }
+
+  // addEleves():Observable<any> {
+  //   const ajoutElevePromises = [];
+  //   elevesData.forEach((e) => {
+  //     const eleve = new Eleve();
+  //     eleve.id = e.id;
+  //     eleve.image = e.image;
+  //     eleve.nom = e.nom;
+  //     eleve.prenom = e.prenom;
+  //     eleve.sexe = e.sexe;
+  //     ajoutElevePromises.push(this.http.post(this.base_uri+'eleves', eleve))
+  //   })
+  //   return forkJoin(ajoutElevePromises);
+  // }
 }

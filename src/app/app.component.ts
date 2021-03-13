@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AssignmentsService } from './shared/assignments.service';
 import { AuthService } from './shared/auth.service';
+import { ElevesService } from './shared/eleves.service';
+import { ProfesseurService } from './shared/professeur.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +14,9 @@ export class AppComponent {
   title = 'Application de gestion des assignments';
 
   constructor(private authService:AuthService, private router:Router,
-              private assignmentsService:AssignmentsService) {}
+              private assignmentsService:AssignmentsService,
+              private professeurService: ProfesseurService,
+              private eleveService: ElevesService) {}
 
   login() {
     // si je suis pas loggé, je me loggue, sinon, si je suis
@@ -29,16 +33,30 @@ export class AppComponent {
       this.authService.logIn("admin", "toto");
     }
   }
-
+  
   peuplerBD() {
     // version naive et simple
     //this.assignmentsService.peuplerBD();
 
     // meilleure version :
-    this.assignmentsService.peuplerBDAvecForkJoin()
-      .subscribe(() => {
-        console.log("LA BD A ETE PEUPLEE, TOUS LES ASSIGNMENTS AJOUTES, ON RE-AFFICHE LA LISTE");
-        this.router.navigate(["/home"], {replaceUrl:true});
-      })
+    this.eleveService.getEleves()
+    .subscribe((eleves) => {
+      this.professeurService.getProfesseur()
+      .subscribe((matieres) => {
+        this.assignmentsService.peuplerBDAvecForkJoin(eleves, matieres)
+          .subscribe(() => {
+            console.log("LA BD A ETE PEUPLEE, TOUS LES ASSIGNMENTS AJOUTES, ON RE-AFFICHE LA LISTE");
+            this.router.navigate(["/home"], {replaceUrl:true});
+          })
+      });
+    });
+  }
+
+  importerEleve() {
+    this.eleveService.addEleves() 
+    .subscribe(() => {
+      console.log("Ajout eleve");
+      this.router.navigate(["/home"], {replaceUrl:true});
+    })
   }
 }

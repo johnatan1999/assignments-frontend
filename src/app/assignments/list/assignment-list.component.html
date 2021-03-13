@@ -1,0 +1,14 @@
+<div>
+    <div class="header">
+        <h4>Liste des assignments</h4>
+        <div class="view-switcher">
+            <button mat-button [matMenuTriggerFor]="menu">Changer de vue</button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item>Liste simple</button>
+                <button mat-menu-item>Liste avec onglet</button>
+                <button mat-menu-item>Liste avec element deplacable</button>
+            </mat-menu>
+        </div>
+    </div>
+    <app-simple-assignment-list></app-simple-assignment-list>
+</div>
