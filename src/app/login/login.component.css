@@ -1,0 +1,51 @@
+.example-card {
+  width: 500px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.mat-form-field{
+    width: 90%;
+    margin: 15px;
+}
+
+.mat-raised-button{
+    width: 90%;
+}
+
+.sign {
+  padding-top: 40px;
+  color: #8C55AA;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: bold;
+  font-size: 23px;
+}
+
+.login100-form-title {
+  font-weight: bold;
+  font-size: 39px;
+  color: #333333;
+}
+
+.mat-raised-button{
+  background-image: url('../../assets/images/bg-01.jpg');
+  background-position: center;
+  background-size: cover;
+  border: 2px;
+  color : white;
+  border-radius: 12px;
+}

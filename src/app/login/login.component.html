@@ -1,0 +1,29 @@
+<div class="flex-container" style="background-image: url('../../assets/images/bg-01.jpg')">
+    <form ngForm #formLogin (submit)="doLogin(); formLogin.reset()">
+        <mat-card class="example-card">
+            <span class="login100-form-title p-b-49"> Login </span>
+            <mat-form-field appearance="fill">
+                <mat-label>Enter your email</mat-label>
+                <input matInput placeholder="pat@example.com" [formControl]="email" required />
+                <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Enter your password</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" [formControl]="password" required />
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+                </button>
+                <mat-error *ngIf="password.invalid">{{
+                    getPasswordErrorMessage()
+                    }}</mat-error>
+            </mat-form-field>
+            <button mat-raised-button>Login</button>
+            <p>Don't have an account yet ?</p>
+            <a href="" style="display: inline">Sign up</a>
+            <p style="color: red" *ngIf="checkUser.state">
+                {{ checkUser.loginError }}
+            </p>
+        </mat-card>
+    </form>
+</div>
