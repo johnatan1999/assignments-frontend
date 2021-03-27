@@ -19,6 +19,12 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AssignmentsComponent } from './assignments/assignments.component';
 import { RenduDirective } from './shared/rendu.directive';
@@ -35,6 +41,9 @@ import { SimpleAssignmentListComponent } from './assignments/list/simple-assignm
 import { DraggableAssignmentListComponent } from './assignments/list/draggable-assignment-list/draggable-assignment-list.component';
 import { TabbedAssignmentListComponent } from './assignments/list/tabbed-assignment-list/tabbed-assignment-list.component';
 import { AssignmentCardListComponent } from './assignments/list/assignment-card-list/assignment-card-list.component';
+import { AssignmentCardComponent } from './assignments/list/assignment-card/assignment-card.component';
+import { AssignmentWithInfiniteScrollComponent } from './assignments/list/assignment-with-infinite-scroll/assignment-with-infinite-scroll.component';
+import { NoteModalComponent } from './assignments/list/draggable-assignment-list/note-modal/note-modal.component';
 
 const routes:Routes = [
   {
@@ -75,7 +84,10 @@ const routes:Routes = [
     SimpleAssignmentListComponent,
     DraggableAssignmentListComponent,
     TabbedAssignmentListComponent,
-    AssignmentCardListComponent
+    AssignmentCardListComponent,
+    AssignmentCardComponent,
+    AssignmentWithInfiniteScrollComponent,
+    NoteModalComponent
   ],
   imports: [
     BrowserModule,
@@ -90,6 +102,12 @@ const routes:Routes = [
     MatSelectModule,
     MatMenuModule,
     MatTabsModule,
+    MatPaginatorModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatButtonToggleModule,
+    DragDropModule,
+    MatDialogModule,
     RouterModule.forRoot(routes), HttpClientModule
   ],
   providers: [],

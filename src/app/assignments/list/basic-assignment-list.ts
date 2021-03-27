@@ -6,7 +6,7 @@ import { AssignmentsService } from "src/app/shared/assignments.service";
 @Injectable()
 export abstract class BasicAssignmentList implements OnInit {
     
-    assignments:Assignment[];
+    assignments:Assignment[] = [];
     page: number=1;
     limit: number=10;
     totalDocs: number;
@@ -33,10 +33,10 @@ export abstract class BasicAssignmentList implements OnInit {
         console.log("getAssignments() du service appelé");
     }
 
-    getAssignments() {
+    getAssignments(appendData = false) {
         this.assignmentsService.getAssignmentsPagine(this.page, this.limit)
         .subscribe(data => {
-          this.assignments = data.docs;
+          this.assignments = appendData ? [...this.assignments, ...data.docs]: data.docs;
           this.page = data.page;
           this.limit = data.limit;
           this.totalDocs = data.totalDocs;

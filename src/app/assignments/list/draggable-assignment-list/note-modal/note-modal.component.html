@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Note</h1>
+<div>
+    <h5 mat-subheader>{{ assignment.nom }}</h5>
+    A rendre le:&nbsp;
+    <span>{{ assignment.dateDeRendu | date }}</span>
+</div>
+<div class="card-img-container">
+    <img class="card-img" title="{{ assignment.eleve.nom }} {{ assignment.eleve.prenom }}" 
+                        src="{{ assignment.eleve.image }}" />
+</div>
+<form class="example-form">
+    <mat-form-field>
+    <mat-label>Saisissez une note</mat-label>
+    <input matInput name="note">
+    </mat-form-field>
+    <div mat-dialog-actions>
+    <button mat-raised-button  mat-button (click)="onNoClick()">No Thanks</button>
+    </div>
+</form>

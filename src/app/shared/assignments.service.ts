@@ -156,7 +156,6 @@ export class AssignmentsService {
       nouvelAssignment.rendu = a.rendu;
       nouvelAssignment.matiere = matieres[randMatiere];
       nouvelAssignment.eleve = eleves[randEleve];
-      console.log("~#", nouvelAssignment);
       appelsVersAddAssignment.push(this.addAssignment(nouvelAssignment));
     });
     return forkJoin(appelsVersAddAssignment); // renvoie un seul Observable pour dire que c'est fini

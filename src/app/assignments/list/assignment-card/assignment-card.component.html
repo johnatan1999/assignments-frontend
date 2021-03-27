@@ -1,0 +1,19 @@
+<mat-card>
+    <!-- <mat-list-item> -->
+        <mat-card-header>
+            <mat-card-title>
+                <h5 mat-subheader>{{ assignment.nom }}</h5>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="card-content">
+            <div mat-subheader>
+                A rendre le:&nbsp;
+                <span>{{ assignment.dateDeRendu | date }}</span>
+            </div>
+            <div class="card-img-container">
+                <img class="card-img" title="{{ assignment.eleve.nom }} {{ assignment.eleve.prenom }}" 
+                                    src="{{ assignment.eleve.image }}" />
+            </div>
+        </mat-card-content>
+    <!-- </mat-list-item> -->
+</mat-card>

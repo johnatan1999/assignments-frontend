@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentsService } from '../shared/assignments.service';
-import { Assignment } from '../model/assignment.model';
 
 @Component({
   selector: 'app-assignments',
@@ -9,15 +8,14 @@ import { Assignment } from '../model/assignment.model';
   styleUrls: ['./assignments.component.css'],
 })
 export class AssignmentsComponent implements OnInit {
-  assignments:Assignment[];
-  page: number=1;
-  limit: number=10;
-  totalDocs: number;
-  totalPages: number;
-  hasPrevPage: boolean;
-  prevPage: number;
-  hasNextPage: boolean;
-  nextPage: number;
+  
+  tabbedListView: Boolean = false;
+  draggableListView: Boolean = true;
+  simpleListView: Boolean = false;
+
+  static TABBED_LIST = 0;
+  static DRAGGABLE_LIST = 1;
+  static SIMPLE_LIST = 2;
 
   // on injecte le service de gestion des assignments
   constructor(private assignmentsService:AssignmentsService,
@@ -25,81 +23,40 @@ export class AssignmentsComponent implements OnInit {
               private router:Router) {}
 
   ngOnInit() {
-    console.log('AVANT AFFICHAGE');
-    // on regarde s'il y a page= et limit = dans l'URL
-    this.route.queryParams.subscribe(queryParams => {
-      console.log("Dans le subscribe des queryParams")
-      this.page = +queryParams.page || 1;
-      this.limit = +queryParams.limit || 10;
 
-      this.getAssignments();
-    });
-      console.log("getAssignments() du service appelé");
   }
 
-  getAssignments() {
-    this.assignmentsService.getAssignmentsPagine(this.page, this.limit)
-    .subscribe(data => {
-      this.assignments = data.docs;
-      this.page = data.page;
-      this.limit = data.limit;
-      this.totalDocs = data.totalDocs;
-      this.totalPages = data.totalPages;
-      this.hasPrevPage = data.hasPrevPage;
-      this.prevPage = data.prevPage;
-      this.hasNextPage = data.hasNextPage;
-      this.nextPage = data.nextPage;
-      console.log("données reçues");
-    });
+  draggableList() {
+    this.changeView(AssignmentsComponent.DRAGGABLE_LIST);
+  }
+  
+  tabbedList() {
+    this.changeView(AssignmentsComponent.TABBED_LIST);
   }
 
-  onDeleteAssignment(event) {
-    // event = l'assignment à supprimer
-
-    //this.assignments.splice(index, 1);
-    this.assignmentsService.deleteAssignment(event)
-      .subscribe(message => {
-        console.log(message);
-      })
+  simpleList() {
+    this.changeView(AssignmentsComponent.SIMPLE_LIST);
   }
 
-  premierePage() {
-    this.router.navigate(['/home'], {
-      queryParams: {
-        page:1,
-        limit:this.limit,
-      }
-    });
+  private changeView(view: Number) {
+    this.tabbedListView = false;
+    this.draggableListView = false;
+    this.simpleListView = false;
+    switch(view) {
+      case AssignmentsComponent.TABBED_LIST:
+        this.tabbedListView = true;
+        break
+      case AssignmentsComponent.DRAGGABLE_LIST:
+        this.draggableListView = true;
+        break
+      case AssignmentsComponent.SIMPLE_LIST:
+        this.simpleListView = true;
+        break
+      default: 
+        this.simpleListView = true;
+        break
+    }
   }
 
-  pageSuivante() {
-    /*
-    this.page = this.nextPage;
-    this.getAssignments();*/
-    this.router.navigate(['/home'], {
-      queryParams: {
-        page:this.nextPage,
-        limit:this.limit,
-      }
-    });
-  }
-
-
-  pagePrecedente() {
-    this.router.navigate(['/home'], {
-      queryParams: {
-        page:this.prevPage,
-        limit:this.limit,
-      }
-    });
-  }
-
-  dernierePage() {
-    this.router.navigate(['/home'], {
-      queryParams: {
-        page:this.totalPages,
-        limit:this.limit,
-      }
-    });
-  }
+  
 }

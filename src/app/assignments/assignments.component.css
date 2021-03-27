@@ -6,3 +6,8 @@
 .ajouterBtn {
   align-self: flex-end;
 }
+
+body {
+  margin: 0;
+  background-color: red;
+}

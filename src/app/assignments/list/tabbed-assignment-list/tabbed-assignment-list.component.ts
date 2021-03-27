@@ -24,13 +24,7 @@ export class TabbedAssignmentListComponent extends BasicAssignmentList {
     if(this.assignments) {
       this.assignmentsRendu = this.assignments.filter((a) => a.rendu);
       this.assignmentsNonRendu = this.assignments.filter((a) => !a.rendu);
-      console.log(this.assignmentsRendu.length, this.assignmentsNonRendu.length, this.assignments.length)
     }
   }
-
-  // ngOnInit() {
-  //   // super.ngOnInit();
-  //   console.log(this.assignments)
-  // }
 
 }

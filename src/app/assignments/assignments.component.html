@@ -1,5 +1,16 @@
-<app-tabbed-assignment-list></app-tabbed-assignment-list>
-<app-assignment-list></app-assignment-list>
+<mat-toolbar>
+  <span>Tool</span>
+  <mat-button-toggle-group  name="fontStyle" aria-label="Font Style">
+    <mat-button-toggle [checked]="true" (click)="tabbedList()" >Tabbed view</mat-button-toggle>
+    <mat-button-toggle (click)="draggableList()">Draggable view</mat-button-toggle>
+    <mat-button-toggle (click)="simpleList()">Basic view</mat-button-toggle>
+  </mat-button-toggle-group>
+</mat-toolbar>
+<app-tabbed-assignment-list *ngIf="tabbedListView" ></app-tabbed-assignment-list>
+<app-simple-assignment-list *ngIf="simpleListView" ></app-simple-assignment-list>
+<app-draggable-assignment-list *ngIf="draggableListView"></app-draggable-assignment-list>
+<!-- <app-assignment-list></app-assignment-list> -->
+
 
 <!-- <main class="container">
   <a routerLink="/add" class="ajouterBtn">

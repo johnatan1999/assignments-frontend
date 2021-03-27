@@ -17,5 +17,5 @@ export class SimpleAssignmentListComponent extends BasicAssignmentList {
               protected router:Router) {
                 super(assignmentsService, route, router);
               }
-
+      
 }

@@ -1,16 +1,8 @@
-<main class="container">
+<main class="container card-container">
     <mat-list *ngFor="let a of assignments">
-        <mat-card>
-            <a routerLink="/assignment/{{a.id}}">
-                <mat-card-title>
-                    <h3 mat-subheader>{{a.dateDeRendu | date}}</h3>
-                </mat-card-title>
-                <mat-list-item>
-                <mat-divider></mat-divider>
-                    {{ a.nom }}  
-                </mat-list-item>
-            </a>
-        </mat-card>
+        <a routerLink="/assignment/{{a.id}}" style="text-decoration: none;">
+            <app-assignment-card [assignment]="a"></app-assignment-card>
+        </a>
     </mat-list>
 </main>
   

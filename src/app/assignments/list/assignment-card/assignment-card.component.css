@@ -1,0 +1,26 @@
+.card-img-container {
+    max-width: 50px;
+    background-color: #ebecf0;
+    border-radius: 50%;
+}
+
+.card-img {
+    width: 45px;
+    margin-right: 10px;
+    height: auto;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.card-content .mat-subheader {
+    margin-left: 15px;
+    margin-top: 0;
+    padding-bottom: 0;
+}
+.mat-card-header {
+    height: 30px;
+}

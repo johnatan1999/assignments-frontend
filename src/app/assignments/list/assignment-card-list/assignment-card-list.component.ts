@@ -10,6 +10,8 @@ export class AssignmentCardListComponent implements OnInit {
 
   @Input() assignments: Assignment[];
 
+  @Input() infiniteScroll: boolean;
+
   constructor() { }
 
   ngOnInit(): void {
