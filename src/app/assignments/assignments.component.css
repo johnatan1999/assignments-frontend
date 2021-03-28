@@ -7,6 +7,21 @@
   align-self: flex-end;
 }
 
+.tp-toolbar {
+  min-height: 50px;
+}
+
+.tp-toolbar-row {
+  height: 50px;
+  box-shadow: 0 0 5px 0;
+  z-index: 2;
+}
+
+.tp-side-nav {
+  width: 200px;
+  position: absolute;
+}
+
 body {
   margin: 0;
   background-color: red;
