@@ -16,4 +16,23 @@
 
 .view-switcher {
     line-height: 62px;
+    display: flex;
+    flex-direction: row;
+}
+
+.add-action {
+    padding: 0;
+    margin-left: -20px;
+    margin-right: -20px;
+}
+
+.menu-link, 
+.menu-link:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.menu-link {
+    margin: 10px;
+    padding-left: 10px;
 }

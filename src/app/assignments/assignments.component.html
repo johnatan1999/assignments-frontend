@@ -25,7 +25,8 @@
     <app-tabbed-assignment-list *ngIf="tabbedListView" ></app-tabbed-assignment-list>
     <app-simple-assignment-list *ngIf="simpleListView" ></app-simple-assignment-list>
     <app-draggable-assignment-list *ngIf="draggableListView"></app-draggable-assignment-list> -->
-    <app-assignment-list></app-assignment-list>
+    <router-outlet name="emptys"></router-outlet>
+    <!-- <app-assignment-list></app-assignment-list> -->
   </mat-sidenav-content>
 </mat-sidenav-container>
 

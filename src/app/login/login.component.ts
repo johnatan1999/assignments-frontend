@@ -55,6 +55,7 @@ export class LoginComponent implements OnInit {
     } else {*/
       // je ne suis pas loggé, je me loggue
       this.authService.logIn(this.email.value, this.password.value).subscribe((data) => {
+        console.log("login", data)
         if(data.auth) this.router.navigate(["/assignments"]);
       }, (error) => {
         this.checkUser.state = true;

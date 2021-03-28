@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-assignment-list',
@@ -17,8 +18,7 @@ export class AssignmentListComponent implements OnInit {
   static DRAGGABLE_LIST = 1;
   static SIMPLE_LIST = 2;
 
-
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.draggableList()
@@ -57,6 +57,10 @@ export class AssignmentListComponent implements OnInit {
         this.simpleListView = true;
         break
     }
+  }
+
+  onClickAdd() {
+    this.router.navigateByUrl("/add");
   }
 
 }
