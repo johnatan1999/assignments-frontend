@@ -1,7 +1,17 @@
-.header {
+/* .header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+} */
+
+.mat-toolbar-row {
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 0 2px 0;
+}
+
+.current-view-text {
+    font-size: 14px;
 }
 
 .view-switcher {

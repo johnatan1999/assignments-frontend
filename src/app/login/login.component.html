@@ -4,7 +4,7 @@
             <span class="login100-form-title p-b-49"> Login </span>
             <mat-form-field appearance="fill">
                 <mat-label>Enter your email</mat-label>
-                <input matInput placeholder="pat@example.com" [formControl]="email" required />
+                <input matInput value="john@gmail.com" placeholder="pat@example.com" [formControl]="email" required />
                 <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
             </mat-form-field>
             <mat-form-field appearance="fill">

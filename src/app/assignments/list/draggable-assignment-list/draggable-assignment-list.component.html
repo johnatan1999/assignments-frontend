@@ -1,41 +1,51 @@
 <!-- <button mat-raised-button (click)="openDialog()">Pick one</button> -->
-<div class="example-container">
-    <h4>A rendre</h4>
-  
-    <div
-      cdkDropList
-      #todoList="cdkDropList"
-      [cdkDropListData]="assignmentsNonRendu"
-      [cdkDropListConnectedTo]="[doneList]"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-      <!-- <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div> -->
-      <mat-list *ngFor="let a of assignmentsNonRendu" cdkDrag>
-        <!-- <mat-list-item  class="assignment-item"> -->
-            <a routerLink="/assignment/{{ a.id }}" style="text-decoration: none;">
-                <app-assignment-card class="assignment-item" [assignment]="a"></app-assignment-card>
-            </a>
-        <!-- </mat-list-item> -->
-      </mat-list>
-    </div>
-</div>
-  
-<div class="example-container">
-    <h4>Rendu</h4>
-    <div
-      cdkDropList
-      #doneList="cdkDropList"
-      [cdkDropListData]="assignmentsRendu"
-      [cdkDropListConnectedTo]="[todoList]"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-      <!-- <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div> -->
-      <mat-list *ngFor="let a of assignmentsRendu" cdkDrag>
-        <!-- <mat-list-item  class="assignment-item"> -->
-            <a routerLink="/assignment/{{ a.id }}" style="text-decoration: none;">
-                <app-assignment-card class="assignment-item" [assignment]="a"></app-assignment-card>
-            </a>
-        <!-- </mat-list-item> -->
-      </mat-list>
-    </div>
+<div class="container">
+  <div class="list-container">
+      <div class="list-header">
+        <h4>A rendre</h4>  
+        <div class="list-action">
+          <a href="#" class="action-item"><mat-icon aria-hidden="false" aria-label="add icon">add</mat-icon></a>
+        </div>  
+      </div>
+      <div
+        cdkDropList
+        #todoList="cdkDropList"
+        [cdkDropListData]="assignmentsNonRendu"
+        [cdkDropListConnectedTo]="[doneList]"
+        class="assignment-list"
+        (cdkDropListDropped)="drop($event)">
+        <!-- <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div> -->
+        <mat-list *ngFor="let a of assignmentsNonRendu" cdkDrag>
+          <!-- <mat-list-item  class="assignment-item"> -->
+              <a routerLink="/assignment/{{ a.id }}" style="text-decoration: none;">
+                  <app-assignment-card class="assignment-item" [assignment]="a"></app-assignment-card>
+              </a>
+          <!-- </mat-list-item> -->
+        </mat-list>
+      </div>
+  </div>
+    
+  <div class="list-container">
+      <div class="list-header">
+        <h4>Rendu</h4>  
+        <div class="list-action">
+        </div>  
+      </div>
+      <div
+        cdkDropList
+        #doneList="cdkDropList"
+        [cdkDropListData]="assignmentsRendu"
+        [cdkDropListConnectedTo]="[todoList]"
+        class="assignment-list"
+        (cdkDropListDropped)="drop($event)">
+        <!-- <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div> -->
+        <mat-list *ngFor="let a of assignmentsRendu" cdkDrag>
+          <!-- <mat-list-item  class="assignment-item"> -->
+              <a routerLink="/assignment/{{ a.id }}" style="text-decoration: none;">
+                  <app-assignment-card class="assignment-item" [assignment]="a"></app-assignment-card>
+              </a>
+          <!-- </mat-list-item> -->
+        </mat-list>
+      </div>
+  </div>
 </div>
