@@ -34,7 +34,7 @@ import { AssignmentDetailComponent } from './assignments/assignment-detail/assig
 import { AddAssignmentComponent } from './assignments/add-assignment/add-assignment.component';
 import { Routes, RouterModule } from '@angular/router';
 import { EditAssigmentComponent } from './assignments/edit-assigment/edit-assigment.component';
-import { AuthGuard } from './shared/auth.guard';
+import { AuthGuard } from './shared/guard/auth.guard';
 import { HttpClientModule } from '@angular/common/http';
 import { AssignmentListComponent } from './assignments/list/assignment-list.component';
 import { SimpleAssignmentListComponent } from './assignments/list/simple-assignment-list/simple-assignment-list.component';
@@ -45,6 +45,8 @@ import { AssignmentCardComponent } from './assignments/list/assignment-card/assi
 import { AssignmentWithInfiniteScrollComponent } from './assignments/list/assignment-with-infinite-scroll/assignment-with-infinite-scroll.component';
 import { NoteModalComponent } from './assignments/list/draggable-assignment-list/note-modal/note-modal.component';
 import { LoginComponent } from "./login/login.component";
+import { AuthService } from "./shared/auth.service";
+import { ChildGuard } from "./shared/guard/child.guard";
 
 const routes: Routes = [
   { 
@@ -57,32 +59,30 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
-    // indique que http://localhost:4200 sans rien ou avec un "/" à la fin
-    // doit afficher le composant AssignmentsComponent (celui qui affiche la liste)
     path: "assignments",
     component: AssignmentsComponent,
-    canActivate: [AuthGuard],
+    children: [
+      {
+        path: "",
+        component: AssignmentListComponent
+      },
+      {
+        path: "add",
+        component: AddAssignmentComponent
+      },
+      {
+        path: ":id",
+        component: AssignmentDetailComponent
+      }
+    ],
+    canActivate: [AuthGuard],    
+    canActivateChild: [ChildGuard],
+    data: { roles: [ AuthService.ADMIN, AuthService.PROFESSEUR ] }
   },
   {
     // idem avec  http://localhost:4200/home
     path: "home",
     component: AssignmentsComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: "add",
-    component: AddAssignmentComponent,
-    outlet: 'empty',
-    canActivate: [AuthGuard],
-  },
-  {
-    path: "assignment/:id",
-    component: AssignmentDetailComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: "assignment/:id/edit",
-    component: EditAssigmentComponent,
     canActivate: [AuthGuard],
   }
 ];

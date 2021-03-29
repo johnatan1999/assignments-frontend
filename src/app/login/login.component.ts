@@ -56,7 +56,6 @@ export class LoginComponent implements OnInit {
       // je ne suis pas loggé, je me loggue
 
       this.authService.logIn(this.email.value, this.password.value).subscribe((data) => {
-        console.log("login", data)
         if(data.auth)
         {
           localStorage.setItem("user",JSON.stringify(data.user));
