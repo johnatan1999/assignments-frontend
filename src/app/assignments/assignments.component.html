@@ -1,13 +1,18 @@
 <mat-toolbar class="tp-toolbar">
   <mat-toolbar-row class="tp-toolbar-row">
-    <span>Assignments</span>
-    <span class="toolbar-spacer"></span>
+    <img src="../../assets/images/Capture.PNG" style="height: inherit">
+    <!--<span class="toolbar-spacer"></span>-->
+    <button mat-button (click)="logout()">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" >logout</mat-icon>
+    </button>
+    
+
   </mat-toolbar-row>
 </mat-toolbar>
 <mat-sidenav-container>
   <mat-sidenav opened mode="side" class="tp-side-nav">
     <mat-nav-list>
-      <a mat-list-item [routerLink]="'/'"> Assignments </a>
+      <a mat-list-item [routerLink]="'/assignments'"> Assignments </a>
       <a mat-list-item [routerLink]="'/'"> Eleves </a>
       <a mat-list-item [routerLink]="'/'"> Professeur </a>
       <a mat-list-item [routerLink]="'/'"> Tableau de bord </a>

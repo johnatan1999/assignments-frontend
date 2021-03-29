@@ -32,8 +32,8 @@ export class AuthGuard implements CanActivate {
         return true;
       } else {
         // On renvoie vers la page d'accueil
-        console.log("GUARD : vous n'êtes pas autorisé à naviguer vers EDIT (vous n'êtes pas admin))");
-        this.router.navigate(['/home']);
+        console.log("GUARD : vous n'êtes pas autorisé à naviguer vers cette url (vous n'êtes pas admin))");
+        this.router.navigate(['/login']);
         return false;
       }
     });

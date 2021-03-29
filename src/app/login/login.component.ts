@@ -54,9 +54,14 @@ export class LoginComponent implements OnInit {
       this.router.navigate(["/home"]);
     } else {*/
       // je ne suis pas loggé, je me loggue
+
       this.authService.logIn(this.email.value, this.password.value).subscribe((data) => {
         console.log("login", data)
-        if(data.auth) this.router.navigate(["/assignments"]);
+        if(data.auth)
+        {
+          localStorage.setItem("user",JSON.stringify(data.user));
+          this.router.navigate(["/assignments"]);
+        } 
       }, (error) => {
         this.checkUser.state = true;
       });

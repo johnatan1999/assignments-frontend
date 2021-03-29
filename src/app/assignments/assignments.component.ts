@@ -10,9 +10,14 @@ import { AssignmentsService } from '../shared/assignments.service';
 export class AssignmentsComponent implements OnInit {
   
   // on injecte le service de gestion des assignments
-  constructor() {}
+  constructor( private router:Router) {}
 
   ngOnInit() {
+  }
+
+  logout(){
+    localStorage.removeItem("user");
+    this.router.navigate(["/login"]);
   }
 
 }

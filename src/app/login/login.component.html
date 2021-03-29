@@ -1,7 +1,7 @@
-<div class="flex-container" style="background-image: url('../../assets/images/bg-01.jpg')">
+<div class="flex-container" >
     <form ngForm #formLogin (submit)="doLogin(); formLogin.reset()">
         <mat-card class="example-card">
-            <span class="login100-form-title p-b-49"> Login </span>
+            <span class="login100-form-title p-b-49"> <img src="../../assets/images/logo.PNG"> </span>
             <mat-form-field appearance="fill">
                 <mat-label>Enter your email</mat-label>
                 <input matInput value="john@gmail.com" placeholder="pat@example.com" [formControl]="email" required />

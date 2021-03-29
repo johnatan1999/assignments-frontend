@@ -61,26 +61,30 @@ const routes: Routes = [
     // doit afficher le composant AssignmentsComponent (celui qui affiche la liste)
     path: "assignments",
     component: AssignmentsComponent,
+    canActivate: [AuthGuard],
   },
   {
     // idem avec  http://localhost:4200/home
     path: "home",
     component: AssignmentsComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: "add",
     component: AddAssignmentComponent,
-    outlet: 'empty'
+    outlet: 'empty',
+    canActivate: [AuthGuard],
   },
   {
     path: "assignment/:id",
     component: AssignmentDetailComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: "assignment/:id/edit",
     component: EditAssigmentComponent,
     canActivate: [AuthGuard],
-  },
+  }
 ];
 @NgModule({
   declarations: [
