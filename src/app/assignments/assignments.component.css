@@ -31,3 +31,24 @@ body {
   margin: 0;
   background-color: red;
 }
+
+.item-row{
+  display: flex;
+  flex-direction: row;
+}
+
+
+.mat-nav-list{
+  display: flex;
+  flex-direction: column;
+}
+
+span{
+  font-family: Roboto, "Tahoma", sans-serif;
+}
+
+.item-row:hover{
+  color: brown;
+}
+
+

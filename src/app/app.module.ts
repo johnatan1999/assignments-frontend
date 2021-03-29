@@ -48,6 +48,7 @@ import { LoginComponent } from "./login/login.component";
 import { AuthService } from "./shared/auth.service";
 import { ChildGuard } from "./shared/guard/child.guard";
 
+
 const routes: Routes = [
   { 
     path: "", 

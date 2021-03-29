@@ -11,8 +11,9 @@ export class AssignmentsComponent implements OnInit {
   
   // on injecte le service de gestion des assignments
   constructor( private router:Router) {}
-
+  
   ngOnInit() {
+    
   }
 
   logout(){
