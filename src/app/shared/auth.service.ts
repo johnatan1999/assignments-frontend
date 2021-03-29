@@ -8,6 +8,12 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthService {
 
+  public static ADMIN = "admin";
+
+  public static ELEVE = "eleve";
+
+  public static PROFESSEUR = "professeur";
+
   constructor(private http: HttpClient) { }
 
   logIn(login, password) {
@@ -36,10 +42,9 @@ export class AuthService {
 
   // exemple d'utilisation :
   // isAdmin.then(admin => { console.log("administrateur : " + admin);})
-  isAdmin() {
+  isLogged() {
     return new Promise((resolve, reject) => {
       let user = JSON.parse(localStorage.getItem("user"));
-      console.log(user);
       if (!user) return false;
       resolve(user.role == "admin");
     });
@@ -54,6 +59,10 @@ export class AuthService {
     });
   }
 
+  isInRoles(roles: String[]) {
+    if(!roles) return false;
+    return roles.includes(AuthService.ADMIN) || roles.includes(AuthService.ELEVE) || roles.includes(AuthService.PROFESSEUR);
+  }
 
   isEleve() {
     return new Promise((resolve, reject) => {

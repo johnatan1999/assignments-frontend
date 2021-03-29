@@ -4,7 +4,7 @@ import { forkJoin, Observable, of } from 'rxjs';
 import { catchError, filter, map, tap } from 'rxjs/operators';
 import { Assignment } from '../model/assignment.model';
 import { LoggingService } from './logging.service';
-import { assignmentsGeneres } from '../../../assignments.data';
+import { assignmentsGeneres } from '../../dummy-data/assignments.data';
 import { Eleve } from '../model/eleve.model';
 import { Matiere } from '../model/matiere.model';
 

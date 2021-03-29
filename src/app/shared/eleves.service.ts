@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { forkJoin, Observable, of } from 'rxjs';
 import { catchError, filter, map, tap } from 'rxjs/operators';
 import { LoggingService } from './logging.service';
-import { elevesData } from '../../../eleves.data';
+import { elevesData } from '../../dummy-data/eleves.data';
 import { Eleve } from '../model/eleve.model';
 import { BasicService } from './basic.service';
 
