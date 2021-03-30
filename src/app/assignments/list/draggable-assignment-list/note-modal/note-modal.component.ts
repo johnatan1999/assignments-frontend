@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Assignment } from 'src/app/model/assignment.model';
+import { Assignment } from 'src/app/shared/model/assignment.model';
 import { DraggableAssignmentListComponent } from '../draggable-assignment-list.component';
 
 

@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Professeur } from "../model/professeur.model";
 import { BasicService } from "./basic.service";
-import { LoggingService } from "./logging.service";
+import { LoggingService } from "./login.service";
 
 @Injectable({
     providedIn: 'root'

@@ -27,6 +27,10 @@
   position: absolute;
 }
 
+.mat-list-item.active {
+  color: aqua;
+}
+
 body {
   margin: 0;
   background-color: red;

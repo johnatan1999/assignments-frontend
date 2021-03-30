@@ -60,7 +60,7 @@ export class AssignmentListComponent implements OnInit {
   }
 
   onClickAdd() {
-    this.router.navigateByUrl("/add");
+    this.router.navigateByUrl("/assignments/add");
   }
 
 }

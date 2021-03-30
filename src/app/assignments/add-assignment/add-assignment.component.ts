@@ -2,14 +2,14 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Eleve } from 'src/app/model/eleve.model';
-import { EleveItem } from 'src/app/model/list-item.model';
-import { Matiere } from 'src/app/model/matiere.model';
-import { Professeur } from 'src/app/model/professeur.model';
-import { AssignmentsService } from 'src/app/shared/assignments.service';
-import { ElevesService } from 'src/app/shared/eleves.service';
-import { ProfesseurService } from 'src/app/shared/professeur.service';
-import { Assignment } from '../../model/assignment.model';
+import { Eleve } from 'src/app/shared/model/eleve.model';
+import { EleveItem } from 'src/app/shared/model/list-item.model';
+import { Matiere } from 'src/app/shared/model/matiere.model';
+import { Professeur } from 'src/app/shared/model/professeur.model';
+import { AssignmentsService } from 'src/app/shared/services/assignments.service';
+import { ElevesService } from 'src/app/shared/services/eleves.service';
+import { ProfesseurService } from 'src/app/shared/services/professeur.service';
+import { Assignment } from '../../shared/model/assignment.model';
 
 @Component({
   selector: 'app-add-assignment',

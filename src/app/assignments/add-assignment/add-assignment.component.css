@@ -8,3 +8,8 @@
   height: 250px;
   overflow: auto;
 }
+
+.form-container {
+  padding: 60px;
+  box-shadow: 1px 0 1px 0;
+}

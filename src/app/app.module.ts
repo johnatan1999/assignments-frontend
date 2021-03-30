@@ -45,7 +45,7 @@ import { AssignmentCardComponent } from './assignments/list/assignment-card/assi
 import { AssignmentWithInfiniteScrollComponent } from './assignments/list/assignment-with-infinite-scroll/assignment-with-infinite-scroll.component';
 import { NoteModalComponent } from './assignments/list/draggable-assignment-list/note-modal/note-modal.component';
 import { LoginComponent } from "./login/login.component";
-import { AuthService } from "./shared/auth.service";
+import { AuthService } from "./shared/services/auth.service";
 import { ChildGuard } from "./shared/guard/child.guard";
 
 

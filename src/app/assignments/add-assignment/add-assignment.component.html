@@ -21,68 +21,70 @@
 <!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
   {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
 </button> -->
-<form [formGroup]="assignmentFormGroup">
-  <mat-horizontal-stepper [linear]="false" #stepper formArrayName="formArray">
-    <mat-step [formGroupName]="0" [stepControl]="formArray?.get([0])">
-        <ng-template matStepLabel>Devoir</ng-template>
+<div class="form-container">
+  <form [formGroup]="assignmentFormGroup">
+    <mat-horizontal-stepper [linear]="false" #stepper formArrayName="formArray">
+      <mat-step [formGroupName]="0" [stepControl]="formArray?.get([0])">
+          <ng-template matStepLabel>Devoir</ng-template>
+          <mat-form-field>
+            <input matInput formControlName="nomDevoirCtrl" placeholder="Titre" required [(ngModel)]="nom" name="nom">
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <textarea  matInput formControlName="descriptionDevoirCtrl" placeholder="Description" required [(ngModel)]="description" name="description"></textarea>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill">
+            <mat-label>Matiere</mat-label>
+            <mat-select formControlName="matiereCtrl" [(ngModel)]="matiereSelectionne" name="matiere">
+              <mat-option *ngFor="let matiere of matieres" [value]="matiere">
+                {{ matiere.nom }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill">
+            <mat-label>Choisissez une date</mat-label>
+            <input formControlName="dateCtrl" matInput [matDatepicker]="picker" required [(ngModel)]="dateDeRendu" name="date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          
+          <div>
+            <button mat-button matStepperNext>Suivant</button>
+          </div>
+      </mat-step>
+      <mat-step [formGroupName]="1" [stepControl]="formArray?.get([1])">
+        <ng-template matStepLabel>Eleves</ng-template>
+  
         <mat-form-field>
-          <input matInput formControlName="nomDevoirCtrl" placeholder="Titre" required [(ngModel)]="nom" name="nom">
+          <input matInput formControlName="searchCtrl" placeholder="Recherche" (keyup)="onSearch()" [(ngModel)]="eleveRecherche" name="recherche">
         </mat-form-field>
-        <br>
-        <mat-form-field>
-          <textarea  matInput formControlName="descriptionDevoirCtrl" placeholder="Description" required [(ngModel)]="description" name="description"></textarea>
-        </mat-form-field>
-        <br>
-        <mat-form-field appearance="fill">
-          <mat-label>Matiere</mat-label>
-          <mat-select formControlName="matiereCtrl" [(ngModel)]="matiereSelectionne" name="matiere">
-            <mat-option *ngFor="let matiere of matieres" [value]="matiere">
-              {{ matiere.nom }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <br>
-        <mat-form-field appearance="fill">
-          <mat-label>Choisissez une date</mat-label>
-          <input formControlName="dateCtrl" matInput [matDatepicker]="picker" required [(ngModel)]="dateDeRendu" name="date">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
+  
+        <mat-selection-list class="scrollable" #eleves>
+          <mat-list-option *ngFor="let item of listeElevesAffiche" [value]='item'  [selected]="item.checked" (click)="checkEleve(item)">
+            {{ item.eleve.nom }} {{ item.eleve.prenom }}
+          </mat-list-option>
+        </mat-selection-list>
+        
+        <p>
+          Options selected: {{eleves.selectedOptions.selected.length}}
+        </p>
         
         <div>
-          <button mat-button matStepperNext>Next</button>
+          <button mat-button matStepperPrevious>Precèdant</button>
+          <button mat-button matStepperNext>Suivant</button>
         </div>
-    </mat-step>
-    <mat-step [formGroupName]="1" [stepControl]="formArray?.get([1])">
-      <ng-template matStepLabel>Eleves</ng-template>
-
-      <mat-form-field>
-        <input matInput formControlName="searchCtrl" placeholder="Recherche" (keyup)="onSearch()" [(ngModel)]="eleveRecherche" name="recherche">
-      </mat-form-field>
-
-      <mat-selection-list class="scrollable" #eleves>
-        <mat-list-option *ngFor="let item of listeElevesAffiche" [value]='item'  [selected]="item.checked" (click)="checkEleve(item)">
-          {{ item.eleve.nom }} {{ item.eleve.prenom }}
-        </mat-list-option>
-      </mat-selection-list>
-      
-      <p>
-        Options selected: {{eleves.selectedOptions.selected.length}}
-      </p>
-      
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </mat-step>
-    <mat-step>
-        <ng-template matStepLabel>Done</ng-template>
-        <p>You are now done.</p>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button (click)="onSubmit_($event); stepper.reset()">Submit</button>
-        </div>
-    </mat-step>
-  </mat-horizontal-stepper>
-</form>
-  
+      </mat-step>
+      <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+          <p>You are now done.</p>
+          <div>
+            <button mat-button matStepperPrevious>Precèdant</button>
+            <button mat-button (click)="onSubmit_($event); stepper.reset()">Valider</button>
+          </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </form>
+    
+</div>

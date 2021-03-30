@@ -1,9 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AssignmentsService } from 'src/app/shared/assignments.service';
+import { AssignmentsService } from 'src/app/shared/services/assignments.service';
 import { BasicAssignmentList } from '../basic-assignment-list';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Assignment } from 'src/app/model/assignment.model';
+import { Assignment } from 'src/app/shared/model/assignment.model';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NoteModalComponent } from './note-modal/note-modal.component';
 

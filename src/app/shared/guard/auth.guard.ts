@@ -7,7 +7,7 @@ import {
   Router,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +28,7 @@ export class AuthGuard implements CanActivate {
     // bien un admin
     return this.authService.isLogged().then((logged) => {
       if (logged && this.authService.isInRoles(route.data.roles)) {
-        console.log("GUARD : autorisation accordée")
+        console.log("GUARD : autorisation accordée", route.routeConfig.path)
         return true;
       } else {
         // On renvoie vers la page d'accueil

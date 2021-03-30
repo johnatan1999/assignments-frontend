@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AssignmentsService } from './shared/assignments.service';
-import { AuthService } from './shared/auth.service';
-import { ElevesService } from './shared/eleves.service';
-import { ProfesseurService } from './shared/professeur.service';
+import { AssignmentsService } from './shared/services/assignments.service';
+import { AuthService } from './shared/services/auth.service';
+import { ElevesService } from './shared/services/eleves.service';
+import { ProfesseurService } from './shared/services/professeur.service';
 
 @Component({
   selector: 'app-root',

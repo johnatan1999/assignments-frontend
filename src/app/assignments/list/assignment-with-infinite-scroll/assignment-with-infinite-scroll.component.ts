@@ -2,8 +2,8 @@ import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { Component, NgZone, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, pairwise, throttleTime } from 'rxjs/operators';
-import { Assignment } from 'src/app/model/assignment.model';
-import { AssignmentsService } from 'src/app/shared/assignments.service';
+import { Assignment } from 'src/app/shared/model/assignment.model';
+import { AssignmentsService } from 'src/app/shared/services/assignments.service';
 import { BasicAssignmentList } from '../basic-assignment-list';
 
 @Component({

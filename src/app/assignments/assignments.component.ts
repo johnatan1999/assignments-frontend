@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AssignmentsService } from '../shared/assignments.service';
+import { AssignmentsService } from '../shared/services/assignments.service';
 
 @Component({
   selector: 'app-assignments',
@@ -19,6 +19,18 @@ export class AssignmentsComponent implements OnInit {
   logout(){
     localStorage.removeItem("user");
     this.router.navigate(["/login"]);
+  }
+
+  peuplerBD() {
+    
+  }
+
+  genererProfesseurs() {
+
+  }
+
+  genererEleves() {
+
   }
 
 }

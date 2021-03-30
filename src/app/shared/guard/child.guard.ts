@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +15,9 @@ export class ChildGuard implements CanActivateChild {
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      return this.authService.isLogged().then((admin) => {
-        if (this.authService.isInRoles(childRoute.data.roles)) {
-          console.log("GUARD : autorisation accordée")
+      return this.authService.isLogged().then((logged) => {
+        if (logged && this.authService.isInRoles(childRoute.parent.routeConfig.data.roles)) {
+          console.log("GUARD : autorisation accordée", childRoute.routeConfig.path)
           return true;
         } else {
           // On renvoie vers la page d'accueil
