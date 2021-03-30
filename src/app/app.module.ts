@@ -47,6 +47,9 @@ import { NoteModalComponent } from './assignments/list/draggable-assignment-list
 import { LoginComponent } from "./login/login.component";
 import { AuthService } from "./shared/services/auth.service";
 import { ChildGuard } from "./shared/guard/child.guard";
+import { ElevesComponent } from './assignments/eleves/eleves.component';
+import {MatTableModule} from '@angular/material/table';
+import { ProfesseursComponent } from './assignments/professeurs/professeurs.component';
 
 
 const routes: Routes = [
@@ -71,10 +74,18 @@ const routes: Routes = [
         path: "add",
         component: AddAssignmentComponent
       },
+      { 
+        path: "eleves", 
+        component: ElevesComponent,
+      },
+      { 
+        path: "professeurs", 
+        component: ProfesseursComponent,
+      },
       {
         path: ":id",
         component: AssignmentDetailComponent
-      }
+      },
     ],
     canActivate: [AuthGuard],    
     canActivateChild: [ChildGuard],
@@ -104,7 +115,9 @@ const routes: Routes = [
     AssignmentCardListComponent,
     AssignmentCardComponent,
     AssignmentWithInfiniteScrollComponent,
-    NoteModalComponent
+    NoteModalComponent,
+    ElevesComponent,
+    ProfesseursComponent
   ],
   imports: [
     BrowserModule,
@@ -133,6 +146,7 @@ const routes: Routes = [
     MatButtonToggleModule,
     DragDropModule,
     MatDialogModule,
+    MatTableModule,
     RouterModule.forRoot(routes), HttpClientModule
   ],
   providers: [],

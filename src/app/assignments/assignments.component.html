@@ -19,7 +19,7 @@
         </div>
       </a>
 
-      <a mat-list-item routerLinkActive #rlab="routerLinkActive" [ngStyle]="rlab.isActive && {'color': 'brown'}"  [routerLink]="'/home'"> 
+      <a mat-list-item routerLinkActive #rlab="routerLinkActive" [ngStyle]="rlab.isActive && {'color': 'brown'}"  [routerLink]="'/assignments/eleves'"> 
         <div class="item-row">
           <mat-icon aria-hidden="false" aria-label="Example home icon" style="margin-right: 5px;
           line-height: 17px;"> group </mat-icon>
@@ -27,7 +27,7 @@
         </div>
       </a>
 
-      <a mat-list-item [routerLink]="'/'"> 
+      <a mat-list-item routerLinkActive #rlac="routerLinkActive" [ngStyle]="rlac.isActive && {'color': 'brown'}" [routerLink]="'/assignments/professeurs'"> 
         <div class="item-row">
           <mat-icon aria-hidden="false" aria-label="Example home icon" style="margin-right: 5px;
           line-height: 17px;"> group </mat-icon>

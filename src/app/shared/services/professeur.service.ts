@@ -20,4 +20,8 @@ export class ProfesseurService extends BasicService {
         return this.http.get<Professeur[]>(this.getUri(this.PATH));
     }
 
+    getProfesseursPagine(page:number, limit:number):Observable<any> {
+        return this.http.get<Professeur[]>(this.getUri(this.PATH)+"?page="+page + "&limit="+limit);
+    }
+
 }
