@@ -10,7 +10,7 @@
 <mat-sidenav-container style="min-height: 95vh;">
   <mat-sidenav opened mode="side" class="tp-side-nav">
     <mat-nav-list >
-      <a mat-list-item  routerLinkActive #rla="routerLinkActive" [ngStyle]="rla.isActive && {'color': 'brown'}"   [routerLink]="'/assignments'">
+      <a mat-list-item  routerLinkActive #rla="routerLinkActive" [routerLinkActiveOptions]="{exact: true}" [ngStyle]="rla.isActive && {'color': 'brown'}"   [routerLink]="'/assignments'">
       
         <div class="item-row">
           <mat-icon aria-hidden="false" aria-label="Example home icon" style="margin-right: 5px;
@@ -19,7 +19,7 @@
         </div>
       </a>
 
-      <a mat-list-item routerLinkActive #rlab="routerLinkActive" [ngStyle]="rlab.isActive && {'color': 'brown'}"  [routerLink]="'/assignments/eleves'"> 
+      <a mat-list-item routerLinkActive #rlab="routerLinkActive" [routerLinkActiveOptions]="{exact: true}"  [ngStyle]="rlab.isActive && {'color': 'brown'}"  [routerLink]="'/assignments/eleves'"> 
         <div class="item-row">
           <mat-icon aria-hidden="false" aria-label="Example home icon" style="margin-right: 5px;
           line-height: 17px;"> group </mat-icon>
@@ -27,7 +27,7 @@
         </div>
       </a>
 
-      <a mat-list-item routerLinkActive #rlac="routerLinkActive" [ngStyle]="rlac.isActive && {'color': 'brown'}" [routerLink]="'/assignments/professeurs'"> 
+      <a mat-list-item routerLinkActive #rlac="routerLinkActive" [routerLinkActiveOptions]="{exact: true}"  [ngStyle]="rlac.isActive && {'color': 'brown'}" [routerLink]="'/assignments/professeurs'"> 
         <div class="item-row">
           <mat-icon aria-hidden="false" aria-label="Example home icon" style="margin-right: 5px;
           line-height: 17px;"> group </mat-icon>
