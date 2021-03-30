@@ -8,4 +8,7 @@ export class BasicService {
         return `${BasicService.base_uri}${path}`.replace(/\//g, '/');
     }
 
+    generateId():number {
+      return Math.round(Math.random()*100000);
+    }
 }

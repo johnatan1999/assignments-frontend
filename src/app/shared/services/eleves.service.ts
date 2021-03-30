@@ -69,15 +69,11 @@ export class ElevesService extends BasicService {
     };
   }
 
-  generateId():number {
-    return Math.round(Math.random()*100000);
-  }
-
-  addEleves():Observable<any> {
+  importEleve():Observable<any> {
     const ajoutElevePromises = [];
     elevesData.forEach((e) => {
       const eleve = new Eleve();
-      eleve.id = e.id;
+      eleve.id = this.generateId();
       eleve.image = e.image;
       eleve.nom = e.nom;
       eleve.prenom = e.prenom;
@@ -86,4 +82,6 @@ export class ElevesService extends BasicService {
     })
     return forkJoin(ajoutElevePromises);
   }
+
+
 }

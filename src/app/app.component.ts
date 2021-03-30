@@ -11,6 +11,7 @@ import { ProfesseurService } from './shared/services/professeur.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
   title = 'Application de gestion des assignments';
 
   constructor(private authService:AuthService, private router:Router,
@@ -38,8 +39,10 @@ export class AppComponent {
     });
   }
 
+  
+
   importerEleve() {
-    this.eleveService.addEleves() 
+    this.eleveService.importEleve() 
     .subscribe(() => {
       console.log("Ajout eleve");
       this.router.navigate(["/home"], {replaceUrl:true});

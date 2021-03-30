@@ -45,18 +45,42 @@
     </mat-nav-list>
     <mat-nav-list>
       <mat-list-item>
-        <button mat-button>Peupler BD</button>
+        <button mat-button (click)="peuplerBDAvecProgressBar()" >Peupler BD</button>
+      </mat-list-item>
+      <!-- <mat-list-item>
+        <button mat-button (click)="genererProfesseurs()" >Generer Professeurs</button>
       </mat-list-item>
       <mat-list-item>
-        <button mat-button>Generer Professeurs</button>
-      </mat-list-item>
-      <mat-list-item>
-        <button mat-button>Generer Eleves</button>
-      </mat-list-item>
+        <button mat-button (click)="genererEleves()" >Generer Eleves</button>
+      </mat-list-item> -->
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <router-outlet></router-outlet>
     <!-- <app-assignment-list></app-assignment-list> -->
+    
   </mat-sidenav-content>
 </mat-sidenav-container>
+<div class="progression-container" *ngIf="showProgression">
+  <div class="progression" cdkDragBoundary=".progression-container" cdkDrag>
+      <mat-card>
+        <div class="handle" cdkDragHandle>
+          <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
+            <path d="M0 0h24v24H0z" fill="none"></path>
+          </svg>
+        </div>
+        <mat-card-title>
+          <p>Peuplement de la base de donnée ({{ progression }}/{{ progressionMax }})</p>
+        </mat-card-title>
+        <mat-card-content>
+          <mat-progress-bar
+            class="example-margin"
+            [color]="'primary'"
+            [mode]="'determinate'"
+            [value]="tauxProgression">
+          </mat-progress-bar>
+        </mat-card-content>
+        <mat-card-footer>&nbsp;</mat-card-footer>
+      </mat-card>
+  </div>

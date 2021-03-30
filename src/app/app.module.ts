@@ -25,6 +25,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatRippleModule } from '@angular/material/core';
+
 
 import { AssignmentsComponent } from './assignments/assignments.component';
 import { RenduDirective } from './shared/rendu.directive';
@@ -147,6 +151,9 @@ const routes: Routes = [
     DragDropModule,
     MatDialogModule,
     MatTableModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
+    MatRippleModule,
     RouterModule.forRoot(routes), HttpClientModule
   ],
   providers: [],

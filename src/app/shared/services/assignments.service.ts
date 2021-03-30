@@ -7,6 +7,8 @@ import { LoggingService } from './login.service';
 import { assignmentsGeneres } from '../../../dummy-data/assignments.data';
 import { Eleve } from '../model/eleve.model';
 import { Matiere } from '../model/matiere.model';
+import { ProfesseurService } from './professeur.service';
+import { ElevesService } from './eleves.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,8 @@ import { Matiere } from '../model/matiere.model';
 export class AssignmentsService {
   assignments:Assignment[];
 
-  constructor(private loggingService:LoggingService, private http:HttpClient) { }
+  constructor(private loggingService:LoggingService, private http:HttpClient,
+    private professeurService: ProfesseurService, private eleveService: ElevesService) { }
 
   uri = "http://localhost:8010/api/assignments";
   base_uri = "http://localhost:8010/api/";
