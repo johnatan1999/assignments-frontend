@@ -18,7 +18,7 @@ export class ElevesService extends BasicService {
 
   PATH = '/eleves';
 
-  getEleves():Observable<Eleve[]> {
+  getEleves():Observable<any[]> {
     console.log("Dans le service de gestion des Eleves...")
     //return of(this.Eleves);
     return this.http.get<Eleve[]>(this.getUri(this.PATH));

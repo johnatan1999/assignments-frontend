@@ -35,10 +35,10 @@ export class AssignmentsComponent implements OnInit {
 
   peuplerBD() {
     this.eleveService.getEleves()
-    .subscribe((eleves) => {
+    .subscribe((eleves: any) => {
       this.professeurService.getProfesseur()
       .subscribe((matieres) => {
-        this.assignmentService.peuplerBDAvecForkJoin(eleves, matieres)
+        this.assignmentService.peuplerBDAvecForkJoin(eleves.docs, matieres)
           .subscribe(() => {
             console.log("LA BD A ETE PEUPLEE, TOUS LES ASSIGNMENTS AJOUTES, ON RE-AFFICHE LA LISTE");
             this.router.navigate(["/home"], {replaceUrl:true});
@@ -50,9 +50,11 @@ export class AssignmentsComponent implements OnInit {
   peuplerBDAvecProgressBar() {
     this.showProgression = true;
     this.eleveService.getEleves()
-    .subscribe((eleves) => {
+    .subscribe((eleves: any) => {
+      eleves = eleves.docs;
       this.professeurService.getProfesseur()
-      .subscribe((matieres) => {
+      .subscribe((matieres: any) => {
+        matieres = matieres.docs;
         assignmentsGeneres.forEach((a) => {
           const nouvelAssignment = new Assignment();
           const randEleve = Math.floor(Math.random() * eleves.length);
