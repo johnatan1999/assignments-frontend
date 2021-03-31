@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { EleveItem } from 'src/app/shared/model/list-item.model';
+import { Matiere } from 'src/app/shared/model/matiere.model';
 import { AssignmentsService } from 'src/app/shared/services/assignments.service';
+import { ElevesService } from 'src/app/shared/services/eleves.service';
+import { MatiereService } from 'src/app/shared/services/matiere.service';
 import { Assignment } from '../../../shared/model/assignment.model';
 
 @Component({
@@ -12,23 +17,56 @@ export class EditAssigmentComponent implements OnInit {
   assignment:Assignment;
 
   // pour le formulaire
-  nom = "";
+  nom = '';
+  description = '';
+  isLinear = false;
   dateDeRendu = null;
+  assignmentFormGroup: FormGroup;
+    
+  eleveRecherche = '';
+  matiereSelectionne = null;
+  listeEleves: EleveItem[] = [];
+  listeElevesAffiche: EleveItem[] = [];
+  eleveSelectionne: any;
+  matieres: Matiere[];
 
   constructor(
     private assignmentsService: AssignmentsService,
+    private matiereService: MatiereService,
+    private elevesService: ElevesService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private _formBuilder: FormBuilder
   ) {}
-
+  
+  get formArray(): AbstractControl | null { return this.assignmentFormGroup.get('formArray'); }
+  
   ngOnInit(): void {
-    // ici on montre comment on peut récupérer les parametres http
-    // par ex de :
-    // http://localhost:4200/assignment/1/edit?nom=Michel%20Buffa&metier=Professeur&responsable=MIAGE#edition
+    this.assignmentFormGroup = this._formBuilder.group({
+      formArray: this._formBuilder.array([
+        this._formBuilder.group({
+          nomDevoirCtrl: ['', Validators.required],
+          descriptionDevoirCtrl: ['', Validators.required],
+          dateCtrl: ['', Validators.required],
+          matiereCtrl: ['', Validators.required]
+        }),
+        this._formBuilder.group({
+          searchCtrl: ['', ()=>{}]
+        }),
+      ])
+    });
 
-    console.log(this.route.snapshot.queryParams);
-    console.log(this.route.snapshot.fragment);
-
+    this.matiereService.getMatiere().subscribe((matieres) => {
+      this.matieres = matieres;
+    })
+    this.elevesService.getEleves()
+      .subscribe((eleves: any) => {
+        eleves = eleves.docs;
+        this.listeEleves = eleves.map((e) => {
+          return new EleveItem(e, false);
+        });
+        this.listeElevesAffiche = this.listeEleves;
+      });
     this.getAssignmentById();
   }
 
@@ -37,12 +75,12 @@ export class EditAssigmentComponent implements OnInit {
     // en number en mettant un "+" devant
     const id: number = +this.route.snapshot.params.id;
 
-    console.log('Dans ngOnInit de details, id = ' + id);
     this.assignmentsService.getAssignment(id).subscribe((assignment) => {
       this.assignment = assignment;
-
+      this.eleveSelectionne = assignment.eleve;
       this.nom = assignment.nom;
       this.dateDeRendu = assignment.dateDeRendu;
+      this.description = assignment.description;
     });
   }
 
@@ -62,5 +100,31 @@ export class EditAssigmentComponent implements OnInit {
         this.router.navigate(["/home"]);
       })
 
+  }
+
+  selectEleve(item: EleveItem) {
+    console.log(item);
+    this.eleveSelectionne = item.eleve;
+    const index_ = this.listeEleves.indexOf(item);
+    this.listeEleves[index_].checked = true;
+  }
+
+  getElevesSelectiones() {
+    return this.listeEleves.filter((e) => e.checked);
+  }
+
+  onSearch() {
+    if(!this.eleveRecherche) {
+      this.listeElevesAffiche = this.listeEleves;
+      return;
+    }
+    this.listeElevesAffiche = [];
+    this.listeEleves.forEach((e) => { 
+      const critere = this.eleveRecherche.toLocaleLowerCase();
+      if(e.eleve.nom?.toLocaleLowerCase().includes(critere) ||
+      e.eleve.prenom?.toLocaleLowerCase().includes(critere)) {
+        this.listeElevesAffiche.push(e);
+      }
+    });
   }
 }

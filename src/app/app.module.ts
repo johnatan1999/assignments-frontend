@@ -90,6 +90,10 @@ const routes: Routes = [
         path: "detail/:id",
         component: AssignmentDetailComponent
       },
+      {
+        path: "edit/:id",
+        component: EditAssigmentComponent
+      }
     ],
     canActivate: [AuthGuard],    
     canActivateChild: [ChildGuard],

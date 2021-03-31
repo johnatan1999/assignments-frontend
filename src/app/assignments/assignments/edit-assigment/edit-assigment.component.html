@@ -1,20 +1,76 @@
-<h2>Modification de l'assignment</h2>
 
-<form ngForm #formAssignment class="form" (submit)="onSubmit($event); formAssignment.reset();">
-  <mat-form-field>
-    <input matInput placeholder="Nom du devoir" required [(ngModel)]="nom" name="nom">
-  </mat-form-field>
+<div class="form-container">
+  <form [formGroup]="assignmentFormGroup">
+    <mat-horizontal-stepper [linear]="false" #stepper formArrayName="formArray">
+      <mat-step [formGroupName]="0" [stepControl]="formArray?.get([0])">
+          <ng-template matStepLabel>Devoir</ng-template>
+          <mat-form-field>
+            <input matInput formControlName="nomDevoirCtrl" placeholder="Titre" required [(ngModel)]="nom" name="nom">
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <textarea class="description" matInput formControlName="descriptionDevoirCtrl" placeholder="Description" required [(ngModel)]="description" name="description"></textarea>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill">
+            <mat-label>Matiere</mat-label>
+            <mat-select formControlName="matiereCtrl" [(ngModel)]="matiereSelectionne" name="matiere">
+              <mat-option *ngFor="let matiere of matieres" [value]="matiere">
+                {{ matiere.nom }} <img src="{{ matiere.image }}">
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill">
+            <mat-label>Choisissez une date</mat-label>
+            <input formControlName="dateCtrl" matInput [matDatepicker]="picker" required [(ngModel)]="dateDeRendu" name="date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperNext>Suivant</button>
+          </div>
+      </mat-step>
+      <mat-step [formGroupName]="1" [stepControl]="formArray?.get([1])">
+        <ng-template matStepLabel>Eleves</ng-template>
+        <div class="eleve-preview">
+          <div class="eleve-img">
+            <img title="{{ eleveSelectionne?.nom }} {{ eleveSelectionne?.prenom }}" 
+                                  src="{{ eleveSelectionne?.image }}" />
+          </div>
+          <div class="eleve-info">
+            <span>{{ eleveSelectionne?.nom }} {{ eleveSelectionne?.prenom }}</span>
+          </div>
+        </div>
+        <mat-form-field>
+          <input matInput formControlName="searchCtrl" placeholder="Recherche" (keyup)="onSearch()" [(ngModel)]="eleveRecherche" name="recherche">
+        </mat-form-field>
+        
+        <mat-selection-list class="scrollable" #eleves [multiple]="false">
+          <mat-list-option *ngFor="let item of listeElevesAffiche" [value]='item'  [selected]="item.checked" (click)="selectEleve(item)">
+            {{ item.eleve.nom }} {{ item.eleve.prenom }}
+          </mat-list-option>
+        </mat-selection-list>
+        
+        <p>
+          Options selected: {{ eleveSelectionne?.nom }}
+        </p>
+        
+        <div>
+          <button mat-button matStepperPrevious>Precèdant</button>
+          <button mat-button matStepperNext>Suivant</button>
+        </div>
+      </mat-step>
+      <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+          <p>You are now done.</p>
+          <div>
+            <button mat-button matStepperPrevious>Precèdant</button>
+            <button mat-button (click)="onSubmit($event); stepper.reset()">Valider</button>
+          </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </form>
+    
+</div>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Choisissez une date</mat-label>
-    <input matInput [matDatepicker]="picker" required [(ngModel)]="dateDeRendu" name="date">
-
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-
-  <button mat-stroked-button color="primary">
-    Modifier le devoir
-  </button>
-</form>

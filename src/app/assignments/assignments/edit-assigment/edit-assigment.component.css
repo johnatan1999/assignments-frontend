@@ -1,5 +1,60 @@
+
 .form {
   display:flex;
   flex-direction: column;
   margin:5px;
+}
+
+.scrollable {
+  height: 250px;
+  overflow: auto;
+}
+
+.form-container {
+  padding: 60px;
+  box-shadow: 1px 0 1px 0;
+}
+
+.description {
+  min-height: 150px;
+  max-height: 200px;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.eleve-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.eleve-img {
+  background-color: #ebecf0;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.eleve-img img {
+  width: 120px;
+  height: auto;
+  border-radius: 25%;
+}
+
+.eleve-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.eleve-info span {
+  margin: auto;
+  font-size: 16px;
+  font-weight: 600;
 }

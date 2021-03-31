@@ -4,6 +4,7 @@ import { assignmentsGeneres } from 'src/dummy-data/assignments.data';
 import { Assignment } from '../shared/model/assignment.model';
 import { AssignmentsService } from '../shared/services/assignments.service';
 import { ElevesService } from '../shared/services/eleves.service';
+import { MatiereService } from '../shared/services/matiere.service';
 import { ProfesseurService } from '../shared/services/professeur.service';
 
 @Component({
@@ -22,6 +23,7 @@ export class AssignmentsComponent implements OnInit {
   // on injecte le service de gestion des assignments
   constructor(private router:Router, private assignmentService: AssignmentsService,
     private eleveService: ElevesService, private professeurService: ProfesseurService,
+    private matiereService: MatiereService, 
     private assignmentsService:AssignmentsService) {}
   
   ngOnInit() {
@@ -92,6 +94,12 @@ export class AssignmentsComponent implements OnInit {
   genererEleves() {
     this.eleveService.importEleve().subscribe(() => {
       console.log("Eleves générés!");
+    });
+  }
+
+  genererMatieres() {
+    this.matiereService.importMatieres().subscribe(() => {
+      console.log("Matieres générées!");
     });
   }
 

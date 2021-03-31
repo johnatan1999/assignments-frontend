@@ -24,9 +24,7 @@ export class AddAssignmentComponent implements OnInit {
   isLinear = false;
   dateDeRendu = null;
   assignmentFormGroup: FormGroup;
-  
-  toppings = new FormControl();
-  
+    
   eleveRecherche = '';
   matiereSelectionne = null;
   listeEleves: EleveItem[] = [];
