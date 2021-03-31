@@ -9,7 +9,7 @@ import { Professeur } from 'src/app/shared/model/professeur.model';
 import { AssignmentsService } from 'src/app/shared/services/assignments.service';
 import { ElevesService } from 'src/app/shared/services/eleves.service';
 import { ProfesseurService } from 'src/app/shared/services/professeur.service';
-import { Assignment } from '../../shared/model/assignment.model';
+import { Assignment } from '../../../shared/model/assignment.model';
 
 @Component({
   selector: 'app-add-assignment',

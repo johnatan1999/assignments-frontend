@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentsService } from 'src/app/shared/services/assignments.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { Assignment } from '../../shared/model/assignment.model';
+import { Assignment } from '../../../shared/model/assignment.model';
 
 @Component({
   selector: 'app-assignment-detail',

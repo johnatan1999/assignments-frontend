@@ -17,7 +17,7 @@
         <!-- <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div> -->
         <mat-list *ngFor="let a of assignmentsNonRendu" cdkDrag>
           <!-- <mat-list-item  class="assignment-item"> -->
-              <a routerLink="/assignment/{{ a.id }}" style="text-decoration: none;">
+              <a routerLink="/assignments/detail/{{ a.id }}" style="text-decoration: none;">
                   <app-assignment-card class="assignment-item" [assignment]="a"></app-assignment-card>
               </a>
           <!-- </mat-list-item> -->

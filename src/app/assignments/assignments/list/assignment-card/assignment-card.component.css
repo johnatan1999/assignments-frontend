@@ -1,3 +1,8 @@
+.card {
+    padding-top: 8px;
+    max-height: 70px;
+}
+
 .card-img-container {
     max-width: 50px;
     background-color: #ebecf0;
@@ -23,4 +28,9 @@
 }
 .mat-card-header {
     height: 30px;
+}
+
+.card,
+.mat-subheader {
+    padding-left: 0;
 }

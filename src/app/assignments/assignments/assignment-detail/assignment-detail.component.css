@@ -1,0 +1,46 @@
+.container {
+  margin: 30px;
+}
+.containe .mat-card {
+  background-color: #f4f5f7;
+}
+
+#bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.mat-card-content {
+  display: flex;
+  flex-direction: row;
+}
+
+.left-content {
+  width: 70%;
+}
+.right-content {
+  width: 30%;
+  padding-left: 50px;
+}
+
+.description-header {
+  display: flex;
+  flex-direction: row;
+}
+
+.note {
+  background-color: rgba(9,30,66,.08);
+  margin-bottom: 10px;
+}
+
+.remarque {
+  background-color: rgba(9,30,66,.08);
+}
+
+.remarque-content {
+  min-height: 100px;
+  max-height: 100px;
+  overflow-y: auto;
+  background-color: #f4f5f7;
+}

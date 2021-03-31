@@ -34,20 +34,20 @@ import { AssignmentsComponent } from './assignments/assignments.component';
 import { RenduDirective } from './shared/rendu.directive';
 import { NonRenduDirective } from './shared/non-rendu.directive';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AssignmentDetailComponent } from './assignments/assignment-detail/assignment-detail.component';
-import { AddAssignmentComponent } from './assignments/add-assignment/add-assignment.component';
+import { AssignmentDetailComponent } from './assignments/assignments/assignment-detail/assignment-detail.component';
+import { AddAssignmentComponent } from './assignments/assignments/add-assignment/add-assignment.component';
 import { Routes, RouterModule } from '@angular/router';
-import { EditAssigmentComponent } from './assignments/edit-assigment/edit-assigment.component';
+import { EditAssigmentComponent } from './assignments/assignments/edit-assigment/edit-assigment.component';
 import { AuthGuard } from './shared/guard/auth.guard';
 import { HttpClientModule } from '@angular/common/http';
-import { AssignmentListComponent } from './assignments/list/assignment-list.component';
-import { SimpleAssignmentListComponent } from './assignments/list/simple-assignment-list/simple-assignment-list.component';
-import { DraggableAssignmentListComponent } from './assignments/list/draggable-assignment-list/draggable-assignment-list.component';
-import { TabbedAssignmentListComponent } from './assignments/list/tabbed-assignment-list/tabbed-assignment-list.component';
-import { AssignmentCardListComponent } from './assignments/list/assignment-card-list/assignment-card-list.component';
-import { AssignmentCardComponent } from './assignments/list/assignment-card/assignment-card.component';
-import { AssignmentWithInfiniteScrollComponent } from './assignments/list/assignment-with-infinite-scroll/assignment-with-infinite-scroll.component';
-import { NoteModalComponent } from './assignments/list/draggable-assignment-list/note-modal/note-modal.component';
+import { AssignmentListComponent } from './assignments/assignments/list/assignment-list.component';
+import { SimpleAssignmentListComponent } from './assignments/assignments/list/simple-assignment-list/simple-assignment-list.component';
+import { DraggableAssignmentListComponent } from './assignments/assignments/list/draggable-assignment-list/draggable-assignment-list.component';
+import { TabbedAssignmentListComponent } from './assignments/assignments/list/tabbed-assignment-list/tabbed-assignment-list.component';
+import { AssignmentCardListComponent } from './assignments/assignments/list/assignment-card-list/assignment-card-list.component';
+import { AssignmentCardComponent } from './assignments/assignments/list/assignment-card/assignment-card.component';
+import { AssignmentWithInfiniteScrollComponent } from './assignments/assignments/list/assignment-with-infinite-scroll/assignment-with-infinite-scroll.component';
+import { NoteModalComponent } from './assignments/assignments/list/draggable-assignment-list/note-modal/note-modal.component';
 import { LoginComponent } from "./login/login.component";
 import { AuthService } from "./shared/services/auth.service";
 import { ChildGuard } from "./shared/guard/child.guard";
@@ -87,7 +87,7 @@ const routes: Routes = [
         component: ProfesseursComponent,
       },
       {
-        path: ":id",
+        path: "detail/:id",
         component: AssignmentDetailComponent
       },
     ],
