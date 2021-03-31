@@ -5,19 +5,19 @@ import { Professeur } from "../model/professeur.model";
 import { BasicService } from "./basic.service";
 import { LoggingService } from "./login.service";
 import { professeurs as professeursData } from 'src/dummy-data/professeurs.data';
+import { MatiereService } from "./matiere.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class ProfesseurService extends BasicService {
 
-    constructor(private loggingService:LoggingService, private http:HttpClient) { super(); }
+    constructor(private loggingService:LoggingService, private http:HttpClient,
+        private matiereService: MatiereService) { super(); }
 
     static PATH = '/professeurs';
 
     getProfesseur():Observable<Professeur[]> {
-        console.log("Dans le service de gestion des Eleves...")
-        //return of(this.Eleves);
         return this.http.get<Professeur[]>(this.getUri(ProfesseurService.PATH));
     }
 
@@ -43,7 +43,8 @@ export class ProfesseurService extends BasicService {
             prof.image = professeursData[i].image;
             prof.nom = professeursData[i].nom;
             prof.prenom = professeursData[i].prenom;
-            prof.matiere = professeursData[i].matiere;
+            const matiere = { ...professeursData[i].matiere, id: this.generateId() };
+            prof.matiere = matiere;
             professeurs.push(prof);
             i++;
         }

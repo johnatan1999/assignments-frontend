@@ -1,7 +1,7 @@
 export const professeurs = [
   {
-    "nom": "Joletta",
-    "prenom": "Sullly",
+    "nom": "Vetso",
+    "prenom": "Rakotobe",
     "image": "https://robohash.org/molestiaealiquidsint.png?size=50x50&set=set1",
     "matiere": {
       "nom": "Programmation objet",

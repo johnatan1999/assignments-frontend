@@ -57,7 +57,8 @@ export class AddAssignmentComponent implements OnInit {
       ])
     });
     this.elevesService.getEleves()
-      .subscribe((eleves) => {
+      .subscribe((eleves: any) => {
+        eleves = eleves.docs;
         this.listeEleves = eleves.map((e) => {
           return new EleveItem(e, false);
         });
@@ -65,7 +66,9 @@ export class AddAssignmentComponent implements OnInit {
       });
 
     this.professeurService.getProfesseur()
-    .subscribe((professeurs: Professeur[]) => {
+    .subscribe((professeurs: any) => {
+      professeurs = professeurs.docs;
+      
       this.matieres = professeurs.map(professeur => professeur.matiere);
     })
   }
