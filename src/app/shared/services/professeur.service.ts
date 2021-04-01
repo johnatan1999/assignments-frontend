@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { forkJoin, Observable } from "rxjs";
+import { forkJoin, Observable, of } from "rxjs";
 import { Professeur } from "../model/professeur.model";
 import { BasicService } from "./basic.service";
 import { LoggingService } from "./login.service";
@@ -35,20 +35,23 @@ export class ProfesseurService extends BasicService {
     }
 
     importProfesseurs(): Observable<any> {
-        var i=0;
-        const professeurs: Professeur[] = []
-        while(i < 8) {
-            const prof = new Professeur();
-            prof.id = this.generateId();
-            prof.image = professeursData[i].image;
-            prof.nom = professeursData[i].nom;
-            prof.prenom = professeursData[i].prenom;
-            const matiere = { ...professeursData[i].matiere, id: this.generateId() };
-            prof.matiere = matiere;
-            professeurs.push(prof);
-            i++;
-        }
-        return this.addProfesseurs(professeurs);
+        return of(this.matiereService.getMatiere().subscribe((matieres) => {
+            var i=0;
+            const professeurs: Professeur[] = []
+            while(i < matieres.length) {
+                const prof = new Professeur();
+                prof.id = this.generateId();
+                prof.image = professeursData[i].image;
+                prof.nom = professeursData[i].nom;
+                prof.prenom = professeursData[i].prenom;
+                prof.matiere = matieres[i];
+                professeurs.push(prof);
+                i++;
+            }
+            return this.addProfesseurs(professeurs).subscribe(() => {
+
+            });
+        }));
     }
 
     getProfesseursPagine(page:number, limit:number):Observable<any> {

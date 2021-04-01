@@ -29,6 +29,19 @@
   flex-direction: row;
 }
 
+.description-header .mat-icon {
+  margin-top: 12px;
+}
+
+.description-header h3 {
+  padding-left: 10px;
+}
+
+.label {
+  color: gray;
+  text-transform: uppercase;
+}
+
 .note {
   background-color: rgba(9,30,66,.08);
   margin-bottom: 10px;

@@ -55,18 +55,18 @@ export class AssignmentsComponent implements OnInit {
     .subscribe((eleves: any) => {
       eleves = eleves.docs;
       this.professeurService.getProfesseur()
-      .subscribe((matieres: any) => {
-        matieres = matieres.docs;
+      .subscribe((professeurs: any) => {
+        professeurs = professeurs.docs;
         assignmentsGeneres.forEach((a) => {
           const nouvelAssignment = new Assignment();
           const randEleve = Math.floor(Math.random() * eleves.length);
-          const randMatiere = Math.floor(Math.random() * matieres.length);
+          const randMatiere = Math.floor(Math.random() * professeurs.length);
           nouvelAssignment.id = a.id;
           nouvelAssignment.nom = `${a.nom.charAt(0).toLocaleUpperCase()}${a.nom.substr(1)}`;
           nouvelAssignment.description = a.description;
           nouvelAssignment.dateDeRendu = new Date(a.dateDeRendu);
           nouvelAssignment.rendu = a.rendu;
-          nouvelAssignment.matiere = matieres[randMatiere];
+          nouvelAssignment.professeur = professeurs[randMatiere];
           nouvelAssignment.eleve = eleves[randEleve];
           this.progressionMax = assignmentsGeneres.length;
           this.assignmentsService.addAssignment(nouvelAssignment).subscribe(() => {

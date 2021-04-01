@@ -1,5 +1,6 @@
 import { Eleve } from "./eleve.model";
 import { Matiere } from "./matiere.model";
+import { Professeur } from "./professeur.model";
 
 export class Assignment {
   _id?:string;
@@ -11,5 +12,5 @@ export class Assignment {
   remarque: string;
   rendu:boolean;
   eleve: Eleve;
-  matiere: Matiere
+  professeur: Professeur;
 }

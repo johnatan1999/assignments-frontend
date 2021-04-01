@@ -9,6 +9,7 @@ import { Eleve } from '../model/eleve.model';
 import { Matiere } from '../model/matiere.model';
 import { ProfesseurService } from './professeur.service';
 import { ElevesService } from './eleves.service';
+import { Professeur } from '../model/professeur.model';
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +53,7 @@ export class AssignmentsService {
     .pipe(
       // traitement 1
       map(a => {
-        a.nom += " MODIFIE PAR MAP";
+        // a.nom += " MODIFIE PAR MAP";
         return a;
       }),
       tap(a => {
@@ -145,19 +146,19 @@ export class AssignmentsService {
 
   // autre version qui permet de récupérer un subscribe une fois que tous les inserts
   // ont été effectués
-  peuplerBDAvecForkJoin(eleves: Eleve[], matieres: Matiere[]): Observable<any> {
+  peuplerBDAvecForkJoin(eleves: Eleve[], professeurs: Professeur[]): Observable<any> {
     const appelsVersAddAssignment = [];
 
     assignmentsGeneres.forEach((a) => {
       const nouvelAssignment = new Assignment();
       const randEleve = Math.floor(Math.random() * eleves.length);
-      const randMatiere = Math.floor(Math.random() * matieres.length);
+      const randProfesseurs = Math.floor(Math.random() * professeurs.length);
       nouvelAssignment.id = a.id;
       nouvelAssignment.nom = `${a.nom.charAt(0).toLocaleUpperCase()}${a.nom.substr(1)}`;
       nouvelAssignment.description = a.description;
       nouvelAssignment.dateDeRendu = new Date(a.dateDeRendu);
       nouvelAssignment.rendu = a.rendu;
-      nouvelAssignment.matiere = matieres[randMatiere];
+      nouvelAssignment.professeur = professeurs[randProfesseurs];
       nouvelAssignment.eleve = eleves[randEleve];
       appelsVersAddAssignment.push(this.addAssignment(nouvelAssignment));
     });

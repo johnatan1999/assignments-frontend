@@ -26,11 +26,11 @@ export class AddAssignmentComponent implements OnInit {
   assignmentFormGroup: FormGroup;
     
   eleveRecherche = '';
-  matiereSelectionne = null;
+  profSelectionne = null;
   listeEleves: EleveItem[] = [];
   listeElevesAffiche: EleveItem[] = [];
   elevesSelectionnes = [];
-  matieres: Matiere[];
+  professeurs: Professeur[];
 
   get formArray(): AbstractControl | null { return this.assignmentFormGroup.get('formArray'); }
 
@@ -65,9 +65,7 @@ export class AddAssignmentComponent implements OnInit {
 
     this.professeurService.getProfesseur()
     .subscribe((professeurs: any) => {
-      professeurs = professeurs.docs;
-      
-      this.matieres = professeurs.map(professeur => professeur.matiere);
+      this.professeurs = professeurs.docs;
     })
   }
 
@@ -96,7 +94,7 @@ export class AddAssignmentComponent implements OnInit {
     nouvelAssignment.rendu = false;
     nouvelAssignment.description = this.description;
     nouvelAssignment.remarque = '';
-    nouvelAssignment.matiere = this.matiereSelectionne;
+    nouvelAssignment.professeur = this.profSelectionne;
     nouvelAssignment.note = 0;
 
     this.assignmentsService.addAssignments(nouvelAssignment, this.getElevesSelectiones().map(e => e.eleve))

@@ -3,9 +3,11 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { ActivatedRoute, Router } from '@angular/router';
 import { EleveItem } from 'src/app/shared/model/list-item.model';
 import { Matiere } from 'src/app/shared/model/matiere.model';
+import { Professeur } from 'src/app/shared/model/professeur.model';
 import { AssignmentsService } from 'src/app/shared/services/assignments.service';
 import { ElevesService } from 'src/app/shared/services/eleves.service';
 import { MatiereService } from 'src/app/shared/services/matiere.service';
+import { ProfesseurService } from 'src/app/shared/services/professeur.service';
 import { Assignment } from '../../../shared/model/assignment.model';
 
 @Component({
@@ -24,15 +26,15 @@ export class EditAssigmentComponent implements OnInit {
   assignmentFormGroup: FormGroup;
     
   eleveRecherche = '';
-  matiereSelectionne = null;
+  profSelectionne = null;
   listeEleves: EleveItem[] = [];
   listeElevesAffiche: EleveItem[] = [];
   eleveSelectionne: any;
-  matieres: Matiere[];
+  professeurs: Professeur[];
 
   constructor(
     private assignmentsService: AssignmentsService,
-    private matiereService: MatiereService,
+    private professeurService: ProfesseurService,
     private elevesService: ElevesService,
     private route: ActivatedRoute,
     private router: Router,
@@ -56,8 +58,8 @@ export class EditAssigmentComponent implements OnInit {
       ])
     });
 
-    this.matiereService.getMatiere().subscribe((matieres) => {
-      this.matieres = matieres;
+    this.professeurService.getProfesseur().subscribe((professeurs) => {
+      this.professeurs = professeurs;
     })
     this.elevesService.getEleves()
       .subscribe((eleves: any) => {
@@ -81,6 +83,7 @@ export class EditAssigmentComponent implements OnInit {
       this.nom = assignment.nom;
       this.dateDeRendu = assignment.dateDeRendu;
       this.description = assignment.description;
+      this.profSelectionne = this.assignment.professeur;
     });
   }
 
@@ -91,19 +94,21 @@ export class EditAssigmentComponent implements OnInit {
 
     this.assignment.nom = this.nom;
     this.assignment.dateDeRendu = this.dateDeRendu;
+    this.assignment.eleve = this.eleveSelectionne;
+    this.assignment.professeur = this.profSelectionne;
+    this.assignment.description = this.description;
 
     this.assignmentsService.updateAssignment(this.assignment)
       .subscribe(message => {
         console.log(message);
 
         // et on navigue vers la page d'accueil
-        this.router.navigate(["/home"]);
+        this.router.navigate(["assignments/detail/" + this.assignment.id]);
       })
 
   }
 
   selectEleve(item: EleveItem) {
-    console.log(item);
     this.eleveSelectionne = item.eleve;
     const index_ = this.listeEleves.indexOf(item);
     this.listeEleves[index_].checked = true;

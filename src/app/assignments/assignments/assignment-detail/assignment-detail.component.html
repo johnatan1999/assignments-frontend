@@ -17,12 +17,16 @@
         </div>
       </div>
       <div class="right-content">
+        <div class="matiere">
+          <div class="label">Matiere</div>
+          <div class="matiere-value">{{ assignmentTransmis?.matiere?.nom }}</div>
+        </div>
         <div class="note">
-          <div class="note-label">Note</div>
-          <div class="note-value">0/20</div>
+          <div class="label">Note</div>
+          <div class="note-value">{{ assignmentTransmis?.note || 0 }}/20</div>
         </div>
         <div class="remarque">
-          <div class="remarque-label">Remarque</div>
+          <div class="label">Remarque</div>
           <div class="remarque-content">
             {{ assignmentTransmis.remarque }}
           </div>

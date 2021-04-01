@@ -14,9 +14,9 @@
           <br>
           <mat-form-field appearance="fill">
             <mat-label>Matiere</mat-label>
-            <mat-select formControlName="matiereCtrl" [(ngModel)]="matiereSelectionne" name="matiere">
-              <mat-option *ngFor="let matiere of matieres" [value]="matiere">
-                {{ matiere.nom }} <img src="{{ matiere.image }}">
+            <mat-select formControlName="matiereCtrl" [(ngModel)]="profSelectionne" name="matiere">
+              <mat-option *ngFor="let prof of professeurs" [value]="prof">
+                {{ prof.matiere.nom }} 
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -66,7 +66,7 @@
           <p>You are now done.</p>
           <div>
             <button mat-button matStepperPrevious>Precèdant</button>
-            <button mat-button (click)="onSubmit($event); stepper.reset()">Valider</button>
+            <button mat-button (click)="onSubmit($event)">Valider</button>
           </div>
       </mat-step>
     </mat-horizontal-stepper>
