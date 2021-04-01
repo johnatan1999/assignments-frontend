@@ -58,17 +58,17 @@ export class EditAssigmentComponent implements OnInit {
       ])
     });
 
-    this.professeurService.getProfesseur().subscribe((professeurs) => {
-      this.professeurs = professeurs;
+    this.professeurService.getProfesseurs().subscribe((professeurs: any) => {
+      this.professeurs = professeurs.docs;
     })
     this.elevesService.getEleves()
-      .subscribe((eleves: any) => {
-        eleves = eleves.docs;
-        this.listeEleves = eleves.map((e) => {
-          return new EleveItem(e, false);
-        });
-        this.listeElevesAffiche = this.listeEleves;
+    .subscribe((eleves: any) => {
+      eleves = eleves.docs;
+      this.listeEleves = eleves.map((e) => {
+        return new EleveItem(e, false);
       });
+      this.listeElevesAffiche = this.listeEleves;
+    });
     this.getAssignmentById();
   }
 
@@ -83,7 +83,7 @@ export class EditAssigmentComponent implements OnInit {
       this.nom = assignment.nom;
       this.dateDeRendu = assignment.dateDeRendu;
       this.description = assignment.description;
-      this.profSelectionne = this.assignment.professeur;
+      this.profSelectionne = this.professeurs.find((p) => p.id === this.assignment.professeur.id);
     });
   }
 

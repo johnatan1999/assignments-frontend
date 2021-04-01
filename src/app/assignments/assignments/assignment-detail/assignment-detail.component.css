@@ -1,8 +1,9 @@
 .container {
   margin: 30px;
 }
-.containe .mat-card {
+.container .mat-card {
   background-color: #f4f5f7;
+  padding: 25px;
 }
 
 #bottom {
@@ -24,6 +25,13 @@
   padding-left: 50px;
 }
 
+.eleve img {
+  border-radius: 50%;
+  height: auto;
+  width: 50px;
+  background-color: lightgray;
+}
+
 .description-header {
   display: flex;
   flex-direction: row;
@@ -35,6 +43,10 @@
 
 .description-header h3 {
   padding-left: 10px;
+}
+
+.description-content {
+  max-width: 560px;
 }
 
 .label {

@@ -44,7 +44,7 @@ export class DraggableAssignmentListComponent extends BasicAssignmentList {
     }
   }
 
-  drop(event: CdkDragDrop<Assignment[]>) {
+  dropVersRendu(event: CdkDragDrop<Assignment[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -59,11 +59,32 @@ export class DraggableAssignmentListComponent extends BasicAssignmentList {
     }
   }
 
+  dropVersNonRendu(event: CdkDragDrop<Assignment[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      const assignment: Assignment = event.previousContainer.data[event.previousIndex];
+      const assignmentSelectionne = this.assignments[this.assignments.indexOf(assignment)];
+      assignmentSelectionne.rendu = false;
+      assignmentSelectionne.note = 0;
+      this.assignmentsService.updateAssignment(assignmentSelectionne).subscribe(() => {
+        console.log(`Deplacement de '${assignmentSelectionne.nom}' vers la liste des non-rendus`)
+      })
+      // console.log(event.previousContainer.data[event.previousIndex]);
+      // this.openDialog(this.assignments[this.assignments.indexOf(assignment)]);
+      transferArrayItem<Assignment>(event.previousContainer.data,
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
+    }
+  }
+
   openDialog(assignment: Assignment): void {
     const dialogRef = this.dialog.open(NoteModalComponent, {
       width: '500px',
       height: '500px',
-      data: assignment
+      data: assignment,
+      disableClose: true
     });
 
     dialogRef.afterClosed().subscribe(result => {

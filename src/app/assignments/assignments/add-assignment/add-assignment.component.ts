@@ -63,7 +63,7 @@ export class AddAssignmentComponent implements OnInit {
         this.listeElevesAffiche = this.listeEleves;
       });
 
-    this.professeurService.getProfesseur()
+    this.professeurService.getProfesseurs()
     .subscribe((professeurs: any) => {
       this.professeurs = professeurs.docs;
     })

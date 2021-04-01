@@ -28,7 +28,7 @@ export class AppComponent {
     // meilleure version :
     this.eleveService.getEleves()
     .subscribe((eleves) => {
-      this.professeurService.getProfesseur()
+      this.professeurService.getProfesseurs()
       .subscribe((matieres) => {
         this.assignmentsService.peuplerBDAvecForkJoin(eleves, matieres)
           .subscribe(() => {

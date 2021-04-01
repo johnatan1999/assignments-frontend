@@ -38,7 +38,7 @@ export class AssignmentsComponent implements OnInit {
   peuplerBD() {
     this.eleveService.getEleves()
     .subscribe((eleves: any) => {
-      this.professeurService.getProfesseur()
+      this.professeurService.getProfesseurs()
       .subscribe((matieres) => {
         this.assignmentService.peuplerBDAvecForkJoin(eleves.docs, matieres)
           .subscribe(() => {
@@ -54,7 +54,7 @@ export class AssignmentsComponent implements OnInit {
     this.eleveService.getEleves()
     .subscribe((eleves: any) => {
       eleves = eleves.docs;
-      this.professeurService.getProfesseur()
+      this.professeurService.getProfesseurs()
       .subscribe((professeurs: any) => {
         professeurs = professeurs.docs;
         assignmentsGeneres.forEach((a) => {

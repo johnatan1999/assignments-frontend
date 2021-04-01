@@ -13,7 +13,7 @@
         [cdkDropListData]="assignmentsNonRendu"
         [cdkDropListConnectedTo]="[doneList]"
         class="assignment-list"
-        (cdkDropListDropped)="drop($event)">
+        (cdkDropListDropped)="dropVersNonRendu($event)">
         <!-- <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div> -->
         <mat-list *ngFor="let a of assignmentsNonRendu" cdkDrag>
           <!-- <mat-list-item  class="assignment-item"> -->
@@ -37,11 +37,11 @@
         [cdkDropListData]="assignmentsRendu"
         [cdkDropListConnectedTo]="[todoList]"
         class="assignment-list"
-        (cdkDropListDropped)="drop($event)">
+        (cdkDropListDropped)="dropVersRendu($event)">
         <!-- <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div> -->
         <mat-list *ngFor="let a of assignmentsRendu" cdkDrag>
           <!-- <mat-list-item  class="assignment-item"> -->
-              <a routerLink="/assignment/{{ a.id }}" style="text-decoration: none;">
+              <a routerLink="/assignments/detail/{{ a.id }}" style="text-decoration: none;">
                   <app-assignment-card class="assignment-item" [assignment]="a"></app-assignment-card>
               </a>
           <!-- </mat-list-item> -->

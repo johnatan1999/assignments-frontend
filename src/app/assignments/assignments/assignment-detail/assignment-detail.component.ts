@@ -11,7 +11,7 @@ import { Assignment } from '../../../shared/model/assignment.model';
 })
 export class AssignmentDetailComponent implements OnInit {
   // passé sous forme d'attribut HTML
-  assignmentTransmis: Assignment;
+  assignment: Assignment;
 
   constructor(
     private assignmentsService: AssignmentsService,
@@ -31,32 +31,32 @@ export class AssignmentDetailComponent implements OnInit {
 
     console.log('Dans ngOnInit de details, id = ' + id);
     this.assignmentsService.getAssignment(id).subscribe((assignment) => {
-      this.assignmentTransmis = assignment;
+      this.assignment = assignment;
     });
   }
 
   onAssignmentRendu() {
-    this.assignmentTransmis.rendu = true;
+    this.assignment.rendu = true;
 
     this.assignmentsService
-      .updateAssignment(this.assignmentTransmis)
+      .updateAssignment(this.assignment)
       .subscribe((reponse) => {
         console.log(reponse.message);
         // et on navigue vers la page d'accueil qui affiche la liste
         this.router.navigate(['/home']);
       });
 
-    //this.assignmentTransmis = null;
+    //this.assignment = null;
   }
 
   onDelete() {
     this.assignmentsService
-      .deleteAssignment(this.assignmentTransmis)
+      .deleteAssignment(this.assignment)
       .subscribe((reponse) => {
         console.log(reponse.message);
 
         // on cache l'affichage du détail
-        this.assignmentTransmis = null;
+        this.assignment = null;
 
         // et on navigue vers la page d'accueil qui affiche la liste
         this.router.navigate(['/home']);
@@ -64,7 +64,7 @@ export class AssignmentDetailComponent implements OnInit {
   }
 
   onClickEdit() {
-    this.router.navigate(['/assignment', this.assignmentTransmis.id, 'edit'], {
+    this.router.navigate(['/assignment', this.assignment.id, 'edit'], {
       queryParams: {
         nom:'Michel Buffa',
         metier:"Professeur",

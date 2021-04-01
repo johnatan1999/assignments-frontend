@@ -1,45 +1,49 @@
 <div class="container">
-  <mat-card *ngIf="assignmentTransmis">
-    <mat-card-title>
+  <mat-card *ngIf="assignment">
+    <mat-card-title style="display: flex; flex-direction: row; align-items: center;">
       <mat-icon>subtitles</mat-icon>
-      {{assignmentTransmis.nom}}</mat-card-title>
-    <mat-card-subtitle>{{assignmentTransmis.dateDeRendu | date}}</mat-card-subtitle>
+      <span style="margin-left: 6px;">{{ assignment.nom }}</span></mat-card-title>
+    <mat-card-subtitle style="margin-left: 30px;">
+      {{assignment.dateDeRendu | date}}
+      <span style="color: {{ assignment.rendu? 'green': 'red' }}">{{ assignment.rendu ? 'Rendu' : 'Non Rendu' }}</span>
+    </mat-card-subtitle>
     <mat-card-content>
       <div class="left-content">
+        <div class="eleve">
+          <img src="{{ assignment.eleve.image }}"/>
+          <span>{{ assignment.eleve.nom + ' ' + assignment.eleve.prenom }}</span>
+        </div>
         <div class="description">
           <div class="description-header">
             <mat-icon >description</mat-icon>
             <h3>Description</h3>
           </div>
           <div class="description-content">
-            {{ assignmentTransmis.description }}
+            {{ assignment.description }}
           </div>
         </div>
       </div>
       <div class="right-content">
         <div class="matiere">
           <div class="label">Matiere</div>
-          <div class="matiere-value">{{ assignmentTransmis?.matiere?.nom }}</div>
+          <div class="matiere-value">{{ assignment?.professeur?.matiere?.nom }}</div>
         </div>
         <div class="note">
           <div class="label">Note</div>
-          <div class="note-value">{{ assignmentTransmis?.note || 0 }}/20</div>
+          <div class="note-value">{{ assignment?.note || 0 }}/20</div>
         </div>
         <div class="remarque">
           <div class="label">Remarque</div>
           <div class="remarque-content">
-            {{ assignmentTransmis.remarque }}
+            {{ assignment.remarque }}
           </div>
         </div>
       </div>
     </mat-card-content>
     <mat-card-action>
       <div id="bottom">
-        <mat-checkbox *ngIf="!assignmentTransmis.rendu" (click)="onAssignmentRendu()">
-          Rendu
-        </mat-checkbox>
         <nav>
-          <a routerLink="/assignments/edit/{{ assignmentTransmis.id }}" style="text-decoration: none;">Edit</a>
+          <a routerLink="/assignments/edit/{{ assignment.id }}" style="text-decoration: none;">Edit</a>
         </nav>
         <button mat-stroked-button color="warn" (click)="onDelete()">DELETE</button>
       </div>
