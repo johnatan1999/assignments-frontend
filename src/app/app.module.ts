@@ -54,7 +54,10 @@ import { ChildGuard } from "./shared/guard/child.guard";
 import { ElevesComponent } from './assignments/eleves/eleves.component';
 import {MatTableModule} from '@angular/material/table';
 import { ProfesseursComponent } from './assignments/professeurs/professeurs.component';
-
+import { DashboardComponent } from './assignments/dashboard/dashboard.component';
+import {PanelModule} from 'primeng/panel';
+import {ChartModule} from 'primeng/chart';
+import {CalendarModule} from 'primeng/calendar';
 
 const routes: Routes = [
   { 
@@ -85,6 +88,10 @@ const routes: Routes = [
       { 
         path: "professeurs", 
         component: ProfesseursComponent,
+      },
+      { 
+        path: "dashboard", 
+        component: DashboardComponent,
       },
       {
         path: "detail/:id",
@@ -125,7 +132,8 @@ const routes: Routes = [
     AssignmentWithInfiniteScrollComponent,
     NoteModalComponent,
     ElevesComponent,
-    ProfesseursComponent
+    ProfesseursComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -158,6 +166,9 @@ const routes: Routes = [
     MatProgressSpinnerModule,
     MatProgressBarModule,
     MatRippleModule,
+    PanelModule,
+    ChartModule,
+    CalendarModule,
     RouterModule.forRoot(routes), HttpClientModule
   ],
   providers: [],

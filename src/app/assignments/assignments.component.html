@@ -35,7 +35,7 @@
         </div>
       </a>
 
-      <a mat-list-item [routerLink]="'/'"> 
+      <a mat-list-item routerLinkActive #rlat="routerLinkActive" [routerLinkActiveOptions]="{exact: true}"  [ngStyle]="rlat.isActive && {'color': 'brown'}" [routerLink]="'/assignments/dashboard'"> 
         <div class="item-row">
           <mat-icon aria-hidden="false" aria-label="Example home icon" style="margin-right: 5px;
           line-height: 17px;"> insert_chart</mat-icon>
@@ -86,4 +86,9 @@
         </mat-card-content>
         <mat-card-footer>&nbsp;</mat-card-footer>
       </mat-card>
+     
+    </div>
   </div>
+
+
+ 

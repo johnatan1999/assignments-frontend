@@ -1,0 +1,170 @@
+<mat-card class="card-dashboard">
+    <div class="ui-g dashboard">
+    <div class="ui-g-12 ui-md-4">
+        <div class="card overview">
+            <div class="overview-content clearfix">
+                <span class="overview-title">Sales</span>
+                <span class="overview-badge">+%90</span>
+                <span class="overview-detail">$22,650 / week</span>
+            </div>
+            <div class="overview-footer">
+                <img src="assets/layout/images/dashboard/sales.svg" style="width: 100%" />
+            </div>
+        </div>
+    </div>
+    <div class="ui-g-12 ui-md-4">
+        <div class="card overview">
+            <div class="overview-content clearfix">
+                <span class="overview-title">Views</span>
+                <span class="overview-badge">+%60</span>
+                <span class="overview-detail">6,520 / day</span>
+            </div>
+            <div class="overview-footer">
+                <img src="assets/layout/images/dashboard/views.svg" style="width: 100%" />
+            </div>
+        </div>
+    </div>
+    <div class="ui-g-12 ui-md-4">
+        <div class="card overview">
+            <div class="overview-content clearfix">
+                <span class="overview-title">Users</span>
+                <span class="overview-badge">+%45</span>
+                <span class="overview-detail">5,200 / day</span>
+            </div>
+            <div class="overview-footer">
+                <img src="assets/layout/images/dashboard/progress.svg" style="width: 100%" />
+            </div>
+        </div>
+    </div>
+
+    <div class="ui-g-12 ui-md-6 ui-lg-3">
+        <div class="ui-g card colorbox colorbox-1">
+            <div class="ui-g-4">
+                <i class="material-icons">check_circle</i>
+            </div>
+            <div class="ui-g-8">
+                <span class="colorbox-name">Tasks</span>
+                <span class="colorbox-count">50</span>
+            </div>
+        </div>
+    </div>
+    <div class="ui-g-12 ui-md-6 ui-lg-3">
+        <div class="ui-g card colorbox colorbox-2">
+            <div class="ui-g-4">
+                <i class="material-icons">shopping_card</i>
+            </div>
+            <div class="ui-g-8">
+                <span class="colorbox-name">Purchases</span>
+                <span class="colorbox-count">1200</span>
+            </div>
+        </div>
+    </div>
+    <div class="ui-g-12 ui-md-6 ui-lg-3">
+        <div class="ui-g card colorbox colorbox-3">
+            <div class="ui-g-4">
+                <i class="material-icons">report</i>
+            </div>
+            <div class="ui-g-8">
+                <span class="colorbox-name">Issues</span>
+                <span class="colorbox-count">22</span>
+            </div>
+        </div>
+    </div>
+    <div class="ui-g-12 ui-md-6 ui-lg-3">
+        <div class="ui-g card colorbox colorbox-4">
+            <div class="ui-g-4">
+                <i class="material-icons">email</i>
+            </div>
+            <div class="ui-g-8">
+                <span class="colorbox-name">Messages</span>
+                <span class="colorbox-count">10</span>
+            </div>
+        </div>
+    </div>
+    <div class="ui-g-12 ui-md-8">
+            <p-panel header="Sales Graph">
+                <p-chart  type="bar" [data]="dataSource" responsive="true" ></p-chart>
+            </p-panel>
+        <!--<div style="display: block">
+            <canvas mdbChart
+                [chartType]="chartType"
+                [datasets]="chartDatasets"
+                [labels]="chartLabels"
+                [colors]="chartColors"
+                [options]="chartOptions"
+                [legend]="true"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)">
+            </canvas>
+          </div>-->
+    </div>
+   
+    <div class="ui-g-12 ui-md-4" style="height: 489px">
+        <p-panel header="Activity" [style]="{'height':'100%'}">
+            <div class="activity-header">
+                <div class="ui-g">
+                    <div class="ui-g-6">
+                        <span style="font-weight:bold">Last Activity</span>
+                        <p>Updated 1 minute ago</p>
+                    </div>
+                    <div class="ui-g-6" style="text-align:right">
+                        <button type="button" label="Update" icon="ui-icon-update" pButton></button>
+                    </div>
+                </div>
+            </div>
+            <ul class="activity-list">
+                <li>
+                    <div class="count">$900</div>
+                    <div class="ui-g">
+                        <div class="ui-g-6">Income</div>
+                        <div class="ui-g-6">95%</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="count" style="background-color:#ffc107">$250</div>
+                    <div class="ui-g">
+                        <div class="ui-g-6">Tax</div>
+                        <div class="ui-g-6">24%</div>
+                    </div>
+                </li>
+               <!--<li>
+                    <div class="count" style="background-color:#673AB7">$125</div>
+                    <div class="ui-g">
+                        <div class="ui-g-6">Invoices</div>
+                        <div class="ui-g-6">55%</div>
+                    </div>
+                </li>-->
+             
+            </ul>
+        </p-panel>
+</div>
+    <div class="ui-g-12 ui-md-8">
+            <p-panel header="Sales Graph">
+                <p-chart type="line" [data]="chartData" responsive="true"></p-chart>
+            </p-panel>
+    </div>
+    <div class="ui-g-12 ui-md-4" style="height: 489px">
+        <p-panel  header="Filtrer par année" [style]="{'height':'100%'}">
+            <p-calendar [placeholder] = "'Cliquez ici pour afficher la date'" [styleClass]="'dashboardDateFilter'" [showIcon]="true" icon="pi pi-calendar" [(ngModel)]="dateValue" view="month" dateFormat="mm/yy" [yearNavigator]="true" yearRange="2000:2030"></p-calendar>
+            <p-button style="width: 100%;" [styleClass]="'filterButton'"  label="Filtrer" icon="pi pi-check" iconPos="right"></p-button>
+            <p-button style="width: 100%;" [styleClass]="'deleteFilterButton'"  label="Supprimer le filtre" icon="pi pi-times" iconPos="right"></p-button>
+        </p-panel>
+    </div>
+    <div class="ui-g-12 ui-md-12">
+        <div class="layout-container">
+            <div class="footer" style="
+            padding-left: 0px;
+            padding-right: 0px;
+        ">
+                <div class="card clearfix">
+                    <span class="footer-text-left">PrimeNG ULTIMA for Angular</span>
+                    <span class="footer-text-right">
+                        <span class="material-icons ui-icon-copyright"></span>
+                        <span>All Rights Reserved</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</mat-card>
