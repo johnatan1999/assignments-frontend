@@ -1,6 +1,6 @@
-<div>
+<mat-card class="card-list-assignments">
     <mat-toolbar>
-        <mat-toolbar-row>            
+        <mat-toolbar-row>
             <h4>Liste des assignments</h4>
             <div class="view-switcher">
                 <span class="current-view-text">{{ currentView }}</span>
@@ -36,8 +36,8 @@
             </div>
         </mat-toolbar-row>
     </mat-toolbar>
-    <app-tabbed-assignment-list *ngIf="tabbedListView" ></app-tabbed-assignment-list>
-    <app-simple-assignment-list *ngIf="simpleListView" ></app-simple-assignment-list>
+    <app-tabbed-assignment-list *ngIf="tabbedListView"></app-tabbed-assignment-list>
+    <app-simple-assignment-list *ngIf="simpleListView"></app-simple-assignment-list>
     <app-draggable-assignment-list *ngIf="draggableListView"></app-draggable-assignment-list>
     <!-- <app-simple-assignment-list></app-simple-assignment-list> -->
-</div>
+</mat-card>
