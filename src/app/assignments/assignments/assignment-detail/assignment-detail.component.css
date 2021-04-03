@@ -18,49 +18,65 @@
 }
 
 .left-content {
-  width: 70%;
+  width: 75%;
 }
 .right-content {
-  width: 30%;
+  width: 25%;
   padding-left: 50px;
+  padding-top: 15px; 
 }
 
 .eleve img {
   border-radius: 50%;
   height: auto;
-  width: 50px;
+  width: 35px;
   background-color: lightgray;
 }
 
-.description-header {
+.header {
   display: flex;
   flex-direction: row;
 }
 
-.description-header .mat-icon {
+.header .mat-icon {
   margin-top: 12px;
 }
 
-.description-header h3 {
+.header h3 {
   padding-left: 10px;
+  font-weight: 500;
 }
 
-.description-content {
+.content {
   max-width: 560px;
+  margin-left: 35px;
+}
+
+.mat-card-title {
+  font-size: 20px;
+}
+
+.header, .content, .mat-card-title {
+  color: #172b4d;
 }
 
 .label {
   color: gray;
   text-transform: uppercase;
+  margin-bottom: 5px;
 }
 
-.note {
+.note, .matiere, .remarque {
   background-color: rgba(9,30,66,.08);
   margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 2px;
 }
 
-.remarque {
-  background-color: rgba(9,30,66,.08);
+.value {
+  color: #97a0af;
+  margin-right: 10px;
+  text-align: right;
 }
 
 .remarque-content {

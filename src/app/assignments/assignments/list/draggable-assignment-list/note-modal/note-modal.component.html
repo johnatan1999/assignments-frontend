@@ -1,20 +1,21 @@
-<h1 mat-dialog-title>Note</h1>
-<div>
-    <h5 mat-subheader>{{ assignment.nom }}</h5>
-    A rendre le:&nbsp;
-    <span>{{ assignment.dateDeRendu | date }}</span>
-</div>
-<div class="card-img-container">
-    <img class="card-img" title="{{ assignment.eleve.nom }} {{ assignment.eleve.prenom }}" 
-                        src="{{ assignment.eleve.image }}" />
-</div>
-<form class="example-form">
-    <mat-form-field>
-    <mat-label>Saisissez une note</mat-label>
-    <input matInput min="0" max="20" [(ngModel)]="note" type="number" name="note">
-    </mat-form-field>
-    <div mat-dialog-actions >
-        <button mat-raised-button style="margin: auto;" mat-button (click)="onClose()">Close</button>
-        <button mat-raised-button style="margin: auto;" color="primary" mat-button (click)="onSubmit()">Valider</button>
+<div class="note">
+    <h1 mat-dialog-title>Note</h1>
+    <div class="title">
+        <h5>{{ assignment.nom }}</h5>
+        <span>A rendre le:&nbsp;{{ assignment.dateDeRendu | date }}</span>
     </div>
-</form>
+    <div class="img-container">
+        <img  title="{{ assignment.eleve.nom }} {{ assignment.eleve.prenom }}" 
+                            src="{{ assignment.eleve.image }}" />
+    </div>
+    <form class="form">
+        <mat-form-field>
+        <mat-label>Saisissez une note</mat-label>
+        <input matInput min="0" max="20" [(ngModel)]="note" type="number" name="note">
+        </mat-form-field>
+        <div mat-dialog-actions >
+            <button mat-raised-button style="margin: auto;" mat-button (click)="onClose()">Close</button>
+            <button mat-raised-button style="margin: auto;" color="primary" mat-button (click)="onSubmit()">Valider</button>
+        </div>
+    </form>
+</div>

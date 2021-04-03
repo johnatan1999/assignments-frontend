@@ -5,6 +5,12 @@
   justify-content: space-around;
 }
 
+.assignment-viewport {
+  height: 70vh;
+  width: 100%;
+  overflow-y: auto;
+}
+
 .list-container {
   width: 45%;
   max-width: 100%;
@@ -20,6 +26,8 @@
   border-radius: 4px;
   overflow: hidden;
   display: block;
+  border: 1px solid #ddd;
+  padding: 0 5px;
 }
 
 .example-box {
@@ -78,4 +86,24 @@
 
 .list-header h4 {
   margin: 0;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
 }

@@ -25,14 +25,14 @@ export class AssignmentsService {
   // base_uri = "https://assignments-backend.herokuapp.com/api/"
   // uri = "https://assignments-backend.herokuapp.com/api/assignments"
 
-  getAssignments():Observable<Assignment[]> {
+  getAssignments(state=''):Observable<Assignment[]> {
     console.log("Dans le service de gestion des assignments...")
     //return of(this.assignments);
-    return this.http.get<Assignment[]>(this.uri);
+    return this.http.get<Assignment[]>(`${this.uri}?state=${state}`);
   }
 
-  getAssignmentsPagine(page:number, limit:number):Observable<any> {
-    return this.http.get<Assignment[]>(this.uri+"?page="+page + "&limit="+limit);
+  getAssignmentsPagine(page:number, limit:number, state=''):Observable<any> {
+    return this.http.get<Assignment[]>(`${this.uri}?page=${page}&limit=${limit}&state=${state}`);
   }
 
   // Pour votre culture, on peut aussi utiliser httpClient avec une promesse

@@ -1,0 +1,35 @@
+.note {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.title h5 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+}
+
+.title span {
+    font-size: 12px;
+}
+
+.img-container {
+    align-items: center;
+    border-radius: 50%;
+    background-color: #eee;
+    margin-bottom: 25px;
+}
+
+.img-container img {
+    width: 150px;
+    min-height: 150px;
+    height: auto;
+    border-radius: 50%;
+}

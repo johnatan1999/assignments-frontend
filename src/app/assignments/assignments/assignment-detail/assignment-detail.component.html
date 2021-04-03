@@ -2,23 +2,31 @@
   <mat-card *ngIf="assignment">
     <mat-card-title style="display: flex; flex-direction: row; align-items: center;">
       <mat-icon>subtitles</mat-icon>
-      <span style="margin-left: 6px;">{{ assignment.nom }}</span></mat-card-title>
+      <span style="margin-left: 8px;">{{ assignment.nom }}</span></mat-card-title>
     <mat-card-subtitle style="margin-left: 30px;">
       {{assignment.dateDeRendu | date}}
-      <span style="color: {{ assignment.rendu? 'green': 'red' }}">{{ assignment.rendu ? 'Rendu' : 'Non Rendu' }}</span>
+      <span [style.color]="assignment.rendu? 'green': 'red'">{{ assignment.rendu ? 'Rendu' : 'Non Rendu' }}</span>
     </mat-card-subtitle>
     <mat-card-content>
       <div class="left-content">
         <div class="eleve">
-          <img src="{{ assignment.eleve.image }}"/>
-          <span>{{ assignment.eleve.nom + ' ' + assignment.eleve.prenom }}</span>
+          <div class="header">
+            <mat-icon >person</mat-icon>
+            <h3>Eleve</h3>
+          </div>
+          <div class="content">
+            <div class="eleve">
+              <img src="{{ assignment.eleve.image }}"/>
+              <span>{{ assignment.eleve.nom + ' ' + assignment.eleve.prenom }}</span>
+            </div>
+          </div>
         </div>
         <div class="description">
-          <div class="description-header">
+          <div class="header">
             <mat-icon >description</mat-icon>
             <h3>Description</h3>
           </div>
-          <div class="description-content">
+          <div class="content">
             {{ assignment.description }}
           </div>
         </div>
@@ -26,11 +34,11 @@
       <div class="right-content">
         <div class="matiere">
           <div class="label">Matiere</div>
-          <div class="matiere-value">{{ assignment?.professeur?.matiere?.nom }}</div>
+          <div class="value">{{ assignment?.professeur?.matiere?.nom }}</div>
         </div>
         <div class="note">
           <div class="label">Note</div>
-          <div class="note-value">{{ assignment?.note || 0 }}/20</div>
+          <div class="value">{{ assignment?.note || 0 }}/20</div>
         </div>
         <div class="remarque">
           <div class="label">Remarque</div>
@@ -40,7 +48,7 @@
         </div>
       </div>
     </mat-card-content>
-    <mat-card-action>
+    <mat-card-action *ngIf="withAction">
       <div id="bottom">
         <nav>
           <a routerLink="/assignments/edit/{{ assignment.id }}" style="text-decoration: none;">Edit</a>

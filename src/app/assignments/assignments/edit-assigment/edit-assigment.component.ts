@@ -24,7 +24,9 @@ export class EditAssigmentComponent implements OnInit {
   isLinear = false;
   dateDeRendu = null;
   assignmentFormGroup: FormGroup;
-    
+  remarque = '';
+  note = 0; 
+  
   eleveRecherche = '';
   profSelectionne = null;
   listeEleves: EleveItem[] = [];
@@ -49,6 +51,7 @@ export class EditAssigmentComponent implements OnInit {
         this._formBuilder.group({
           nomDevoirCtrl: ['', Validators.required],
           descriptionDevoirCtrl: ['', Validators.required],
+          remarqueCtrl: ['', ''],
           dateCtrl: ['', Validators.required],
           matiereCtrl: ['', Validators.required]
         }),
@@ -83,7 +86,9 @@ export class EditAssigmentComponent implements OnInit {
       this.nom = assignment.nom;
       this.dateDeRendu = assignment.dateDeRendu;
       this.description = assignment.description;
-      this.profSelectionne = this.professeurs.find((p) => p.id === this.assignment.professeur.id);
+      this.note = assignment.note;
+      this.remarque = assignment.remarque;
+      this.profSelectionne = this.professeurs?.find((p) => p.id === this.assignment.professeur.id);
     });
   }
 
