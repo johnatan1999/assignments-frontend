@@ -31,8 +31,8 @@ export class AssignmentsService {
     return this.http.get<Assignment[]>(`${this.uri}?state=${state}`);
   }
 
-  getAssignmentsPagine(page:number, limit:number, state=''):Observable<any> {
-    return this.http.get<Assignment[]>(`${this.uri}?page=${page}&limit=${limit}&state=${state}`);
+  getAssignmentsPagine(page:number, limit:number, state='', criteria=''):Observable<any> {
+    return this.http.get<Assignment[]>(`${this.uri}?page=${page}&limit=${limit}&state=${state}&criteria=${criteria}`);
   }
 
   // Pour votre culture, on peut aussi utiliser httpClient avec une promesse

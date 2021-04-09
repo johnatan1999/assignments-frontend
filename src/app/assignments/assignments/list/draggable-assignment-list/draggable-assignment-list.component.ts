@@ -18,8 +18,10 @@ export class DraggableAssignmentListComponent extends BasicAssignmentList {
 
   pageRendu = 1;
   pageNonRendu = 1;
-  assignmentsRendu: Assignment[];
-  assignmentsNonRendu: Assignment[];
+  searchRendu = '';
+  searchNonRendu = '';
+  assignmentsRendu: Assignment[] = [];
+  assignmentsNonRendu: Assignment[] = [];
   @ViewChild('scrollerRendu') scrollerRendu: CdkVirtualScrollViewport;
   @ViewChild('scrollerNonRendu') scrollerNonRendu: CdkVirtualScrollViewport;
   
@@ -29,18 +31,21 @@ export class DraggableAssignmentListComponent extends BasicAssignmentList {
     private ngZone: NgZone) {
       super(assignmentsService, route, router);
     }
-
+    
+  ngDoCheck() {
+    const rendu = this.assignmentsNonRendu.find((a) => a.rendu);
+    const nonRendu = this.assignmentsRendu.find((a) => !a.rendu);
+    this.assignmentsNonRendu = this.assignmentsNonRendu.filter((a) => !a.rendu);
+    this.assignmentsRendu = this.assignmentsRendu.filter((a) => a.rendu);
+    console.log(this.assignmentsNonRendu.length, this.assignmentsRendu.length, rendu, nonRendu)
+    if(nonRendu)this.assignmentsNonRendu.push(nonRendu);
+    if(rendu)this.assignmentsRendu.push(rendu);
+    console.log(this.assignmentsNonRendu.length, this.assignmentsRendu.length)
+  }
   
   ngOnInit() {
     this.getAssignmentsByState(true);
     this.getAssignmentsByState(false);
-  }
-  
-  ngDoCheck() {
-    if(this.assignments) {
-      this.assignmentsRendu = this.assignments.filter((a) => a.rendu);
-      this.assignmentsNonRendu = this.assignments.filter((a) => !a.rendu);
-    }
   }
   
   ngAfterViewInit() {
@@ -66,14 +71,24 @@ export class DraggableAssignmentListComponent extends BasicAssignmentList {
       this.ngZone.run(() => {
         // if(this.hasNextPage) {
           this.pageRendu = this.nextPage;
-          this.getAssignmentsByState(false);
+          this.getAssignmentsByState(false, this.search);
         // }
       });
     });
   }
 
-  getAssignmentsByState(rendu) {
-    this.assignmentsService.getAssignmentsPagine(rendu ? this.pageRendu : this.pageNonRendu, this.limit, rendu ? 'rendu' : 'nonrendu')
+  onSearchAssignmentRendu() {
+    this.pageRendu = 1;
+    this.getAssignmentsByState(true, this.searchRendu, false)
+  }
+
+  onSearchAssignmentNonRendu() {
+    this.pageNonRendu = 1;
+    this.getAssignmentsByState(false, this.searchNonRendu, false)
+  }
+
+  getAssignmentsByState(rendu, criteria='', appendData=true) {
+    this.assignmentsService.getAssignmentsPagine(rendu ? this.pageRendu : this.pageNonRendu, this.limit, rendu ? 'rendu' : 'nonrendu', criteria)
     .subscribe(data => {
       if(rendu) {
         this.pageRendu += 1;
@@ -81,7 +96,12 @@ export class DraggableAssignmentListComponent extends BasicAssignmentList {
       else {
         this.pageNonRendu += 1;
       }
-      this.assignments = [...this.assignments, ...data];
+      var assignments = rendu ? this.assignmentsRendu : this.assignmentsNonRendu;
+      assignments = appendData ? assignments.concat(data.docs): data.docs;
+      if(rendu)
+        this.assignmentsRendu = assignments;
+      else 
+        this.assignmentsNonRendu = assignments;
     });
   }
   
@@ -92,11 +112,14 @@ export class DraggableAssignmentListComponent extends BasicAssignmentList {
       const assignment: Assignment = event.previousContainer.data[event.previousIndex];
       this.assignmentsNonRendu[this.assignmentsNonRendu.indexOf(assignment)].rendu = true;
       // console.log(event.previousContainer.data[event.previousIndex]);
-      this.openDialog(this.assignments[this.assignments.indexOf(assignment)]);
-      transferArrayItem<Assignment>(event.previousContainer.data,
-                        event.container.data,
-                        event.previousIndex,
-                        event.currentIndex);
+      // this.assignmentsNonRendu = this.assignmentsNonRendu.filter((a) => !a.rendu)
+      // this.assignmentsRendu.push(assignment);
+      this.openDialog(assignment);
+      // transferArrayItem<Assignment>(event.previousContainer.data,
+      //                   event.container.data,
+      //                   event.previousIndex,
+      //                   event.currentIndex);
+      //                   console.log(this.assignmentsNonRendu)
     }
   }
 
@@ -108,6 +131,8 @@ export class DraggableAssignmentListComponent extends BasicAssignmentList {
       const assignmentSelectionne = this.assignmentsRendu[this.assignmentsRendu.indexOf(assignment)];
       assignmentSelectionne.rendu = false;
       assignmentSelectionne.note = 0;
+      // this.assignmentsRendu = this.assignmentsRendu.filter((a) => a.rendu);
+      // this.assignmentsNonRendu.push(assignmentSelectionne);
       this.assignmentsService.updateAssignment(assignmentSelectionne).subscribe(() => {
         console.log(`Deplacement de '${assignmentSelectionne.nom}' vers la liste des non-rendus`)
       })

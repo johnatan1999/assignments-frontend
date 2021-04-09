@@ -3,6 +3,12 @@
   <div class="list-container">
       <div class="list-header">
         <h4>A rendre</h4>  
+        <form class="search-form">
+          <mat-form-field>
+            <mat-label>Recherche</mat-label>
+            <input (keyup)="onSearchAssignmentNonRendu()" matInput name="searchNonRendu" [(ngModel)]="searchNonRendu"/>
+          </mat-form-field>
+        </form>
         <div class="list-action">
           <a [routerLink]="'/assignments/add'" class="action-item"><mat-icon aria-hidden="false" aria-label="add icon">add</mat-icon></a>
         </div>  
@@ -30,6 +36,12 @@
   <div class="list-container">
       <div class="list-header">
         <h4>Rendu</h4>  
+        <form class="search-form">
+          <mat-form-field>
+            <mat-label>Recherche</mat-label>
+            <input (keyup)="onSearchAssignmentRendu()" matInput name="searchRendu" [(ngModel)]="searchRendu"/>
+          </mat-form-field>
+        </form>
         <div class="list-action">
         </div>  
       </div>

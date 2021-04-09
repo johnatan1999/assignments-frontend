@@ -15,7 +15,7 @@ export abstract class BasicAssignmentList implements OnInit {
     prevPage: number;
     hasNextPage: boolean;
     nextPage: number;
-
+    search = "";
     constructor(protected assignmentsService:AssignmentsService,
         protected route:ActivatedRoute,
         protected router:Router) {}
@@ -47,6 +47,10 @@ export abstract class BasicAssignmentList implements OnInit {
           this.nextPage = data.nextPage;
           console.log("données reçues");
         });
+    }
+
+    searchAssignment() {
+        
     }
 
     onDeleteAssignment(event) {
