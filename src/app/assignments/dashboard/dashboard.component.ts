@@ -1,5 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { DashboardService } from 'src/app/shared/services/dashboard.service';
 
+export class NumberOnDashboard {
+  eleve: number;
+  professeur: number;
+  matiere: number;
+  assignment: number;
+  assignmentRendu: number;
+  assignmentPasRendu: number;
+}
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -9,9 +18,11 @@ export class DashboardComponent implements OnInit {
   chartData: any;
   dataSource: any;
   dateValue : Date;
-  constructor() { }
+  number: NumberOnDashboard = new NumberOnDashboard();
+  constructor(private dashboard : DashboardService) { }
 
   ngOnInit(): void {
+    this.loadNumberOnDashboard();
     this.chartData = {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
       datasets: [
@@ -48,5 +59,20 @@ export class DashboardComponent implements OnInit {
 
   }
 
+
+  loadNumberOnDashboard() {
+    this.dashboard.getDashboard()
+    .subscribe((dashboard: any) => {
+      this.dashboard.getAssignmentDashboard()
+      .subscribe((dashboardAssignment : any) => {
+        this.number.eleve = dashboard.eleve;
+        this.number.professeur = dashboard.professeur;
+        this.number.matiere = dashboard.matiere;
+        this.number.assignment = dashboardAssignment.assignment;
+        this.number.assignmentPasRendu = dashboardAssignment.assignmentPasRendu;
+        this.number.assignmentRendu = dashboardAssignment.assignmentRendu;
+      });
+    });
+  }
   
 }
