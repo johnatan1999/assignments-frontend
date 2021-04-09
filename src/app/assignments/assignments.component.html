@@ -1,21 +1,59 @@
+<!--<mat-sidenav-container class="example-container" *ngIf="!shouldRun">
+  <mat-sidenav #sidenav mode="side" [(opened)]="opened" (opened)="events=true"
+               (closed)="events=false">
+    Sidenav content
+  </mat-sidenav>
+
+  
+  <mat-sidenav-content>
+    <p><mat-checkbox [(ngModel)]="opened">sidenav.opened</mat-checkbox></p>
+    <p><button mat-button (click)="sidenav.toggle()">sidenav.toggle() eto</button></p>
+    <div *ngIf="events">tay </div>
+
+    <p>Events:</p>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<div *ngIf="!shouldRun">Please open on Stackblitz to see result</div>-->
+
+
+<!-- Copyright 2020 Google LLC. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->
 
 <mat-toolbar class="tp-toolbar">
   <mat-toolbar-row class="tp-toolbar-row">
-    <img src="../../assets/images/Capture.PNG" style="height: inherit">
-    <!--<span class="toolbar-spacer"></span>-->
+    <div>
+      <img src="../../assets/images/icons8-école-80.png" style="height: 42px; width: 65px;">
+      <mat-icon (click)="sidenav.toggle()" style="margin:22px 0px 0px 40px;" aria-hidden="false" aria-label="Example home icon" >reorder</mat-icon>
+    </div>
+    
+    <p style="color:#0081A7">Année scolaire 2021/2022</p>
+    <div>
+      <button mat-raised-button (click)="peuplerBDAvecProgressBar()"> Peupler BD </button>
     <button mat-button (click)="logout()">
-      <mat-icon aria-hidden="false" aria-label="Example home icon">logout</mat-icon>
+      <mat-icon aria-hidden="false" aria-label="Example home icon" >power_settings_new</mat-icon>
     </button>
+  </div>
   </mat-toolbar-row>
 </mat-toolbar>
 <mat-sidenav-container style="min-height: 95vh;">
-  <mat-sidenav opened mode="side" class="tp-side-nav">
+  <mat-sidenav #sidenav mode="side" [(opened)]="opened" (opened)="events=true"
+  (closed)="events=false" scrollTo='100' class="tp-side-nav">
     <mat-nav-list >
+      <a mat-list-item routerLinkActive #rlat="routerLinkActive" [routerLinkActiveOptions]="{exact: true}" [class]="rlat.isActive ? 'active' : ''" [routerLink]="'/assignments/dashboard'"> 
+        <div class="item-row">
+          <mat-icon aria-hidden="false" aria-label="Example home icon" style="margin-right: 5px;
+          line-height: 20px;"> insert_chart</mat-icon>
+          <span class="title">Tableau de bord</span>
+        </div>
+      </a>
       <a mat-list-item  routerLinkActive #rla="routerLinkActive" [routerLinkActiveOptions]="{exact: true}" [class]="rla.isActive ? 'active' : ''" [routerLink]="'/assignments'">
       
         <div class="item-row">
           <mat-icon aria-hidden="false" aria-label="Example home icon" style="margin-right: 5px;
-          line-height: 17px;"> home </mat-icon>
+          line-height: 20px;"> assignment </mat-icon>
           <span>Assignments</span>
         </div>
       </a>
@@ -23,7 +61,7 @@
       <a mat-list-item routerLinkActive #rlab="routerLinkActive" [routerLinkActiveOptions]="{exact: true}"  [class]="rlab.isActive ? 'active' : ''"  [routerLink]="'/assignments/eleves'"> 
         <div class="item-row">
           <mat-icon aria-hidden="false" aria-label="Example home icon" style="margin-right: 5px;
-          line-height: 17px;"> group </mat-icon>
+          line-height: 20px;"> group </mat-icon>
           <span>Eleves</span>
         </div>
       </a>
@@ -31,23 +69,14 @@
       <a mat-list-item routerLinkActive #rlac="routerLinkActive" [routerLinkActiveOptions]="{exact: true}" [class]="rlac.isActive ? 'active' : ''" [routerLink]="'/assignments/professeurs'"> 
         <div class="item-row">
           <mat-icon aria-hidden="false" aria-label="Example home icon" style="margin-right: 5px;
-          line-height: 17px;"> group </mat-icon>
+          line-height: 20px;"> group </mat-icon>
           <span>Professeur</span>
         </div>
       </a>
 
-      <a mat-list-item routerLinkActive #rlat="routerLinkActive" [routerLinkActiveOptions]="{exact: true}" [class]="rlat.isActive ? 'active' : ''" [routerLink]="'/assignments/dashboard'"> 
-        <div class="item-row">
-          <mat-icon aria-hidden="false" aria-label="Example home icon" style="margin-right: 5px;
-          line-height: 17px;"> insert_chart</mat-icon>
-          <span class="title">Tableau de bord</span>
-        </div>
-      </a>
+      
     </mat-nav-list>
     <mat-nav-list>
-      <mat-list-item>
-        <button mat-button (click)="peuplerBDAvecProgressBar()" >Peupler BD</button>
-      </mat-list-item>
       <mat-list-item>
         <button mat-button (click)="genererProfesseurs()" >Generer Professeurs</button>
       </mat-list-item>
@@ -61,10 +90,13 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <router-outlet></router-outlet>
-    <!-- <app-assignment-list></app-assignment-list> -->
+
     
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+
+
 <div class="progression-container" *ngIf="showProgression">
   <div class="progression" cdkDragBoundary=".progression-container" cdkDrag>
       <mat-card>

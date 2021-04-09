@@ -18,7 +18,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding-left: 25px;
+  padding-left: 70px;
   background-color: white;
 }
 
@@ -46,17 +46,13 @@ span{
   font-family: Roboto, "Tahoma", sans-serif;
 }
 
-.item-row {
-  /* color: var(--cg-blue); */
-  display: inline;
-}
 
 .mat-list-item {
-  color: var(--cg-blue);
+  color: black;
 }
 
 .mat-list-item:hover, .mat-list-item.active {
-  color: var(--bitter-sweet);
+  color: #0081a7;
 }
 
 .progression-container {
@@ -97,3 +93,10 @@ span{
   display: flex;
   justify-content: center;
 }
+
+.mat-raised-button{
+  background-color: #f78f8f;
+  border: 2px;
+  color : white;
+}
+

@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
         if(data.auth)
         {
           localStorage.setItem("user",JSON.stringify(data.user));
-          this.router.navigate(["/assignments"]);
+          this.router.navigate(["/assignments/dashboard"]);
         } 
       }, (error) => {
         this.checkUser.state = true;

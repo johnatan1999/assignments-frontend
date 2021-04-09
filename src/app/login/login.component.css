@@ -1,6 +1,6 @@
 .example-card {
-  width: 500px;
-  height: 600px;
+  width: 400px;
+  height: 450px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,7 +16,7 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  background-color: #ffcaaf;
+  background-color: #0081a7;
 }
 
 .mat-form-field{
@@ -43,7 +43,7 @@
 }
 
 .mat-raised-button{
-  background-color: #ffcaaf;
+  background-color: #0081a7;
   background-position: center;
   background-size: cover;
   border: 2px;

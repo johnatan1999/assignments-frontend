@@ -19,6 +19,14 @@ export class AssignmentsComponent implements OnInit {
   tauxProgression = 0;
 
   showProgression = false;
+
+
+  events: boolean;
+  opened: boolean;
+
+  shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
+
+  
   
   // on injecte le service de gestion des assignments
   constructor(private router:Router, private assignmentService: AssignmentsService,
