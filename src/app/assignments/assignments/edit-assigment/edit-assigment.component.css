@@ -58,3 +58,11 @@
   font-size: 16px;
   font-weight: 600;
 }
+
+::ng-deeper .assignment-preview {
+  min-height: 100px;
+}
+
+.assignment-preview .mat-card {
+  box-shadow: none;
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EleveItem } from 'src/app/shared/model/list-item.model';
@@ -9,6 +9,7 @@ import { ElevesService } from 'src/app/shared/services/eleves.service';
 import { MatiereService } from 'src/app/shared/services/matiere.service';
 import { ProfesseurService } from 'src/app/shared/services/professeur.service';
 import { Assignment } from '../../../shared/model/assignment.model';
+import { AssignmentDetailComponent } from '../assignment-detail/assignment-detail.component';
 
 @Component({
   selector: 'app-edit-assigment',
@@ -34,6 +35,8 @@ export class EditAssigmentComponent implements OnInit {
   eleveSelectionne: any;
   professeurs: Professeur[];
 
+  @ViewChild(AssignmentDetailComponent, { static: false }) assignmentPreview: AssignmentDetailComponent;
+
   constructor(
     private assignmentsService: AssignmentsService,
     private professeurService: ProfesseurService,
@@ -53,7 +56,8 @@ export class EditAssigmentComponent implements OnInit {
           descriptionDevoirCtrl: ['', Validators.required],
           remarqueCtrl: ['', ''],
           dateCtrl: ['', Validators.required],
-          matiereCtrl: ['', Validators.required]
+          matiereCtrl: ['', Validators.required],
+          noteCtrl: ['', Validators.required]
         }),
         this._formBuilder.group({
           searchCtrl: ['', ()=>{}]
@@ -86,9 +90,9 @@ export class EditAssigmentComponent implements OnInit {
       this.nom = assignment.nom;
       this.dateDeRendu = assignment.dateDeRendu;
       this.description = assignment.description;
-      this.note = assignment.note;
+      this.note = assignment.note || 0;
       this.remarque = assignment.remarque;
-      this.profSelectionne = this.professeurs?.find((p) => p.id === this.assignment.professeur.id);
+      this.profSelectionne = this.professeurs?.find((p) => p._id === this.assignment.professeur._id);
     });
   }
 
@@ -102,6 +106,8 @@ export class EditAssigmentComponent implements OnInit {
     this.assignment.eleve = this.eleveSelectionne;
     this.assignment.professeur = this.profSelectionne;
     this.assignment.description = this.description;
+    this.assignment.remarque = this.remarque;
+    this.assignment.note = this.note;
 
     this.assignmentsService.updateAssignment(this.assignment)
       .subscribe(message => {
@@ -111,6 +117,18 @@ export class EditAssigmentComponent implements OnInit {
         this.router.navigate(["assignments/detail/" + this.assignment.id]);
       })
 
+  }
+
+  showPreview() {
+    this.assignment.nom = this.nom;
+    this.assignment.dateDeRendu = this.dateDeRendu;
+    this.assignment.eleve = this.eleveSelectionne;
+    this.assignment.professeur = this.profSelectionne;
+    this.assignment.description = this.description;
+    this.assignment.remarque = this.remarque;
+    this.assignment.note = this.note;
+    this.assignment.rendu = this.note > 0;
+    this.assignmentPreview.update(this.assignment);
   }
 
   selectEleve(item: EleveItem) {

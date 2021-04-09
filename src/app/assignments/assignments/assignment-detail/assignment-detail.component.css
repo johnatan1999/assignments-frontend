@@ -2,7 +2,8 @@
   margin: 30px;
 }
 .container .mat-card {
-  background-color: #f4f5f7;
+  /* background-color: #f4f5f7; */
+  background-color: white;
   padding: 25px;
 }
 
@@ -18,18 +19,29 @@
 }
 
 .left-content {
-  width: 75%;
+  width: 65%;
 }
 .right-content {
-  width: 25%;
+  width: 35%;
   padding-left: 50px;
   padding-top: 15px; 
 }
 
-.eleve img {
+.info-eleve {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.info-eleve span {
+  margin-top: 4px;
+}
+
+.info-eleve img {
   border-radius: 50%;
   height: auto;
   width: 35px;
+  margin-right: 10px;
   background-color: lightgray;
 }
 

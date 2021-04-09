@@ -51,6 +51,10 @@ export class AssignmentDetailComponent implements OnInit {
     //this.assignment = null;
   }
 
+  update(assignment) {
+    this.assignment = assignment;
+  }
+
   onDelete() {
     this.assignmentsService
       .deleteAssignment(this.assignment)

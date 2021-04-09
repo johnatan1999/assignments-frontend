@@ -17,8 +17,8 @@
             </mat-form-field>
           </div>
           <br>
-          <div >
-            <mat-form-field appearance="fill">
+          <div style="display: flex; flex-direction: row; justify-content: space-around;">
+            <mat-form-field style="width: 65%;">
               <mat-label>Matiere</mat-label>
               <mat-select formControlName="matiereCtrl" [(ngModel)]="profSelectionne" name="matiere">
                 <mat-option *ngFor="let prof of professeurs" [value]="prof">
@@ -26,8 +26,10 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <mat-form-field>
-              <input type="number" min="0" max="20" [(ngModel)]="note" name="note" />
+            <mat-form-field style="width: 25%;">
+              <mat-label>Note</mat-label>
+              <input matInput type="number" min="0" max="20" formControlName="noteCtrl" [(ngModel)]="note" name="note" />
+              <span matSuffix>/20</span>
             </mat-form-field>
           </div>
           <br>
@@ -38,7 +40,7 @@
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
           <div>
-            <button mat-button matStepperNext>Suivant</button>
+            <button mat-button matStepperNext (click)="showPreview()">Suivant</button>
           </div>
       </mat-step>
       <mat-step [formGroupName]="1" [stepControl]="formArray?.get([1])">
@@ -68,15 +70,15 @@
         
         <div>
           <button mat-button matStepperPrevious>Precèdant</button>
-          <button mat-button matStepperNext>Suivant</button>
+          <button mat-button matStepperNext (click)="showPreview()">Suivant</button>
         </div>
       </mat-step>
       <mat-step>
           <ng-template matStepLabel>Done</ng-template>
-          <div>
+          <div class="assignment-preview">
             <app-assignment-detail (assignment)="assignment" [withAction]="false"></app-assignment-detail>
           </div>
-          <p>You are now done.</p>
+          <p>Cliquez sur <b>Valider</b> pour enregistrer vos changements.</p>
           <div>
             <button mat-button matStepperPrevious>Precèdant</button>
             <button mat-button (click)="onSubmit($event)">Valider</button>

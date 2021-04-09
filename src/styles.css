@@ -32,3 +32,17 @@ body .deleteFilterButton.ui-button.ui-widget {
     width: 100%;
 }
 
+div[_primary-color], h3[_primary-color], a[_primary-color] {
+    color: var(--peach-puff);
+}
+
+a[_primary-color]:hover {
+    color: var(--peach-puff);
+}
+
+:root {
+    --peach-puff: #fed9b7;
+    --bitter-sweet: #f17d74;
+    --cg-blue: #0081a7;
+    --verdi-gris: 00afb9;
+}
