@@ -1,5 +1,5 @@
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-import { Component, NgZone, ViewChild } from '@angular/core';
+import { Component, Input, NgZone, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, pairwise, throttleTime } from 'rxjs/operators';
 import { Assignment } from 'src/app/shared/model/assignment.model';
@@ -15,14 +15,20 @@ export class AssignmentWithInfiniteScrollComponent extends BasicAssignmentList {
 
   @ViewChild('scroller') scroller: CdkVirtualScrollViewport;
 
+  @Input() stateFilter: String;
+
   constructor(protected assignmentsService: AssignmentsService,
     protected route: ActivatedRoute,
     protected router: Router,
     private ngZone: NgZone) {
       super(assignmentsService, route, router);
-      this.limit = 20;
+      this.limit = 15;
     }
   
+  ngOnInit() {
+    this._getAssignments();
+  }
+
   ngAfterViewInit() {
     this.scroller.elementScrolled().pipe(
       map(() => this.scroller.measureScrollOffset('bottom')),
@@ -33,10 +39,19 @@ export class AssignmentWithInfiniteScrollComponent extends BasicAssignmentList {
       this.ngZone.run(() => {
         if(this.hasNextPage) {
           this.page = this.nextPage;
-          this.getAssignments(true);
+          this._getAssignments();
         }
       });
     });
+  }
+
+  _getAssignments() {
+    if(this.stateFilter && (this.stateFilter === BasicAssignmentList.RENDU || BasicAssignmentList.NON_RENDU)) {
+      this.findAssignmentsByState(this.stateFilter, true);
+      console.log(this.stateFilter, this.assignments);
+    } else {
+      this.getAssignments(true);
+    }
   }
 
 }

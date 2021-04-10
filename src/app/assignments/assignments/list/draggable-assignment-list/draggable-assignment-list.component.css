@@ -120,3 +120,16 @@
   height: 40px;
   margin-top: -10px;
 }
+
+.asssignment-loader {
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: rgba(0, 0, 0, 0.1); */
+}
+
+.asssignment-loader .mat-spinner {
+  color: #0081A7;
+  width: 50px;
+}

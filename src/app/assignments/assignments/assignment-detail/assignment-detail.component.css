@@ -1,5 +1,6 @@
 .container {
   margin: 30px;
+  /* font-family: 'system-ui'; */
 }
 .container .mat-card {
   /* background-color: #f4f5f7; */
@@ -51,7 +52,7 @@
 }
 
 .header .mat-icon {
-  margin-top: 12px;
+  margin-top: 16px;
 }
 
 .header h3 {
@@ -89,6 +90,10 @@
   color: #97a0af;
   margin-right: 10px;
   text-align: right;
+}
+
+.note .value {
+  font-size: 26px;
 }
 
 .remarque-content {

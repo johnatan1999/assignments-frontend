@@ -2,8 +2,12 @@
 @import '~primeng/resources/primeng.min.css';
 html, body { height: 100%; }
 
-body { margin: 0px; }
-
+body {
+    margin: 0px; 
+}
+::ng-deep div, h4, h2, h3, span, h2, p {
+    font-family: system-ui;
+}
 body .dashboardDateFilter {
     width: 100%;
     margin-top: 15px;

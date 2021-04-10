@@ -1,5 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { Component, Input, OnInit, ViewChild, NgZone } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { filter, map, pairwise, throttleTime } from 'rxjs/operators';
 import { Assignment } from 'src/app/shared/model/assignment.model';
 import { AssignmentsService } from 'src/app/shared/services/assignments.service';
 import { BasicAssignmentList } from '../basic-assignment-list';
@@ -11,20 +13,29 @@ import { BasicAssignmentList } from '../basic-assignment-list';
 })
 export class TabbedAssignmentListComponent extends BasicAssignmentList {
 
-  assignmentsRendu: Assignment[];
-  assignmentsNonRendu: Assignment[];
+  @ViewChild('scrollerRendu') scrollerRendu: CdkVirtualScrollViewport;
+  showRenduLoader = false;
+  totalDocsRendu: number;
+  assignmentsRendu: Assignment[] = [];
+  pageRendu = 1;
+  renduNextPage: number;
+  renduHasNextPage: Boolean;
+  searchRendu = '';
+  
+  // Non Rendu
+  @ViewChild('scrollerNonRendu') scrollerNonRendu: CdkVirtualScrollViewport;
+  showNonRenduLoader = false;
+  totalDocsNonRendu: number;
+  assignmentsNonRendu: Assignment[] = [];
+  pageNonRendu = 1;
+  nonRenduNextPage: number;
+  nonRenduHasNextPage: Boolean;
+  searchNonRendu = '';
 
   constructor(protected assignmentsService:AssignmentsService,
     protected route:ActivatedRoute,
     protected router:Router) {
       super(assignmentsService, route, router);
     }
-
-  ngDoCheck() {
-    if(this.assignments) {
-      this.assignmentsRendu = this.assignments.filter((a) => a.rendu);
-      this.assignmentsNonRendu = this.assignments.filter((a) => !a.rendu);
-    }
-  }
 
 }

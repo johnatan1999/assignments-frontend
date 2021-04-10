@@ -5,7 +5,7 @@
             <div class="overview-content clearfix">
                 <span class="overview-title">Etudiants</span>
                 <span class="overview-badge">2021 - 2022</span>
-                <span class="overview-detail">{{number.eleve}} </span>
+                <span class="overview-detail">{{number.eleve || 0}} </span>
             </div>
             <div class="overview-footer" style="margin-left: 300px;
             margin-bottom: 5px;">
@@ -18,7 +18,7 @@
             <div class="overview-content clearfix">
                 <span class="overview-title">Professeurs</span>
                 <span class="overview-badge">2021 - 2022</span>
-                <span class="overview-detail">{{number.professeur}} </span>
+                <span class="overview-detail">{{number.professeur || 0}} </span>
             </div>
             <div class="overview-footer" style="margin-left: 315px;
             margin-bottom: 15px;">
@@ -31,7 +31,7 @@
             <div class="overview-content clearfix">
                 <span class="overview-title">Matières</span>
                 <span class="overview-badge">2021 - 2022</span>
-                <span class="overview-detail">{{number.matiere}} </span>
+                <span class="overview-detail">{{number.matiere || 0}} </span>
             </div>
             <div class="overview-footer" style="margin-left: 315px;
             margin-bottom: 15px;">
@@ -47,7 +47,7 @@
             </div>
             <div class="ui-g-8">
                 <span class="colorbox-name">Assignment</span>
-                <span class="colorbox-count">{{number.assignment}}</span>
+                <span class="colorbox-count">{{number.assignment || 0}}</span>
             </div>
         </div>
     </div>
@@ -58,7 +58,7 @@
             </div>
             <div class="ui-g-8">
                 <span class="colorbox-name">Rendu</span>
-                <span class="colorbox-count">{{number.assignmentRendu}}</span>
+                <span class="colorbox-count">{{number.assignmentRendu || 0}}</span>
             </div>
         </div>
     </div>
@@ -71,7 +71,7 @@
             </div>
             <div class="ui-g-8">
                 <span class="colorbox-name">Pas rendu</span>
-                <span class="colorbox-count">{{number.assignmentPasRendu}}</span>
+                <span class="colorbox-count">{{number.assignmentPasRendu || 0}}</span>
             </div>
         </div>
     </div>

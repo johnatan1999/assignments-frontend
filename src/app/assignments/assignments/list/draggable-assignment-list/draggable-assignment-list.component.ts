@@ -15,16 +15,27 @@ import { filter, map, pairwise, throttleTime } from 'rxjs/operators';
   styleUrls: ['./draggable-assignment-list.component.css']
 })
 export class DraggableAssignmentListComponent extends BasicAssignmentList {
-
-  pageRendu = 1;
-  pageNonRendu = 1;
-  searchRendu = '';
-  searchNonRendu = '';
-  assignmentsRendu: Assignment[] = [];
-  assignmentsNonRendu: Assignment[] = [];
+    
+  // Rendu
   @ViewChild('scrollerRendu') scrollerRendu: CdkVirtualScrollViewport;
-  @ViewChild('scrollerNonRendu') scrollerNonRendu: CdkVirtualScrollViewport;
+  showRenduLoader = false;
+  totalDocsRendu: number;
+  assignmentsRendu: Assignment[] = [];
+  pageRendu = 1;
+  renduNextPage: number;
+  renduHasNextPage: Boolean;
+  searchRendu = '';
   
+  // Non Rendu
+  @ViewChild('scrollerNonRendu') scrollerNonRendu: CdkVirtualScrollViewport;
+  showNonRenduLoader = false;
+  totalDocsNonRendu: number;
+  assignmentsNonRendu: Assignment[] = [];
+  pageNonRendu = 1;
+  nonRenduNextPage: number;
+  nonRenduHasNextPage: Boolean;
+  searchNonRendu = '';
+
   constructor(protected assignmentsService:AssignmentsService,
     protected route:ActivatedRoute,
     protected router:Router,public dialog: MatDialog,
@@ -37,42 +48,45 @@ export class DraggableAssignmentListComponent extends BasicAssignmentList {
     const nonRendu = this.assignmentsRendu.find((a) => !a.rendu);
     this.assignmentsNonRendu = this.assignmentsNonRendu.filter((a) => !a.rendu);
     this.assignmentsRendu = this.assignmentsRendu.filter((a) => a.rendu);
-    console.log(this.assignmentsNonRendu.length, this.assignmentsRendu.length, rendu, nonRendu)
-    if(nonRendu)this.assignmentsNonRendu.push(nonRendu);
-    if(rendu)this.assignmentsRendu.push(rendu);
-    console.log(this.assignmentsNonRendu.length, this.assignmentsRendu.length)
+    // console.log(this.assignmentsNonRendu.length, this.assignmentsRendu.length, rendu, nonRendu)
+
+    if(nonRendu)this.assignmentsNonRendu.splice(0, 0, nonRendu);
+    if(rendu)this.assignmentsRendu.splice(0, 0, rendu);
+    // console.log(this.assignmentsNonRendu.length, this.assignmentsRendu.length)
   }
   
   ngOnInit() {
+    // this.showRenduLoader = true;
+    // this.showNonRenduLoader = true;
     this.getAssignmentsByState(true);
     this.getAssignmentsByState(false);
   }
   
   ngAfterViewInit() {
-    this.scrollerRendu.elementScrolled().pipe(
+    this.scrollerRendu?.elementScrolled().pipe(
       map(() => this.scrollerRendu.measureScrollOffset('bottom')),
       pairwise(),
       filter(([y1, y2]) => (y2 < y1 && y2 < 140)),
       throttleTime(200)
     ).subscribe(() => {
       this.ngZone.run(() => {
-        // if(this.hasNextPage) {
-          this.pageRendu = this.nextPage;
+        if(this.renduHasNextPage) {
+          this.pageRendu = this.renduNextPage;
           this.getAssignmentsByState(true);
-        // }
+        }
       });
     });
-    this.scrollerNonRendu.elementScrolled().pipe(
+    this.scrollerNonRendu?.elementScrolled().pipe(
       map(() => this.scrollerNonRendu.measureScrollOffset('bottom')),
       pairwise(),
       filter(([y1, y2]) => (y2 < y1 && y2 < 140)),
       throttleTime(200)
     ).subscribe(() => {
       this.ngZone.run(() => {
-        // if(this.hasNextPage) {
-          this.pageRendu = this.nextPage;
+        if(this.nonRenduHasNextPage) {
+          this.pageNonRendu = this.nonRenduNextPage;
           this.getAssignmentsByState(false, this.search);
-        // }
+        }
       });
     });
   }
@@ -90,18 +104,24 @@ export class DraggableAssignmentListComponent extends BasicAssignmentList {
   getAssignmentsByState(rendu, criteria='', appendData=true) {
     this.assignmentsService.getAssignmentsPagine(rendu ? this.pageRendu : this.pageNonRendu, this.limit, rendu ? 'rendu' : 'nonrendu', criteria)
     .subscribe(data => {
-      if(rendu) {
-        this.pageRendu += 1;
-      }
-      else {
-        this.pageNonRendu += 1;
-      }
       var assignments = rendu ? this.assignmentsRendu : this.assignmentsNonRendu;
       assignments = appendData ? assignments.concat(data.docs): data.docs;
-      if(rendu)
+      if(rendu) {
+        this.pageRendu = data.page;
+        this.renduHasNextPage = data.hasNextPage;
+        this.renduNextPage = data.nextPage;
         this.assignmentsRendu = assignments;
-      else 
+        this.showRenduLoader = false;
+        this.totalDocsRendu = data.totalDocs;
+      }
+      else {
+        this.nonRenduHasNextPage = data.hasNextPage;
+        this.nonRenduNextPage = data.nextPage;
+        this.pageNonRendu = data.page;
+        this.showNonRenduLoader = false;
         this.assignmentsNonRendu = assignments;
+        this.totalDocsNonRendu = data.totalDocs;
+      }
     });
   }
   

@@ -22,25 +22,15 @@
     Use of this source code is governed by an MIT-style license that
     can be found in the LICENSE file at http://angular.io/license -->
 
-<mat-toolbar class="tp-toolbar">
-  <mat-toolbar-row class="tp-toolbar-row">
-    <div>
-      <img src="../../assets/images/icons8-école-80.png" style="height: 42px; width: 65px;">
-      <mat-icon (click)="sidenav.toggle()" style="margin:22px 0px 0px 40px;" aria-hidden="false" aria-label="Example home icon" >reorder</mat-icon>
-    </div>
-    
-    <p style="color:#0081A7">Année scolaire 2021/2022</p>
-    <div>
-      <button mat-raised-button (click)="peuplerBDAvecProgressBar()"> Peupler BD </button>
-    <button mat-button (click)="logout()">
-      <mat-icon aria-hidden="false" aria-label="Example home icon" >power_settings_new</mat-icon>
-    </button>
-  </div>
-  </mat-toolbar-row>
-</mat-toolbar>
+
 <mat-sidenav-container style="min-height: 95vh;">
-  <mat-sidenav #sidenav mode="side" [(opened)]="opened" (opened)="events=true"
-  (closed)="events=false" scrollTo='100' class="tp-side-nav">
+  <mat-sidenav #sidenav 
+    mode="side" 
+    class="tp-side-nav"
+		opened="true">
+    <div #logo class="logo" >
+      <img src="../../assets/images/icons8-école-80.png">
+    </div>
     <mat-nav-list >
       <a mat-list-item routerLinkActive #rlat="routerLinkActive" [routerLinkActiveOptions]="{exact: true}" [class]="rlat.isActive ? 'active' : ''" [routerLink]="'/assignments/dashboard'"> 
         <div class="item-row">
@@ -76,7 +66,7 @@
 
       
     </mat-nav-list>
-    <mat-nav-list>
+    <!-- <mat-nav-list>
       <mat-list-item>
         <button mat-button (click)="genererProfesseurs()" >Generer Professeurs</button>
       </mat-list-item>
@@ -86,19 +76,36 @@
       <mat-list-item>
         <button mat-button (click)="genererMatieres()" >Generer Matieres</button>
       </mat-list-item>
-    </mat-nav-list>
+    </mat-nav-list> -->
   </mat-sidenav>
   <mat-sidenav-content>
+    <mat-toolbar class="tp-toolbar">
+      <mat-toolbar-row class="tp-toolbar-row">
+        <div class="sidebar-toggle">
+          <button mat-button (click)="sidenav.toggle();">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" >reorder</mat-icon>
+          </button>
+        </div>
+        
+        <p style="color:#0081A7">Année scolaire 2021/2022</p>
+        <div>
+          <button mat-raised-button (click)="peuplerBDAvecProgressBar()"> Peupler BD </button>
+        <button mat-button (click)="logout()">
+          <mat-icon aria-hidden="false" aria-label="Example home icon" >power_settings_new</mat-icon>
+        </button>
+      </div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+
     <router-outlet></router-outlet>
 
-    
   </mat-sidenav-content>
 </mat-sidenav-container>
 
 
 
-<div class="progression-container" *ngIf="showProgression">
-  <div class="progression" cdkDragBoundary=".progression-container" cdkDrag>
+<div [class]="!backgroundProgression ? 'progression-container' : 'background-progression-container'" *ngIf="showProgression">
+  <div class="progression" cdkDragBoundary="{{ !backgroundProgression ? '.progression-container' : '.background-progression-container'}}" cdkDrag>
       <mat-card>
         <div class="handle" cdkDragHandle>
           <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
@@ -117,7 +124,11 @@
             [value]="tauxProgression">
           </mat-progress-bar>
         </mat-card-content>
-        <mat-card-footer>&nbsp;</mat-card-footer>
+        <mat-card-footer style="display: flex; flex-direction: row; justify-content: space-around; padding-bottom: 6px;">
+          <button mat-raised-button style="background-color: #0081A7;" (click)="mettreEnArrierePlan()">
+            Mettre en arrière plan
+          </button>
+        </mat-card-footer>
       </mat-card>
      
     </div>

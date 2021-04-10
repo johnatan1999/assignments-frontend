@@ -1,8 +1,11 @@
 <mat-tab-group mat-align-tabs="start">
     <mat-tab label="Rendu">
-        <app-assignment-with-infinite-scroll></app-assignment-with-infinite-scroll>
+        <app-assignment-with-infinite-scroll [stateFilter]="'rendu'" ></app-assignment-with-infinite-scroll>
     </mat-tab>
     <mat-tab label="Non rendu">
-        <app-assignment-card-list [assignments]="assignmentsNonRendu" ></app-assignment-card-list>
+        <ng-template matTabContent>
+            <app-assignment-with-infinite-scroll [stateFilter]="'nonrendu'" ></app-assignment-with-infinite-scroll>
+        </ng-template>
+        <!-- <app-assignment-card-list [assignments]="assignmentsNonRendu" ></app-assignment-card-list> -->
     </mat-tab>
 </mat-tab-group>

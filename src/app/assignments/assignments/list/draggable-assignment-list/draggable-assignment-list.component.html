@@ -2,7 +2,7 @@
 <div class="container">
   <div class="list-container">
       <div class="list-header">
-        <h4>A rendre</h4>  
+        <h4>A rendre ({{ assignmentsNonRendu.length || 0 }}/{{ totalDocsNonRendu || 0 }})</h4>  
         <form class="search-form">
           <mat-form-field>
             <mat-label>Recherche</mat-label>
@@ -21,7 +21,7 @@
         class="assignment-list"
         (cdkDropListDropped)="dropVersNonRendu($event)">
         <!-- <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div> -->
-        <cdk-virtual-scroll-viewport #scrollerNonRendu itemSize="75" class="assignment-viewport">
+        <cdk-virtual-scroll-viewport *ngIf="!showNonRenduLoader" #scrollerNonRendu itemSize="75" class="assignment-viewport">
           <mat-list *cdkVirtualFor="let a of assignmentsNonRendu" cdkDrag>
             <!-- <mat-list-item  class="assignment-item"> -->
                 <a routerLink="/assignments/detail/{{ a.id }}" style="text-decoration: none;">
@@ -30,12 +30,15 @@
             <!-- </mat-list-item> -->
           </mat-list>
         </cdk-virtual-scroll-viewport>
+        <div class="asssignment-loader" *ngIf="showNonRenduLoader">
+          <mat-spinner [diameter]=70></mat-spinner>
+        </div>
       </div>
   </div>
     
   <div class="list-container">
       <div class="list-header">
-        <h4>Rendu</h4>  
+        <h4>Rendu ({{ assignmentsRendu.length || 0 }}/{{ totalDocsRendu || 0 }})</h4>  
         <form class="search-form">
           <mat-form-field>
             <mat-label>Recherche</mat-label>
@@ -53,7 +56,7 @@
         class="assignment-list"
         (cdkDropListDropped)="dropVersRendu($event)">
         <!-- <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div> -->
-        <cdk-virtual-scroll-viewport #scrollerRendu itemSize="75" class="assignment-viewport">
+        <cdk-virtual-scroll-viewport *ngIf="!showRenduLoader" #scrollerRendu itemSize="75" class="assignment-viewport">
           <mat-list *cdkVirtualFor="let a of assignmentsRendu" cdkDrag>
             <!-- <mat-list-item  class="assignment-item"> -->
                 <a routerLink="/assignments/detail/{{ a.id }}" style="text-decoration: none;">
@@ -62,6 +65,9 @@
             <!-- </mat-list-item> -->
           </mat-list>
         </cdk-virtual-scroll-viewport>
+        <div class="asssignment-loader" *ngIf="showRenduLoader">
+          <mat-spinner [diameter]=70></mat-spinner>
+        </div>
       </div>
   </div>
 </div>

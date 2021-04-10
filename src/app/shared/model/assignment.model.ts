@@ -13,4 +13,6 @@ export class Assignment {
   rendu:boolean;
   eleve: Eleve;
   professeur: Professeur;
+  dateUpdate: Date;
+  enCours: Boolean;
 }

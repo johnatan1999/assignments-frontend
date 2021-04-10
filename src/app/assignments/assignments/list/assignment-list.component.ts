@@ -21,7 +21,7 @@ export class AssignmentListComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    this.draggableList()
+    this.tabbedList();
   }
 
   draggableList(viewName = 'Liste avec element deplacable') {

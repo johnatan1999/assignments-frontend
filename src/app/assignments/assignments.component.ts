@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 import { ActivatedRoute, Router } from '@angular/router';
 import { assignmentsGeneres } from 'src/dummy-data/assignments.data';
 import { Assignment } from '../shared/model/assignment.model';
@@ -19,13 +20,12 @@ export class AssignmentsComponent implements OnInit {
   tauxProgression = 0;
 
   showProgression = false;
+  openedSidenav: boolean = true;
 
+  backgroundProgression = false;
 
-  events: boolean;
-  opened: boolean;
-
-  shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
-
+  @ViewChild("sidenav") sidenav: MatSidenav;
+  @ViewChild("logo") headerLogo: ElementRef;
   
   
   // on injecte le service de gestion des assignments
@@ -68,6 +68,8 @@ export class AssignmentsComponent implements OnInit {
         assignmentsGeneres.forEach((a) => {
           const nouvelAssignment = new Assignment();
           const randEleve = Math.floor(Math.random() * eleves.length);
+          const randNote = Math.floor(Math.random() * 12) + 8;
+          console.log("note", randNote);
           const randMatiere = Math.floor(Math.random() * professeurs.length);
           nouvelAssignment.id = a.id;
           nouvelAssignment.nom = `${a.nom.charAt(0).toLocaleUpperCase()}${a.nom.substr(1)}`;
@@ -76,6 +78,7 @@ export class AssignmentsComponent implements OnInit {
           nouvelAssignment.rendu = a.rendu;
           nouvelAssignment.professeur = professeurs[randMatiere];
           nouvelAssignment.eleve = eleves[randEleve];
+          nouvelAssignment.note = a.rendu ? randNote : 0;
           this.progressionMax = assignmentsGeneres.length;
           this.assignmentsService.addAssignment(nouvelAssignment).subscribe(() => {
             this.progression += 1;
@@ -89,8 +92,13 @@ export class AssignmentsComponent implements OnInit {
               }, 1000)
           })
         });
+        this.router.navigate(['/assignments']);
       });
     });
+  }
+
+  mettreEnArrierePlan() {
+    this.backgroundProgression = true;
   }
 
   genererProfesseurs() {

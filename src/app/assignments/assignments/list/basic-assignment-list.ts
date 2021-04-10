@@ -6,6 +6,9 @@ import { AssignmentsService } from "src/app/shared/services/assignments.service"
 @Injectable()
 export abstract class BasicAssignmentList implements OnInit {
     
+    static RENDU = 'rendu';
+    static NON_RENDU = 'nonrendu';
+
     assignments:Assignment[] = [];
     page: number=1;
     limit: number=10;
@@ -31,6 +34,21 @@ export abstract class BasicAssignmentList implements OnInit {
             this.getAssignments();
         });
         console.log("getAssignments() du service appelé");
+    }
+
+    findAssignmentsByState(state, appendData = false) {
+        this.assignmentsService.getAssignmentsPagine(this.page, this.limit, state)
+        .subscribe(data => {
+          this.assignments = appendData ? [...this.assignments, ...data.docs]: data.docs;
+          this.page = data.page;
+          this.limit = data.limit;
+          this.totalDocs = data.totalDocs;
+          this.totalPages = data.totalPages;
+          this.hasPrevPage = data.hasPrevPage;
+          this.prevPage = data.prevPage;
+          this.hasNextPage = data.hasNextPage;
+          this.nextPage = data.nextPage;
+        });
     }
 
     getAssignments(appendData = false) {

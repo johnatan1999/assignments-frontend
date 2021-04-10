@@ -18,8 +18,8 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding-left: 70px;
   background-color: white;
+  padding-left: 0;
 }
 
 .tp-side-nav {
@@ -68,6 +68,31 @@ span{
   background-color: rgba(0, 0, 0, 0.6);
 }
 
+.background-progression-container {
+  position: fixed;
+  bottom: 0;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  /* padding: 0 20px; */
+}
+
+.background-progression-container .mat-card {
+  width: 99vw;
+  border-radius: 0;
+  height: 100px;
+  box-shadow: 5px -1px 2px #ccc;
+}
+
+.background-progression-container .handle {
+  display: none;
+}
+.background-progression-container .mat-card-title {
+  margin-top: -20px;
+  font-size: 20px;
+}
+
 .progression {
   width: 50%;
   display: flex;
@@ -100,3 +125,24 @@ span{
   color : white;
 }
 
+
+.sidebar-toggle {
+  display: flex;
+  flex-direction: row;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  padding-top: 4px;
+  /* padding-bottom: 8px; */
+  align-items: center;
+  width: 200px;
+  /* border-bottom: 1px solid #c3c3c3; */
+}
+
+.logo img {
+  height: 46px; 
+  /* width: 65px; */
+  width: auto;
+}
