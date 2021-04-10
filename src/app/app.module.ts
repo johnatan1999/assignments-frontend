@@ -40,7 +40,7 @@ import { AddAssignmentComponent } from './assignments/assignments/add-assignment
 import { Routes, RouterModule } from '@angular/router';
 import { EditAssigmentComponent } from './assignments/assignments/edit-assigment/edit-assigment.component';
 import { AuthGuard } from './shared/guard/auth.guard';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AssignmentListComponent } from './assignments/assignments/list/assignment-list.component';
 import { SimpleAssignmentListComponent } from './assignments/assignments/list/simple-assignment-list/simple-assignment-list.component';
 import { DraggableAssignmentListComponent } from './assignments/assignments/list/draggable-assignment-list/draggable-assignment-list.component';
@@ -59,6 +59,7 @@ import { DashboardComponent } from './assignments/dashboard/dashboard.component'
 import {PanelModule} from 'primeng/panel';
 import {ChartModule} from 'primeng/chart';
 import {CalendarModule} from 'primeng/calendar';
+import { AuthInterceptor } from "./interceptor/auth.interceptor";
 
 const routes: Routes = [
   { 
@@ -172,7 +173,11 @@ const routes: Routes = [
     CalendarModule,
     RouterModule.forRoot(routes), HttpClientModule
   ],
-  providers: [],
+  providers: [{
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+  }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
