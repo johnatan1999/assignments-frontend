@@ -10,7 +10,7 @@ import { ProfesseurService } from 'src/app/shared/services/professeur.service';
 })
 export class ProfesseursComponent implements OnInit {
 
-  displayedColumns: string[] = ['_id', 'nom', 'prenom', 'image', 'matiere'];
+  displayedColumns: string[] = ['image', 'nom', 'prenom', 'matiere'];
   //dataSource = ELEMENT_DATA;
 
   professeurs:Professeur[];
@@ -40,6 +40,17 @@ export class ProfesseursComponent implements OnInit {
     });
       console.log("getProfesseurs() du service appelé");
   }
+
+  pageEvents(event: any) {
+    if(event.pageIndex > event.previousPageIndex) {
+      this.pageSuivante();
+      // Clicked on next button
+    } else {
+      this.pagePrecedente();
+      // Clicked on previous button
+    }
+    // The code that you want to execute on clicking on next and previous buttons will be written here.
+ }
 
   getProfesseurs() {
     this.professeursService.getProfesseursPagine(this.page, this.limit)

@@ -27,7 +27,7 @@ export interface PeriodicElement {
   styleUrls: ['./eleves.component.css']
 })
 export class ElevesComponent implements OnInit {
-  displayedColumns: string[] = ['_id', 'nom', 'prenom', 'image', 'sexe'];
+  displayedColumns: string[] = ['image', 'nom', 'prenom', 'sexe'];
   //dataSource = ELEMENT_DATA;
 
   eleves:Eleve[];
@@ -39,6 +39,7 @@ export class ElevesComponent implements OnInit {
   prevPage: number;
   hasNextPage: boolean;
   nextPage: number;
+  pageSizeOptions: number[] = [];
 
 
   constructor(private route:ActivatedRoute,private elevesService : ElevesService,
@@ -46,6 +47,7 @@ export class ElevesComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('AVANT AFFICHAGE');
+   
     // on regarde s'il y a page= et limit = dans l'URL
     this.route.queryParams.subscribe(queryParams => {
       console.log("Dans le subscribe des queryParams")
@@ -53,10 +55,21 @@ export class ElevesComponent implements OnInit {
       this.limit = +queryParams.limit || 10;
 
       this.getEleves();
-  
+      
     });
       console.log("getEleves() du service appelé");
   }
+
+  pageEvents(event: any) {
+    if(event.pageIndex > event.previousPageIndex) {
+      this.pageSuivante();
+      // Clicked on next button
+    } else {
+      this.pagePrecedente();
+      // Clicked on previous button
+    }
+    // The code that you want to execute on clicking on next and previous buttons will be written here.
+ }
 
   getEleves() {
     this.elevesService.getElevesPagine(this.page, this.limit)

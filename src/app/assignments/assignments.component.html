@@ -31,7 +31,8 @@
     <div #logo class="logo" >
       <img src="../../assets/images/icons8-école-80.png">
     </div>
-    <mat-nav-list >
+    <mat-nav-list>
+      <hr/>
       <a mat-list-item routerLinkActive #rlat="routerLinkActive" [routerLinkActiveOptions]="{exact: true}" [class]="rlat.isActive ? 'active' : ''" [routerLink]="'/assignments/dashboard'"> 
         <div class="item-row">
           <mat-icon aria-hidden="false" aria-label="Example home icon" style="margin-right: 5px;
