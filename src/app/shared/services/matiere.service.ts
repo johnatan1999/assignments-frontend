@@ -14,9 +14,14 @@ export class MatiereService extends BasicService {
     constructor(private loggingService:LoggingService, private http:HttpClient) { super(); }
 
     static PATH = '/matieres';
+    static PATHPagination = '/matieres-pagination';
 
     getMatiere():Observable<Matiere[]> {
         return this.http.get<Matiere[]>(this.getUri(MatiereService.PATH));
+    }
+
+    getMatierePagine(page:number, limit:number):Observable<any> {
+        return this.http.get<Matiere[]>(this.getUri(MatiereService.PATHPagination)+"?page="+page + "&limit="+limit);
     }
 
     addMatiere(matiere: Matiere):Observable<any> {

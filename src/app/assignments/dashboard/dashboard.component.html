@@ -1,6 +1,6 @@
 <mat-card class="card-dashboard">
     <div class="ui-g dashboard">
-    <div class="ui-g-12 ui-md-4">
+    <div [routerLink]="'/assignments/eleves'" class="ui-g-12 ui-md-4">
         <div class="card overview">
             <div class="overview-content clearfix">
                 <span class="overview-title">Etudiants</span>
@@ -13,7 +13,8 @@
             </div>
         </div>
     </div>
-    <div class="ui-g-12 ui-md-4">
+
+    <div [routerLink]="'/assignments/professeurs'" class="ui-g-12 ui-md-4">
         <div class="card overview">
             <div class="overview-content clearfix">
                 <span class="overview-title">Professeurs</span>
@@ -26,7 +27,7 @@
             </div>
         </div>
     </div>
-    <div class="ui-g-12 ui-md-4">
+    <div [routerLink]="'/assignments/matieres'" class="ui-g-12 ui-md-4">
         <div class="card overview">
             <div class="overview-content clearfix">
                 <span class="overview-title">Matières</span>

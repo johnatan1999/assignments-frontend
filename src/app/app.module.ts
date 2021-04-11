@@ -62,6 +62,8 @@ import {CalendarModule} from 'primeng/calendar';
 import { AuthInterceptor } from "./interceptor/auth.interceptor";
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { DynamicDialogComponent } from './components/dynamic-dialog/dynamic-dialog.component';
+import { MatiereComponent } from './assignments/matiere/matiere.component';
+import { AddElevesComponent } from "./assignments/eleves/add-eleves/add-eleves.component";
 
 const routes: Routes = [
   { 
@@ -90,8 +92,16 @@ const routes: Routes = [
         component: ElevesComponent,
       },
       { 
+        path: "eleves/add", 
+        component: AddElevesComponent,
+      },
+      { 
         path: "professeurs", 
         component: ProfesseursComponent,
+      },
+      { 
+        path: "matieres", 
+        component: MatiereComponent,
       },
       { 
         path: "dashboard", 
@@ -139,7 +149,8 @@ const routes: Routes = [
     ProfesseursComponent,
     DashboardComponent,
     ConfirmDialogComponent,
-    DynamicDialogComponent
+    DynamicDialogComponent,
+    MatiereComponent
   ],
   imports: [
     BrowserModule,

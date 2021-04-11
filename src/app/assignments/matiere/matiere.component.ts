@@ -1,19 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Professeur } from 'src/app/shared/model/professeur.model';
-import { ProfesseurService } from 'src/app/shared/services/professeur.service';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { Matiere } from 'src/app/shared/model/matiere.model';
+import { MatiereService } from 'src/app/shared/services/matiere.service';
 
 @Component({
-  selector: 'app-professeurs',
-  templateUrl: './professeurs.component.html',
-  styleUrls: ['./professeurs.component.css']
+  selector: 'app-matiere',
+  templateUrl: './matiere.component.html',
+  styleUrls: ['./matiere.component.css']
 })
-export class ProfesseursComponent implements OnInit {
+export class MatiereComponent implements OnInit {
 
-  displayedColumns: string[] = ['image', 'nom', 'prenom', 'matiere'];
-  //dataSource = ELEMENT_DATA;
 
-  professeurs:Professeur[];
+  displayedColumns: string[] = ['image', 'matiere'];
+
+  matieres:Matiere[];
   page: number=1;
   limit: number=4;
   totalDocs: number;
@@ -24,7 +25,7 @@ export class ProfesseursComponent implements OnInit {
   nextPage: number;
 
 
-  constructor(private route:ActivatedRoute,private professeursService : ProfesseurService,
+  constructor(private route:ActivatedRoute,private matiereService : MatiereService,
     private router:Router) { }
 
   ngOnInit(): void {
@@ -35,10 +36,10 @@ export class ProfesseursComponent implements OnInit {
       this.page = +queryParams.page || 1;
       this.limit = +queryParams.limit || 4;
 
-      this.getProfesseurs();
+      this.getMatieres();
   
     });
-      console.log("getProfesseurs() du service appelé");
+      console.log("getMatiere() du service appelé");
   }
 
   pageEvents(event: any) {
@@ -52,10 +53,10 @@ export class ProfesseursComponent implements OnInit {
     // The code that you want to execute on clicking on next and previous buttons will be written here.
  }
 
-  getProfesseurs() {
-    this.professeursService.getProfesseursPagine(this.page, this.limit)
+  getMatieres() {
+    this.matiereService.getMatierePagine(this.page, this.limit)
     .subscribe(data => {
-      this.professeurs = data.docs;
+      this.matieres = data.docs;
       this.page = data.page;
       this.limit = data.limit;
       this.totalDocs = data.totalDocs;
@@ -70,7 +71,7 @@ export class ProfesseursComponent implements OnInit {
 
 
   pageSuivante() {
-    this.router.navigate(['/assignments/professeurs'], {
+    this.router.navigate(['/assignments/matieres'], {
       queryParams: {
         page:this.nextPage,
         limit:this.limit,
@@ -80,14 +81,13 @@ export class ProfesseursComponent implements OnInit {
 
 
   pagePrecedente() {
-    this.router.navigate(['/assignments/professeurs'], {
+    this.router.navigate(['/assignments/matieres'], {
       queryParams: {
         page:this.prevPage,
         limit:this.limit,
       }
     });
   }
-
 
 
 }

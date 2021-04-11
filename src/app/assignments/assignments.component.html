@@ -1,28 +1,3 @@
-<!--<mat-sidenav-container class="example-container" *ngIf="!shouldRun">
-  <mat-sidenav #sidenav mode="side" [(opened)]="opened" (opened)="events=true"
-               (closed)="events=false">
-    Sidenav content
-  </mat-sidenav>
-
-  
-  <mat-sidenav-content>
-    <p><mat-checkbox [(ngModel)]="opened">sidenav.opened</mat-checkbox></p>
-    <p><button mat-button (click)="sidenav.toggle()">sidenav.toggle() eto</button></p>
-    <div *ngIf="events">tay </div>
-
-    <p>Events:</p>
-
-  </mat-sidenav-content>
-</mat-sidenav-container>
-
-<div *ngIf="!shouldRun">Please open on Stackblitz to see result</div>-->
-
-
-<!-- Copyright 2020 Google LLC. All Rights Reserved.
-    Use of this source code is governed by an MIT-style license that
-    can be found in the LICENSE file at http://angular.io/license -->
-
-
 <mat-sidenav-container style="min-height: 95vh;">
   <mat-sidenav #sidenav 
     mode="side" 
@@ -65,19 +40,17 @@
         </div>
       </a>
 
+      <a mat-list-item routerLinkActive #rlam="routerLinkActive" [routerLinkActiveOptions]="{exact: true}" [class]="rlam.isActive ? 'active' : ''" [routerLink]="'/assignments/matieres'"> 
+        <div class="item-row">
+          <mat-icon aria-hidden="false" aria-label="Example home icon" style="margin-right: 5px;
+          line-height: 20px;"> school </mat-icon>
+          <span>Matières</span>
+        </div>
+      </a>
+
       
     </mat-nav-list>
-    <!-- <mat-nav-list>
-      <mat-list-item>
-        <button mat-button (click)="genererProfesseurs()" >Generer Professeurs</button>
-      </mat-list-item>
-      <mat-list-item>
-        <button mat-button (click)="genererEleves()" >Generer Eleves</button>
-      </mat-list-item> 
-      <mat-list-item>
-        <button mat-button (click)="genererMatieres()" >Generer Matieres</button>
-      </mat-list-item>
-    </mat-nav-list> -->
+
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar class="tp-toolbar">

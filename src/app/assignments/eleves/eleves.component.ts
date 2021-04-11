@@ -88,19 +88,7 @@ export class ElevesComponent implements OnInit {
   }
 
 
-  premierePage() {
-    this.router.navigate(['/assignments/eleves'], {
-      queryParams: {
-        page:1,
-        limit:this.limit,
-      }
-    });
-  }
-
   pageSuivante() {
-    /*
-    this.page = this.nextPage;
-    this.getAssignments();*/
     this.router.navigate(['/assignments/eleves'], {
       queryParams: {
         page:this.nextPage,
@@ -119,12 +107,7 @@ export class ElevesComponent implements OnInit {
     });
   }
 
-  dernierePage() {
-    this.router.navigate(['/assignments/eleves'], {
-      queryParams: {
-        page:this.totalPages,
-        limit:this.limit,
-      }
-    });
+  onClickAdd() {
+    this.router.navigate(['/assignments/eleves/add']);
   }
 }

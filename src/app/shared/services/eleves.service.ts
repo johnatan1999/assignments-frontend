@@ -18,6 +18,12 @@ export class ElevesService extends BasicService {
 
   PATH = '/eleves';
 
+  addEleve(eleve:Eleve):Observable<any> {
+    eleve.id = this.generateId();
+
+    return this.http.post(this.getUri(this.PATH), eleve);
+  }
+
   getEleves():Observable<any[]> {
     console.log("Dans le service de gestion des Eleves...")
     //return of(this.Eleves);

@@ -2,6 +2,17 @@
   <mat-toolbar>
     <mat-toolbar-row>
         <h4>Liste des élèves</h4>
+        <div class="view-switcher">
+          <button mat-button [matMenuTriggerFor]="menu">
+              <mat-icon aria-hidden="false">more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)=onClickAdd()>
+                  <mat-icon aria-hidden="false">add</mat-icon>
+                  Ajouter
+              </button>
+          </mat-menu>
+      </div>
     </mat-toolbar-row>
 </mat-toolbar>
     <div>
@@ -37,47 +48,5 @@
       <mat-paginator [length]="totalDocs" [pageSize]="10" [hidePageSize]=true (page)="pageEvents($event)">
       </mat-paginator>
     </div>
-
-
-
-    <!--<table mat-table [dataSource]="eleves" class="mat-elevation-z8">
-      
-      <ng-container matColumnDef="image">
-        <th mat-header-cell *matHeaderCellDef> Photo de profil </th>
-        <td mat-cell *matCellDef="let element"> <img src="{{element.image}}"> </td>
-      </ng-container>
-      
-        <ng-container matColumnDef="nom">
-          <th mat-header-cell *matHeaderCellDef> Nom </th>
-          <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
-        </ng-container>
-      
-        <ng-container matColumnDef="prenom">
-          <th mat-header-cell *matHeaderCellDef> Prénom </th>
-          <td mat-cell *matCellDef="let element"> {{element.prenom}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="sexe">
-            <th mat-header-cell *matHeaderCellDef> Sexe </th>
-            <td mat-cell *matCellDef="let element"> {{element.sexe}} </td>
-          </ng-container>
-      
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-      <button mat-raised-button color="primary" (click)="premierePage()">
-        Première
-      </button>
-      <button mat-raised-button color="primary" [disabled]="!hasPrevPage" (click)="pagePrecedente()">
-        Prev
-      </button>
-      <button mat-raised-button color="primary" [disabled]="!hasNextPage" (click)="pageSuivante()">
-        Suiv
-      </button>
-      <button mat-raised-button color="primary" (click)="dernierePage()">
-        Dernière
-      </button>
-      <mat-paginator [length]="totalDocs" [pageSize]="10" [hidePageSize]=true (page)="pageEvents($event)">
-</mat-paginator>-->
 
 </mat-card>
