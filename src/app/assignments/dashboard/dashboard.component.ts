@@ -16,7 +16,7 @@ export class NumberOnDashboard {
   styleUrls: ["./dashboard.component.css"],
 })
 export class DashboardComponent implements OnInit {
-  chartData: any;
+  professorSuccessRate:any = {};
   dataSource: any;
   dateValue: Date;
   number: NumberOnDashboard = new NumberOnDashboard();
@@ -24,8 +24,8 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadNumberOnDashboard();
-
     this.getSuccessRateByMatter();
+    this.refreshProfessorSuccessRate();
   }
 
   getSuccessRateByMatter() {
@@ -65,6 +65,23 @@ export class DashboardComponent implements OnInit {
           this.number.assignmentRendu = dashboardAssignment.assignmentRendu;
           this.number.assignmentEnCours = dashboardAssignment.assignmentEnCours;
         });
+    });
+  }
+  
+  refreshProfessorSuccessRate() {
+    this.dashboard.getProfessorSuccessRate().subscribe((data: any[]) => {
+      const data_ = {
+        labels: data.map((prof) => prof._id.nom),
+        datasets: [
+          {
+            label: 'Professeur',
+            data: data.map((prof) => ((prof.successRate * 100) / 20).toFixed(2)),
+            fill: true,
+            borderColor: '#FFC107'
+          }
+        ]
+      }
+      this.professorSuccessRate = data_;
     });
   }
 }
