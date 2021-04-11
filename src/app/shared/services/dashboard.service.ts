@@ -11,6 +11,7 @@ export class DashboardService extends BasicService{
   constructor(private http:HttpClient) { super(); }
   dashboardPath = '/dashboard';
   dashboardAssignmentsPath = '/dashboard-assignments';
+  succesRateByMatterPath = '/success-rate-by-students';
 
   getDashboard():Observable<any[]> {
     console.log("Dans le service de gestion des dashboard...")
@@ -20,6 +21,11 @@ export class DashboardService extends BasicService{
   getAssignmentDashboard():Observable<any[]> {
     console.log("Dans le service de gestion des dashboard assignments...")
     return this.http.get<any>(this.getUri(this.dashboardAssignmentsPath));
+  }
+
+  getSuccessRateByMatter():Observable<any[]> {
+    console.log("Dans le service de gestion des dashboard assignments...")
+    return this.http.get<any>(this.getUri(this.succesRateByMatterPath));
   }
 
 
