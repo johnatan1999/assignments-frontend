@@ -13,24 +13,24 @@ import { BasicAssignmentList } from '../basic-assignment-list';
 })
 export class TabbedAssignmentListComponent extends BasicAssignmentList {
 
-  @ViewChild('scrollerRendu') scrollerRendu: CdkVirtualScrollViewport;
-  showRenduLoader = false;
-  totalDocsRendu: number;
-  assignmentsRendu: Assignment[] = [];
-  pageRendu = 1;
-  renduNextPage: number;
-  renduHasNextPage: Boolean;
-  searchRendu = '';
+  // @ViewChild('scrollerRendu') scrollerRendu: CdkVirtualScrollViewport;
+  // showRenduLoader = false;
+  // totalDocsRendu: number;
+  // assignmentsRendu: Assignment[] = [];
+  // pageRendu = 1;
+  // renduNextPage: number;
+  // renduHasNextPage: Boolean;
+  // searchRendu = '';
   
-  // Non Rendu
-  @ViewChild('scrollerNonRendu') scrollerNonRendu: CdkVirtualScrollViewport;
-  showNonRenduLoader = false;
-  totalDocsNonRendu: number;
-  assignmentsNonRendu: Assignment[] = [];
-  pageNonRendu = 1;
-  nonRenduNextPage: number;
-  nonRenduHasNextPage: Boolean;
-  searchNonRendu = '';
+  // // Non Rendu
+  // @ViewChild('scrollerNonRendu') scrollerNonRendu: CdkVirtualScrollViewport;
+  // showNonRenduLoader = false;
+  // totalDocsNonRendu: number;
+  // assignmentsNonRendu: Assignment[] = [];
+  // pageNonRendu = 1;
+  // nonRenduNextPage: number;
+  // nonRenduHasNextPage: Boolean;
+  // searchNonRendu = '';
 
   constructor(protected assignmentsService:AssignmentsService,
     protected route:ActivatedRoute,

@@ -4,12 +4,12 @@
             <span class="login100-form-title p-b-49"> <img src="../../assets/images/icons8-école-80.png"> </span>
             <mat-form-field appearance="fill">
                 <mat-label>Entrer votre adresse email</mat-label>
-                <input matInput value="john@gmail.com" placeholder="pat@example.com" [formControl]="email" required />
+                <input matInput value="john@gmail.com" placeholder="pat@example.com" [formControl]="email" required autocomplete="" />
                 <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Entrer votre mot de passe </mat-label>
-                <input matInput [type]="hide ? 'password' : 'text'" [formControl]="password" required />
+                <input matInput [type]="hide ? 'password' : 'text'" [formControl]="password" required autocomplete="current-password"/>
                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                     [attr.aria-pressed]="hide">
                     <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>

@@ -1,9 +1,12 @@
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { Component, Input, NgZone, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, pairwise, throttleTime } from 'rxjs/operators';
+import { DynamicDialogComponent } from 'src/app/components/dynamic-dialog/dynamic-dialog.component';
 import { Assignment } from 'src/app/shared/model/assignment.model';
 import { AssignmentsService } from 'src/app/shared/services/assignments.service';
+import { AssignmentDetailComponent } from '../../assignment-detail/assignment-detail.component';
 import { BasicAssignmentList } from '../basic-assignment-list';
 
 @Component({
@@ -20,7 +23,8 @@ export class AssignmentWithInfiniteScrollComponent extends BasicAssignmentList {
   constructor(protected assignmentsService: AssignmentsService,
     protected route: ActivatedRoute,
     protected router: Router,
-    private ngZone: NgZone) {
+    private ngZone: NgZone, 
+    public dialog: MatDialog) {
       super(assignmentsService, route, router);
       this.limit = 15;
     }
@@ -52,6 +56,16 @@ export class AssignmentWithInfiniteScrollComponent extends BasicAssignmentList {
     } else {
       this.getAssignments(true);
     }
+  }
+
+  onOpenDetail(assignment) {
+    this.dialog.open(DynamicDialogComponent, {
+      width: '600px',
+      data: {
+        component: AssignmentDetailComponent,
+        assignment: assignment
+      }
+    })
   }
 
 }

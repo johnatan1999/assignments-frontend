@@ -1,1 +1,16 @@
-<p>dynamic-dialog works!</p>
+<div class="modal">
+    <div class="modal-title">
+
+    </div>
+    <div class="modal-content">
+        <!-- <ng-template [cdkPortalOutlet]="portalComponent"></ng-template> -->
+        <ng-container *ngComponentOutlet="data.component" (attached)="attachData($event)"></ng-container>
+    </div>
+    <div class="modal-footer">
+        <div class="modal-action">
+            <button mat-flat-button (click)="onClose()">
+                Fermer
+            </button>
+        </div>
+    </div>
+</div>

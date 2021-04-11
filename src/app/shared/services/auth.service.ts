@@ -46,7 +46,7 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       let user = JSON.parse(localStorage.getItem("user"));
       if (!user) return false;
-      resolve(user.role == "admin");
+      resolve(user);
     });
   }
 
