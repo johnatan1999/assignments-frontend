@@ -60,6 +60,8 @@ import {PanelModule} from 'primeng/panel';
 import {ChartModule} from 'primeng/chart';
 import {CalendarModule} from 'primeng/calendar';
 import { AuthInterceptor } from "./interceptor/auth.interceptor";
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { DynamicDialogComponent } from './components/dynamic-dialog/dynamic-dialog.component';
 
 const routes: Routes = [
   { 
@@ -135,7 +137,9 @@ const routes: Routes = [
     NoteModalComponent,
     ElevesComponent,
     ProfesseursComponent,
-    DashboardComponent
+    DashboardComponent,
+    ConfirmDialogComponent,
+    DynamicDialogComponent
   ],
   imports: [
     BrowserModule,

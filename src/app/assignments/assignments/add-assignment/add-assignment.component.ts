@@ -82,7 +82,7 @@ export class AddAssignmentComponent implements OnInit {
         console.log(reponse.message);
 
          // et on navigue vers la page d'accueil qui affiche la liste
-         this.router.navigate(["/home"]);
+         this.router.navigate(["/assignments"]);
       });
   }
 
@@ -102,7 +102,7 @@ export class AddAssignmentComponent implements OnInit {
         console.log(reponse.message);
 
          // et on navigue vers la page d'accueil qui affiche la liste
-         this.router.navigate(["/home"]);
+         this.router.navigate(["/assignments"]);
       });
   }
 

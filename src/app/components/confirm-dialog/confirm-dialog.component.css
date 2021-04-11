@@ -1,0 +1,9 @@
+.modal-action {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.modal-action button {
+    margin-left: 10px;
+}

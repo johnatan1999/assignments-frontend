@@ -8,7 +8,11 @@
       <table mat-table [dataSource]="eleves">
         <ng-container matColumnDef="image">
           <th mat-header-cell *matHeaderCellDef> Photo de profil </th>
-          <td mat-cell *matCellDef="let element"> <img src="{{element.image}}"> </td>
+          <td mat-cell *matCellDef="let element"> 
+            <div class="image-container">
+              <img src="{{element.image}}"> 
+            </div>
+          </td>
         </ng-container>
         
           <ng-container matColumnDef="nom">

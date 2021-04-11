@@ -1,0 +1,19 @@
+<div class="modal">
+    <div class="modal-title">
+
+    </div>
+    <div class="modal-content">
+        <p>{{ data.message || 'Confirmer ?'}}</p>
+    </div>
+    <div class="modal-footer">
+
+    </div>
+    <div class="modal-action">
+        <button mat-flat-button (click)="onCancel()">
+            {{ data.noButton || 'Non'}}
+        </button>
+        <button mat-flat-button color="warn" (click)="onConfirm()">
+            {{ data.yesButton || 'Oui'}}
+        </button>
+    </div>
+</div>

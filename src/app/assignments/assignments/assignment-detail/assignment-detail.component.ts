@@ -1,8 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { AssignmentsService } from 'src/app/shared/services/assignments.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Assignment } from '../../../shared/model/assignment.model';
+import { DialogPosition, MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-assignment-detail',
@@ -19,7 +22,9 @@ export class AssignmentDetailComponent implements OnInit {
     private assignmentsService: AssignmentsService,
     private route: ActivatedRoute,
     private router: Router,
-    private authService:AuthService
+    private authService:AuthService,
+    private _location: Location,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -55,20 +60,6 @@ export class AssignmentDetailComponent implements OnInit {
     this.assignment = assignment;
   }
 
-  onDelete() {
-    this.assignmentsService
-      .deleteAssignment(this.assignment)
-      .subscribe((reponse) => {
-        console.log(reponse.message);
-
-        // on cache l'affichage du détail
-        this.assignment = null;
-
-        // et on navigue vers la page d'accueil qui affiche la liste
-        this.router.navigate(['/home']);
-      });
-  }
-
   onClickEdit() {
     this.router.navigate(['/assignment', this.assignment.id, 'edit'], {
       queryParams: {
@@ -80,7 +71,40 @@ export class AssignmentDetailComponent implements OnInit {
     });
   }
 
-  isAdmin() {
-    return true;
+  onClickBackButton() {
+    this._location.back();
   }
+
+  private onDelete() {
+    this.assignmentsService
+      .deleteAssignment(this.assignment)
+      .subscribe((reponse) => {
+        console.log(reponse.message);
+
+        // on cache l'affichage du détail
+        this.assignment = null;
+
+        // et on navigue vers la page d'accueil qui affiche la liste
+        this.router.navigate(['/assignments']);
+      });
+  }
+
+  openConfirmDialog() {
+    const dialogPosition: DialogPosition = {
+      top: '50px'
+    }
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '400px',
+      position: dialogPosition,
+      data: { 
+        yesButton: 'Confirmer', 
+        noButton: 'Annuler', 
+        message: 'Veuillez confirmer la suppression.',
+        onConfirm: () => {
+          this.onDelete();
+        }
+      }
+    })
+  }
+
 }

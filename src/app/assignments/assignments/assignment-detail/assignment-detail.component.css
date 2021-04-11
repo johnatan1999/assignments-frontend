@@ -14,6 +14,13 @@
   align-items: flex-end;
 }
 
+.card-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center; 
+  font-size: 15px;
+}
+
 .mat-card-content {
   display: flex;
   flex-direction: row;

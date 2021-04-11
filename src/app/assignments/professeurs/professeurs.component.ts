@@ -33,7 +33,7 @@ export class ProfesseursComponent implements OnInit {
     this.route.queryParams.subscribe(queryParams => {
       console.log("Dans le subscribe des queryParams")
       this.page = +queryParams.page || 1;
-      this.limit = +queryParams.limit || 2;
+      this.limit = +queryParams.limit || 10;
 
       this.getProfesseurs();
   

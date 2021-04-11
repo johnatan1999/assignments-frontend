@@ -2,7 +2,8 @@
   <mat-card *ngIf="assignment" class="assignment">
     <mat-card-title style="display: flex; flex-direction: row; align-items: center; font-size: 16px;">
       <mat-icon>subtitles</mat-icon>
-      <span style="margin-left: 8px;">{{ assignment.nom }}</span></mat-card-title>
+      <span style="margin-left: 8px;">{{ assignment.nom }}</span>
+    </mat-card-title>
     <mat-card-subtitle style="margin-left: 30px;">
       {{assignment.dateDeRendu | date}}
       <span [style.color]="assignment.rendu? 'green': 'red'">{{ assignment.rendu ? 'Rendu' : 'Non Rendu' }}</span>
@@ -50,10 +51,15 @@
     </mat-card-content>
     <mat-card-action *ngIf="withAction">
       <div id="bottom">
+        <button mat-button (click)="onClickBackButton()">
+          <mat-icon>
+            arrow_back
+          </mat-icon>Back
+        </button>
         <nav>
           <a routerLink="/assignments/edit/{{ assignment.id }}" style="text-decoration: none;">Edit</a>
         </nav>
-        <button mat-stroked-button color="warn" (click)="onDelete()">DELETE</button>
+        <button mat-raised-button color="warn" (click)="openConfirmDialog()">DELETE</button>
       </div>
     </mat-card-action>
   </mat-card>
