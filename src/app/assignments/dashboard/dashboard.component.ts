@@ -8,6 +8,7 @@ export class NumberOnDashboard {
   assignment: number;
   assignmentRendu: number;
   assignmentPasRendu: number;
+  assignmentEnCours: number;
 }
 @Component({
   selector: 'app-dashboard',
@@ -71,6 +72,7 @@ export class DashboardComponent implements OnInit {
         this.number.assignment = dashboardAssignment.assignment;
         this.number.assignmentPasRendu = dashboardAssignment.assignmentPasRendu;
         this.number.assignmentRendu = dashboardAssignment.assignmentRendu;
+        this.number.assignmentEnCours = dashboardAssignment.assignmentEnCours;
       });
     });
   }
