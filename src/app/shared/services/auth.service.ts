@@ -3,6 +3,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { catchError, retry } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRouteSnapshot } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
@@ -13,6 +14,10 @@ export class AuthService {
   public static ELEVE = "eleve";
 
   public static PROFESSEUR = "professeur";
+
+  public static HOME_ELEVE = "/assignments";
+
+  public static HOME_ADMIN = "/assignments/dashboard";
 
   constructor(private http: HttpClient) { }
 
@@ -49,6 +54,15 @@ export class AuthService {
       resolve(user);
     });
   }
+  
+  getHomePage() {
+    let user = JSON.parse(localStorage.getItem("user"));
+    if(user?.role === AuthService.ADMIN) {
+      return AuthService.HOME_ADMIN;
+    } else {
+      return AuthService.HOME_ELEVE;
+    }
+  }
 
 
   isProf() {
@@ -61,7 +75,23 @@ export class AuthService {
 
   isInRoles(roles: String[]) {
     if(!roles) return false;
-    return roles.includes(AuthService.ADMIN) || roles.includes(AuthService.ELEVE) || roles.includes(AuthService.PROFESSEUR);
+    const user = JSON.parse(localStorage.getItem("user"));
+    return roles.includes(user.role);
+    // return roles.includes(AuthService.ADMIN) || roles.includes(AuthService.ELEVE) || roles.includes(AuthService.PROFESSEUR);
+  }
+
+  hasRole(route: ActivatedRouteSnapshot) {
+    var roles = route?.data?.roles;
+    var parent = route.parent;
+    while(!roles && parent) {
+      if(parent) {
+        console.log('->', parent.routeConfig)
+        roles = parent?.routeConfig?.data?.roles;
+        parent = roles ? parent : parent.parent;
+      }
+    }
+    const user = JSON.parse(localStorage.getItem("user"));
+    return roles.includes(user.role);
   }
 
   isEleve() {

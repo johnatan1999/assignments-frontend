@@ -15,7 +15,7 @@ export class TabbedAssignmentListComponent extends BasicAssignmentList {
 
   // @ViewChild('scrollerRendu') scrollerRendu: CdkVirtualScrollViewport;
   // showRenduLoader = false;
-  // totalDocsRendu: number;
+  assignmentsRendu: any;
   // assignmentsRendu: Assignment[] = [];
   // pageRendu = 1;
   // renduNextPage: number;
@@ -25,7 +25,7 @@ export class TabbedAssignmentListComponent extends BasicAssignmentList {
   // // Non Rendu
   // @ViewChild('scrollerNonRendu') scrollerNonRendu: CdkVirtualScrollViewport;
   // showNonRenduLoader = false;
-  // totalDocsNonRendu: number;
+  assignmentsNonRendu: any;
   // assignmentsNonRendu: Assignment[] = [];
   // pageNonRendu = 1;
   // nonRenduNextPage: number;
@@ -38,4 +38,11 @@ export class TabbedAssignmentListComponent extends BasicAssignmentList {
       super(assignmentsService, route, router);
     }
 
+  getDocsRendu(docs) {
+    this.assignmentsRendu = docs;
+  } 
+
+  getDocsNonRendu(docs) {
+    this.assignmentsNonRendu = docs;
+  } 
 }

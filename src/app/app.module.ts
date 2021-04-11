@@ -106,6 +106,7 @@ const routes: Routes = [
       { 
         path: "dashboard", 
         component: DashboardComponent,
+        data: { roles: [ AuthService.ADMIN, AuthService.PROFESSEUR ] }
       },
       {
         path: "detail/:id",
@@ -116,9 +117,9 @@ const routes: Routes = [
         component: EditAssigmentComponent
       }
     ],
-    canActivate: [AuthGuard],    
+    // canActivate: [AuthGuard],    
     canActivateChild: [ChildGuard],
-    data: { roles: [ AuthService.ADMIN, AuthService.PROFESSEUR ] }
+    data: { roles: [ AuthService.ADMIN, AuthService.PROFESSEUR, AuthService.ELEVE ] }
   },
   {
     // idem avec  http://localhost:4200/home

@@ -22,7 +22,12 @@ export class LoginComponent implements OnInit {
   password = new FormControl('password', [Validators.required]);
   
 
-  constructor(private authService:AuthService, private router:Router) { }
+  constructor(private authService:AuthService, private router:Router) {
+    const message = this.router.getCurrentNavigation()?.extras.state?.message;
+    if(message) {
+
+    }
+  }
 
   ngOnInit(): void {
 
@@ -61,7 +66,7 @@ export class LoginComponent implements OnInit {
         if(data.auth)
         {
           localStorage.setItem("user",JSON.stringify(data.user));
-          this.router.navigate(["/assignments/dashboard"]);
+          this.router.navigate([this.authService.getHomePage()]);
         } 
       }, (error) => {
         this.checkUser.state = true;

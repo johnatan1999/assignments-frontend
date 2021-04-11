@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit {
           d._id.nom = d._id.nom.substring(0, 10);
         }
         labels.push(d._id.nom);
-        note.push((d.avgNote * 100) / 20);
+        note.push(((d.avgNote * 100) / 20).toFixed(2));
       });
 
       this.dataSource = {

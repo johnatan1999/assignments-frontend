@@ -1,5 +1,5 @@
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-import { Component, Input, NgZone, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, NgZone, Output, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, pairwise, throttleTime } from 'rxjs/operators';
@@ -19,6 +19,7 @@ export class AssignmentWithInfiniteScrollComponent extends BasicAssignmentList {
   @ViewChild('scroller') scroller: CdkVirtualScrollViewport;
 
   @Input() stateFilter: String;
+  @Output() assignmentsDocs: EventEmitter<any>;
 
   constructor(protected assignmentsService: AssignmentsService,
     protected route: ActivatedRoute,
@@ -27,10 +28,23 @@ export class AssignmentWithInfiniteScrollComponent extends BasicAssignmentList {
     public dialog: MatDialog) {
       super(assignmentsService, route, router);
       this.limit = 15;
+      this.assignmentsDocs = new EventEmitter();
     }
-  
+    
   ngOnInit() {
     this._getAssignments();
+  }
+  
+  ngDoCheck() {
+    setTimeout(() => {
+      if(this.assignmentsDocs) {
+        this.assignmentsDocs.emit({
+          maxCount: this.totalDocs,
+          number: this.assignments.length
+        });
+        this.assignmentsDocs = null;
+      }
+    }, 2000)
   }
 
   ngAfterViewInit() {
@@ -39,23 +53,22 @@ export class AssignmentWithInfiniteScrollComponent extends BasicAssignmentList {
       pairwise(),
       filter(([y1, y2]) => (y2 < y1 && y2 < 140)),
       throttleTime(200)
-    ).subscribe(() => {
-      this.ngZone.run(() => {
-        if(this.hasNextPage) {
-          this.page = this.nextPage;
-          this._getAssignments();
-        }
+      ).subscribe(() => {
+        this.ngZone.run(() => {
+          if(this.hasNextPage) {
+            this.page = this.nextPage;
+            this._getAssignments();
+          }
+        });
       });
-    });
-  }
-
-  _getAssignments() {
-    if(this.stateFilter && (this.stateFilter === BasicAssignmentList.RENDU || BasicAssignmentList.NON_RENDU)) {
-      this.findAssignmentsByState(this.stateFilter, true);
-      console.log(this.stateFilter, this.assignments);
-    } else {
-      this.getAssignments(true);
     }
+    
+    _getAssignments() {
+      if(this.stateFilter && (this.stateFilter === BasicAssignmentList.RENDU || BasicAssignmentList.NON_RENDU)) {
+        this.findAssignmentsByState(this.stateFilter, true);
+      } else {
+        this.getAssignments(true);
+      }
   }
 
   onOpenDetail(assignment) {
