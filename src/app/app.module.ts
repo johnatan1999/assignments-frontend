@@ -64,8 +64,10 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import { DynamicDialogComponent } from './components/dynamic-dialog/dynamic-dialog.component';
 import { MatiereComponent } from './assignments/matiere/matiere.component';
 import { AddElevesComponent } from "./assignments/eleves/add-eleves/add-eleves.component";
-
-
+import { FileUploadModule } from "ng2-file-upload";
+import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5.x';
+import { Cloudinary } from 'cloudinary-core';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 const routes: Routes = [
   { 
     path: "", 
@@ -91,6 +93,10 @@ const routes: Routes = [
       { 
         path: "eleves", 
         component: ElevesComponent,
+      },
+      { 
+        path: "add-eleve", 
+        component: AddElevesComponent,
       },
       { 
         path: "professeurs", 
@@ -149,8 +155,8 @@ const routes: Routes = [
     ConfirmDialogComponent,
     DynamicDialogComponent,
     MatiereComponent,
-    AddElevesComponent
-
+    AddElevesComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -186,6 +192,9 @@ const routes: Routes = [
     PanelModule,
     ChartModule,
     CalendarModule,
+    FileUploadModule,
+    MaterialFileInputModule,
+    CloudinaryModule.forRoot({Cloudinary}, { cloud_name: 'dy528ddbe' } as CloudinaryConfiguration),
     RouterModule.forRoot(routes), HttpClientModule
   ],
   providers: [{

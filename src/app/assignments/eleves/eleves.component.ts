@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Eleve } from 'src/app/shared/model/eleve.model';
 import { ElevesService } from 'src/app/shared/services/eleves.service';
@@ -40,6 +41,8 @@ export class ElevesComponent implements OnInit {
   hasNextPage: boolean;
   nextPage: number;
   pageSizeOptions: number[] = [];
+
+  
 
 
   constructor(private route:ActivatedRoute,private elevesService : ElevesService,
