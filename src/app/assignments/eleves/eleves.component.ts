@@ -108,6 +108,6 @@ export class ElevesComponent implements OnInit {
   }
 
   onClickAdd() {
-    this.router.navigate(['/assignments/eleves/add']);
+    this.router.navigate(['/assignments/add-eleve']);
   }
 }

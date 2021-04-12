@@ -65,6 +65,7 @@ import { DynamicDialogComponent } from './components/dynamic-dialog/dynamic-dial
 import { MatiereComponent } from './assignments/matiere/matiere.component';
 import { AddElevesComponent } from "./assignments/eleves/add-eleves/add-eleves.component";
 
+
 const routes: Routes = [
   { 
     path: "", 
@@ -90,10 +91,6 @@ const routes: Routes = [
       { 
         path: "eleves", 
         component: ElevesComponent,
-      },
-      { 
-        path: "eleves/add", 
-        component: AddElevesComponent,
       },
       { 
         path: "professeurs", 
@@ -153,6 +150,7 @@ const routes: Routes = [
     DynamicDialogComponent,
     MatiereComponent,
     AddElevesComponent
+
   ],
   imports: [
     BrowserModule,
