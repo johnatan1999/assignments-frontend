@@ -151,7 +151,8 @@ const routes: Routes = [
     DashboardComponent,
     ConfirmDialogComponent,
     DynamicDialogComponent,
-    MatiereComponent
+    MatiereComponent,
+    AddElevesComponent
   ],
   imports: [
     BrowserModule,

@@ -85,7 +85,6 @@ export class AuthService {
     var parent = route.parent;
     while(!roles && parent) {
       if(parent) {
-        console.log('->', parent.routeConfig)
         roles = parent?.routeConfig?.data?.roles;
         parent = roles ? parent : parent.parent;
       }
