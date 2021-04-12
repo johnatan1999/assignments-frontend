@@ -1,0 +1,17 @@
+<main class="container assignment-container">
+    <div class="header">
+        <span>{{ label }}</span>
+    </div>
+    <div class="content">
+        <cdk-virtual-scroll-viewport #scroller [itemSize]="75" [ngStyle]="{'height.px': assignments.length*80}" class="assignment-viewport">
+            <mat-list *cdkVirtualFor="let a of assignments">
+                <!-- <mat-list-item  class="assignment-item"> -->
+                    <a routerLink="/assignments/detail/{{ a.id }}" style="text-decoration: none;">
+                    <!-- <a routerLink="#" (click)="onOpenDetail(a)" style="text-decoration: none;"> -->
+                        <app-assignment-card class="assignment-item" [assignment]="a"></app-assignment-card>
+                    </a>
+                <!-- </mat-list-item> -->
+            </mat-list>
+        </cdk-virtual-scroll-viewport>
+    </div>
+</main>

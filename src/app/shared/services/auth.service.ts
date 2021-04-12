@@ -115,4 +115,22 @@ export class AuthService {
       'Something bad happened; please try again later.');
   };
 
+  static getUserFromLS():User {
+    var user: User = JSON.parse(localStorage.getItem("user"));
+    return user;
+  }
+
 }
+
+export interface User {
+  token: string;
+  role: string;
+  _id: string;
+  user_info: UserInfo;
+}
+export interface UserInfo {
+  image: string;
+  nom: string;
+  prenom: string;
+  _id: string; 
+} 

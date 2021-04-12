@@ -44,6 +44,31 @@ a[_primary-color]:hover {
     color: var(--peach-puff);
 }
 
+
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 10px;
+}
+  
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f2f2f2; 
+    border-radius: 4px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(199, 199, 199); 
+    border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(146, 146, 146); 
+    border-radius: 4px;
+}
+
 :root {
     --peach-puff: #fed9b7;
     --bitter-sweet: #f17d74;

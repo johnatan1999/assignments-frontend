@@ -18,7 +18,8 @@ export class LoginComponent implements OnInit {
   hide = true;
   // email = new FormControl('john@gmail.com', [Validators.required, Validators.email]);
   // password = new FormControl('john', [Validators.required]);
-  email = new FormControl('vetsorakotobe@gmail.com', [Validators.required, Validators.email]);
+  // email = new FormControl('vetsorakotobe@gmail.com', [Validators.required, Validators.email]);
+  email = new FormControl('catleeslowan@gmail.com', [Validators.required, Validators.email]);
   password = new FormControl('password', [Validators.required]);
   
 

@@ -1,0 +1,12 @@
+<div class="assignments-container">
+    <ng-container *ngIf="professeursAssignments" >
+        <div 
+            *ngFor="let professeurAssignments of professeursAssignments" 
+            class="professor-assignments">
+            <app-assignments-group 
+                [assignments]="professeurAssignments.assignments" 
+                [label]="professeurAssignments.label">
+            </app-assignments-group>
+        </div>
+    </ng-container>
+</div>

@@ -68,6 +68,10 @@ export class AssignmentsService {
     );
   }
 
+  getStudentAssignmentsGroupedByProfessor(id: any):Observable<any> {
+    return this.http.get<any>(this.uri + '/eleve/' + id);
+  }
+
   private handleError<T>(operation: any, result?: T) {
     return (error: any): Observable<T> => {
       console.log(error); // pour afficher dans la console

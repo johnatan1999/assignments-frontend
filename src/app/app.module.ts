@@ -68,6 +68,9 @@ import { FileUploadModule } from "ng2-file-upload";
 import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5.x';
 import { Cloudinary } from 'cloudinary-core';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { EleveAssignmentsComponent } from './assignments/eleves/eleve-assignments/eleve-assignments.component';
+import { AssignmentsGroupComponent } from "./assignments/assignments/assignments-group/assignments-group.component";
+
 const routes: Routes = [
   { 
     path: "", 
@@ -95,8 +98,12 @@ const routes: Routes = [
         component: ElevesComponent,
       },
       { 
-        path: "add-eleve", 
+        path: "eleves/add", 
         component: AddElevesComponent,
+      },
+      {
+        path: "eleves/assignments",
+        component: EleveAssignmentsComponent
       },
       { 
         path: "professeurs", 
@@ -156,7 +163,8 @@ const routes: Routes = [
     DynamicDialogComponent,
     MatiereComponent,
     AddElevesComponent,
-    
+    AssignmentsGroupComponent,
+    EleveAssignmentsComponent,
   ],
   imports: [
     BrowserModule,

@@ -40,3 +40,10 @@
 .card-img-container .mat-card-header-text {
     margin: 0 10px;
 }
+.mat-card-title {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

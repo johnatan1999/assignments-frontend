@@ -16,16 +16,16 @@ import { BasicAssignmentList } from '../basic-assignment-list';
 })
 export class AssignmentWithInfiniteScrollComponent extends BasicAssignmentList {
 
-  @ViewChild('scroller') scroller: CdkVirtualScrollViewport;
+  @ViewChild('scroller') protected scroller: CdkVirtualScrollViewport;
 
-  @Input() stateFilter: String;
-  @Output() assignmentsDocs: EventEmitter<any>;
+  @Input() protected stateFilter: String;
+  @Output() protected assignmentsDocs: EventEmitter<any>;
 
   constructor(protected assignmentsService: AssignmentsService,
     protected route: ActivatedRoute,
     protected router: Router,
-    private ngZone: NgZone, 
-    public dialog: MatDialog) {
+    protected ngZone: NgZone, 
+    protected dialog: MatDialog) {
       super(assignmentsService, route, router);
       this.limit = 15;
       this.assignmentsDocs = new EventEmitter();
@@ -36,15 +36,15 @@ export class AssignmentWithInfiniteScrollComponent extends BasicAssignmentList {
   }
   
   ngDoCheck() {
-    setTimeout(() => {
-      if(this.assignmentsDocs) {
-        this.assignmentsDocs.emit({
-          maxCount: this.totalDocs,
-          number: this.assignments.length
-        });
-        this.assignmentsDocs = null;
-      }
-    }, 2000)
+    // setTimeout(() => {
+    //   if(this.assignmentsDocs) {
+    //     this.assignmentsDocs.emit({
+    //       maxCount: this.totalDocs,
+    //       number: this.assignments.length
+    //     });
+    //     this.assignmentsDocs = null;
+    //   }
+    // }, 2000)
   }
 
   ngAfterViewInit() {

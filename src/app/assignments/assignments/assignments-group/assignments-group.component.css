@@ -1,0 +1,23 @@
+.assignment-container {
+    background-color: #ebecf0;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    max-height: 80vh;
+    height: auto;
+    border-radius: 5px;
+}
+
+.assignment-viewport {
+    /* height: 80vh; */
+    width: 100%;
+}
+
+
+.header {
+    height: 35px;
+    padding-top: 4px;
+    color: #172b4d;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+}

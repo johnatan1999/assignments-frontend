@@ -10,7 +10,7 @@
                 A rendre le:&nbsp;
                 <span>{{ assignment.dateDeRendu | date }}</span>
             </div>
-            <div class="card-img-container">
+            <div *ngIf="assignment.eleve" class="card-img-container">
                 <img class="card-img" title="{{ assignment.eleve.nom }} {{ assignment.eleve.prenom }}" 
                                     src="{{ assignment.eleve.image }}" />
             </div>
