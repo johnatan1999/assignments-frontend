@@ -1,41 +1,38 @@
 <mat-card class="card-dashboard">
     <div class="ui-g dashboard">
-    <div [routerLink]="'/assignments/eleves'" class="ui-g-12 ui-md-4">
+    <div [routerLink]="'/assignments/eleves'" class="card-overview ui-g-12 ui-md-4">
         <div class="card overview">
             <div class="overview-content clearfix">
                 <span class="overview-title">Etudiants</span>
                 <span class="overview-badge">2021 - 2022</span>
                 <span class="overview-detail">{{number.eleve || 0}} </span>
             </div>
-            <div class="overview-footer" style="margin-left: 300px;
-            margin-bottom: 5px;">
+            <div class="overview-footer" >
                 <img src="assets/images/icons8-étudiant-homme-100.png" style="width: 90px;height: 90px;" />
             </div>
         </div>
     </div>
 
-    <div [routerLink]="'/assignments/professeurs'" class="ui-g-12 ui-md-4">
+    <div [routerLink]="'/assignments/professeurs'" class="card-overview ui-g-12 ui-md-4">
         <div class="card overview">
             <div class="overview-content clearfix">
                 <span class="overview-title">Professeurs</span>
                 <span class="overview-badge">2021 - 2022</span>
                 <span class="overview-detail">{{number.professeur || 0}} </span>
             </div>
-            <div class="overview-footer" style="margin-left: 315px;
-            margin-bottom: 15px;">
+            <div class="overview-footer">
                 <img src="assets/images/icons8-prof-96.png" style="width: 75px;height: 75px;" />
             </div>
         </div>
     </div>
-    <div [routerLink]="'/assignments/matieres'" class="ui-g-12 ui-md-4">
+    <div [routerLink]="'/assignments/matieres'" class="card-overview ui-g-12 ui-md-4">
         <div class="card overview">
             <div class="overview-content clearfix">
                 <span class="overview-title">Matières</span>
                 <span class="overview-badge">2021 - 2022</span>
                 <span class="overview-detail">{{number.matiere || 0}} </span>
             </div>
-            <div class="overview-footer" style="margin-left: 315px;
-            margin-bottom: 15px;">
+            <div class="overview-footer">
                 <img src="assets/images/icons8-livre-64.png" style="width: 75px;height: 75px;" />
             </div>
         </div>

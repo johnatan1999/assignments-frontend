@@ -23,13 +23,22 @@ export class AssignmentsGroupComponent implements OnInit {
   @Input() assignments: Assignment[] = [];
   @Input() label: string;
 
+  displayedAssignments: Assignment[] = [];
+  done = false;
+
   constructor(protected assignmentsService:AssignmentsService,
     protected route:ActivatedRoute,
     protected router:Router) {
   }
 
   ngOnInit() {
-    
+    this.displayedAssignments = this.assignments.filter((a) => !a.rendu);
+  }
+  
+  onSwitchAssignmentsState(event) {
+    event.preventDefault();
+    this.displayedAssignments = this.assignments.filter((a) => a.rendu === !this.done);
+    this.done = !this.done;
   }
 
 }

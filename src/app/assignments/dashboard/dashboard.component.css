@@ -2,5 +2,15 @@
     margin:10px;
 }
 
+.card-overview:hover {
+    cursor: pointer;
+    background-color: rgb(228, 228, 228);
+} 
 
-
+.overview-footer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-right: 10px;
+}

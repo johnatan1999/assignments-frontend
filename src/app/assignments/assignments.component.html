@@ -2,7 +2,8 @@
   <mat-sidenav #sidenav 
     mode="side" 
     class="tp-side-nav"
-		opened="true">
+		opened="true"
+    style="z-index: 1;">
     <div #logo class="logo" >
       <img src="../../assets/images/icons8-école-80.png">
     </div>
@@ -70,7 +71,7 @@
       </div>
       </mat-toolbar-row>
     </mat-toolbar>
-
+    
     <router-outlet></router-outlet>
     <router-outlet name="eleves"></router-outlet>
 

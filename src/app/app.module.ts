@@ -28,8 +28,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatRippleModule } from '@angular/material/core';
-import { MatBadgeModule } from '@angular/material/badge';
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { AssignmentsComponent } from './assignments/assignments.component';
 import { RenduDirective } from './shared/rendu.directive';
@@ -53,7 +52,7 @@ import { LoginComponent } from "./login/login.component";
 import { AuthService } from "./shared/services/auth.service";
 import { ChildGuard } from "./shared/guard/child.guard";
 import {MatTableModule} from '@angular/material/table';
-import { ProfesseursComponent } from './assignments/professeurs/professeurs.component';
+import { ProfesseursComponent } from './assignments/professeurs/professeur-list/professeurs.component';
 import { DashboardComponent } from './assignments/dashboard/dashboard.component';
 import {PanelModule} from 'primeng/panel';
 import {ChartModule} from 'primeng/chart';
@@ -74,6 +73,9 @@ import { EleveListComponent } from "./assignments/eleves/eleve-list/eleve-list.c
 import { ToolBarComponent } from './components/tool-bar/tool-bar.component';
 import { CoursComponent } from './assignments/matiere/cours/cours.component';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { ModalComponent } from './components/modal/modal.component';
+import { ProfesseurOutletComponent } from './assignments/professeurs/professeur-outlet.component';
+import { ProfesseurAssignmentComponent } from './assignments/professeurs/professeur-assignment/professeur-assignment.component';
 
 
 const routes: Routes = [
@@ -110,15 +112,25 @@ const routes: Routes = [
             path: "add", 
             component: AddElevesComponent,
           },
+          {
+            path: "assignments",
+            component: EleveAssignmentsComponent
+          },
         ]
-      },
-      {
-        path: "eleves/assignments",
-        component: EleveAssignmentsComponent
       },
       { 
         path: "professeurs", 
-        component: ProfesseursComponent,
+        component: ProfesseurOutletComponent,
+        children: [
+          { 
+            path: "", 
+            component: ProfesseursComponent
+          },
+          {
+            path: "assignments",
+            component: ProfesseurAssignmentComponent
+          }
+        ]
       },
       { 
         path: "matieres", 
@@ -183,6 +195,9 @@ const routes: Routes = [
     EleveListComponent,
     ToolBarComponent,
     CoursComponent,
+    ModalComponent,
+    ProfesseurOutletComponent,
+    ProfesseurAssignmentComponent
   ],
   imports: [
     BrowserModule,
@@ -222,6 +237,7 @@ const routes: Routes = [
     MaterialFileInputModule,
     BrowserModule,
     MatGridListModule,
+    MatSnackBarModule,
     CloudinaryModule.forRoot({Cloudinary}, { cloud_name: 'dy528ddbe' } as CloudinaryConfiguration),
     RouterModule.forRoot(routes), HttpClientModule
   ],

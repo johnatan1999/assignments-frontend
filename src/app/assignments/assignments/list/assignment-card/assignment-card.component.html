@@ -4,13 +4,57 @@
             <mat-card-title style="padding-left: 0;">
                 <h5 mat-subheader>{{ assignment.nom }}</h5>
             </mat-card-title>
+            <div 
+                *ngIf="!hideState"
+                class="state-flag" 
+                [ngClass]="{
+                    'done': assignment.rendu,
+                    'in-progress': assignment.enCours && !assignment.rendu,
+                    'not-done': !assignment.rendu && !assignment.enCours 
+                }">
+            </div>
         </mat-card-header>
         <mat-card-content class="card-content">
             <div mat-subheader>
-                A rendre le:&nbsp;
-                <span>{{ assignment.dateDeRendu | date }}</span>
+                <p>
+                    A rendre le:&nbsp;
+                    <span>{{ assignment.dateDeRendu | date }}</span>
+                </p>
+                <div class="actions">
+                    <a [routerLink]="" (click)="onEdit($event)" [matMenuTriggerFor]="menu" class="">
+                        <mat-icon>
+                            edit
+                        </mat-icon>
+                    </a>
+                    <mat-menu #menu="matMenu">
+                        <button *ngIf="!inProgress else pendingState" (click)="onStart($event)" mat-menu-item>
+                            <mat-icon>
+                                play_arrow
+                            </mat-icon>
+                            Commencer
+                        </button>
+                        <ng-template #pendingState>
+                            <button mat-menu-item (click)="onStop($event)" >
+                                <mat-icon>
+                                    stop
+                                </mat-icon>
+                                Arréter
+                            </button>
+                        </ng-template>
+                        <button *ngIf="!assignment.rendu" (click)="onValidAssignment($event)" mat-menu-item>
+                            <mat-icon>
+                                done
+                            </mat-icon>Rendre
+                        </button>
+                    </mat-menu>
+                    <a [routerLink]="" (click)="onOpenDetail($event)" class="">
+                        <mat-icon>
+                            notes
+                        </mat-icon>
+                    </a>
+                </div>
             </div>
-            <div *ngIf="assignment.eleve" class="card-img-container">
+            <div *ngIf="assignment.eleve && !hideEleve" class="card-img-container">
                 <img class="card-img" title="{{ assignment.eleve.nom }} {{ assignment.eleve.prenom }}" 
                                     src="{{ assignment.eleve.image }}" />
             </div>

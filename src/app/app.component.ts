@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { AssignmentsService } from './shared/services/assignments.service';
 import { AuthService } from './shared/services/auth.service';
 import { ElevesService } from './shared/services/eleves.service';
 import { ProfesseurService } from './shared/services/professeur.service';
+import { UrlService } from './shared/services/url.service';
 
 @Component({
   selector: 'app-root',
@@ -13,11 +15,20 @@ import { ProfesseurService } from './shared/services/professeur.service';
 export class AppComponent {
 
   title = 'Application de gestion des assignments';
-
-  constructor(private authService:AuthService, private router:Router,
+  previousUrl: string = null;
+  currentUrl: string = null;
+  constructor(private router:Router,
               private assignmentsService:AssignmentsService,
               private professeurService: ProfesseurService,
-              private eleveService: ElevesService) {}
+              private eleveService: ElevesService) {
+                this.router.events.pipe(
+                  filter((event) => event instanceof NavigationEnd)
+                ).subscribe((event: NavigationEnd) => {
+                  this.previousUrl = this.currentUrl;
+                  UrlService.setPreviousUrl(this.previousUrl);
+                  this.currentUrl = event.url;
+                }); 
+              }
 
   
   

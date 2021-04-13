@@ -1,9 +1,5 @@
 <mat-card class="card-matiere">
-    <mat-toolbar>
-        <mat-toolbar-row>
-            <h4 style="text-decoration: underline;">Liste des matieres</h4>
-        </mat-toolbar-row>
-    </mat-toolbar>
+    <app-tool-bar [title]="'Liste des matières'"></app-tool-bar>
     <div>
         <table mat-table [dataSource]="matieres">
             <ng-container matColumnDef="image">

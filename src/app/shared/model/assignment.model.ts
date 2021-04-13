@@ -14,5 +14,12 @@ export class Assignment {
   eleve: Eleve;
   professeur: Professeur;
   dateUpdate: Date;
-  enCours: Boolean;
+  etat: Number;
 }
+
+export const EtatAssignment = {
+  EN_COURS: 1,
+  EN_ATTENTE: 2,
+  NOTEE: 3
+}
+

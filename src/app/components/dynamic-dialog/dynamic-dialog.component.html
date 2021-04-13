@@ -3,8 +3,7 @@
 
     </div>
     <div class="modal-content">
-        <!-- <ng-template [cdkPortalOutlet]="portalComponent"></ng-template> -->
-        <ng-container *ngComponentOutlet="data.component" (attached)="attachData($event)"></ng-container>
+        <app-assignment-detail [flatCard]="true" [withAction]="false" [assignment]="data.assignment" ></app-assignment-detail>
     </div>
     <div class="modal-footer">
         <div class="modal-action">

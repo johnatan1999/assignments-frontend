@@ -27,7 +27,10 @@ export class EleveAssignmentsComponent implements OnInit {
     if(user) {
       this.assignmentService.getStudentAssignmentsGroupedByProfessor(user.user_info._id).subscribe((response) => {
         response.data.map((row) => {
-          console.log(row.professeur.nom)
+          row.assignments = row.assignments.map((a) => {
+            a.professeur = row.professeur;
+            return a; 
+          })
           this.professeursAssignments.push({
             assignments: row.assignments,
             label: `${row.professeur.nom} ${row.professeur.prenom}`

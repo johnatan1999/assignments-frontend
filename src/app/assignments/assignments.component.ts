@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { ActivatedRoute, Router } from '@angular/router';
 import { assignmentsGeneres } from 'src/dummy-data/assignments.data';
-import { Assignment } from '../shared/model/assignment.model';
+import { Assignment, EtatAssignment } from '../shared/model/assignment.model';
 import { AssignmentsService } from '../shared/services/assignments.service';
 import { ElevesService } from '../shared/services/eleves.service';
 import { MatiereService } from '../shared/services/matiere.service';
@@ -69,7 +69,6 @@ export class AssignmentsComponent implements OnInit {
           const nouvelAssignment = new Assignment();
           const randEleve = Math.floor(Math.random() * eleves.length);
           const randNote = Math.floor(Math.random() * 12) + 8;
-          console.log("note", randNote);
           const randMatiere = Math.floor(Math.random() * professeurs.length);
           nouvelAssignment.id = a.id;
           nouvelAssignment.nom = `${a.nom.charAt(0).toLocaleUpperCase()}${a.nom.substr(1)}`;
@@ -78,7 +77,8 @@ export class AssignmentsComponent implements OnInit {
           nouvelAssignment.rendu = a.rendu;
           nouvelAssignment.professeur = professeurs[randMatiere];
           nouvelAssignment.eleve = eleves[randEleve];
-          nouvelAssignment.note = a.rendu ? randNote : 0;
+          nouvelAssignment.note = a.rendu && randNote % 3 === 0  ? randNote : 0;
+          nouvelAssignment.etat = a.rendu && randNote % 3 === 0  ? EtatAssignment.NOTEE : 0;
           this.progressionMax = assignmentsGeneres.length;
           this.assignmentsService.addAssignment(nouvelAssignment).subscribe(() => {
             this.progression += 1;

@@ -18,6 +18,8 @@ export class AssignmentDetailComponent implements OnInit {
 
   @Input() withAction: Boolean = true;
 
+  @Input() flatCard: Boolean = false;
+
   constructor(
     private assignmentsService: AssignmentsService,
     private route: ActivatedRoute,
@@ -28,7 +30,9 @@ export class AssignmentDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getAssignmentById();
+    if(!this.assignment) {
+      this.getAssignmentById();
+    }
   }
 
   getAssignmentById() {

@@ -1,16 +1,22 @@
 <main class="container assignment-container">
     <div class="header">
         <span>{{ label }}</span>
+        <div class="header-actions">
+            <ng-content></ng-content>
+            <span>{{ done ? 'Rendu' : 'Non rendu' }}</span>
+            <a href="" (click)="onSwitchAssignmentsState($event)">
+                <mat-icon>
+                    compare_arrows    
+                </mat-icon>
+            </a>
+        </div>
     </div>
     <div class="content">
-        <cdk-virtual-scroll-viewport #scroller [itemSize]="75" [ngStyle]="{'height.px': assignments.length*80}" class="assignment-viewport">
-            <mat-list *cdkVirtualFor="let a of assignments">
-                <!-- <mat-list-item  class="assignment-item"> -->
+        <cdk-virtual-scroll-viewport #scroller [itemSize]="75" [ngStyle]="{'height.px': displayedAssignments.length*80}" class="assignment-viewport">
+            <mat-list *cdkVirtualFor="let a of displayedAssignments">
                     <a routerLink="/assignments/detail/{{ a.id }}" style="text-decoration: none;">
-                    <!-- <a routerLink="#" (click)="onOpenDetail(a)" style="text-decoration: none;"> -->
-                        <app-assignment-card class="assignment-item" [assignment]="a"></app-assignment-card>
+                        <app-assignment-card class="assignment-item" [hideState]="false" [hideEleve]="true" [assignment]="a"></app-assignment-card>
                     </a>
-                <!-- </mat-list-item> -->
             </mat-list>
         </cdk-virtual-scroll-viewport>
     </div>
