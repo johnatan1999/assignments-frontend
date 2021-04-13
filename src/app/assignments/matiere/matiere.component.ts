@@ -12,7 +12,7 @@ import { MatiereService } from 'src/app/shared/services/matiere.service';
 export class MatiereComponent implements OnInit {
 
 
-  displayedColumns: string[] = ['image', 'matiere'];
+  displayedColumns: string[] = ['image', 'matiere','details'];
 
   matieres:Matiere[];
   page: number=1;

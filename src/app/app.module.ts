@@ -72,6 +72,9 @@ import { AssignmentsGroupComponent } from "./assignments/assignments/assignments
 import { EleveOutletComponent } from "./assignments/eleves/eleve-outlet.component";
 import { EleveListComponent } from "./assignments/eleves/eleve-list/eleve-list.component";
 import { ToolBarComponent } from './components/tool-bar/tool-bar.component';
+import { CoursComponent } from './assignments/matiere/cours/cours.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 
 const routes: Routes = [
   { 
@@ -120,6 +123,10 @@ const routes: Routes = [
       { 
         path: "matieres", 
         component: MatiereComponent,
+      },
+      { 
+        path: "matieres/cours", 
+        component: CoursComponent,
       },
       { 
         path: "dashboard", 
@@ -174,7 +181,8 @@ const routes: Routes = [
     EleveAssignmentsComponent,
     EleveOutletComponent,
     EleveListComponent,
-    ToolBarComponent
+    ToolBarComponent,
+    CoursComponent,
   ],
   imports: [
     BrowserModule,
@@ -212,6 +220,8 @@ const routes: Routes = [
     CalendarModule,
     FileUploadModule,
     MaterialFileInputModule,
+    BrowserModule,
+    MatGridListModule,
     CloudinaryModule.forRoot({Cloudinary}, { cloud_name: 'dy528ddbe' } as CloudinaryConfiguration),
     RouterModule.forRoot(routes), HttpClientModule
   ],

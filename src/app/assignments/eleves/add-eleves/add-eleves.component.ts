@@ -58,6 +58,50 @@ export class AddElevesComponent implements OnInit {
     });
   }*/
 
+  /*nom = new FormControl('johnatan', [Validators.required]);
+  prenom = new FormControl('john', [Validators.required]);
+  image = new FormControl('john', [Validators.required]);
+  sexe = new FormControl('F', [Validators.required]);
+  sexes: any[] = [
+    {value: 'F', viewValue: 'Féminin'},
+    {value: 'M', viewValue: 'Masculin'},
+  ];
+  
+  eleveFormGroup: FormGroup;*/
+  /*constructor(private elevesService:ElevesService,private router:Router, private _formBuilder: FormBuilder) { }
+
+  ngOnInit(): void {
+  
+  }*/
+
+
+
+  /*getErrorMessage() {
+    if (this.nom.hasError('required') || this.prenom.hasError('required') || this.image.hasError('required') || this.sexe.hasError('required')) {
+      return 'You must enter a value';
+    }
+  }
+
+
+  addEleve(){
+    if((!this.nom.value) || (!this.prenom.value) || (!this.image.value) || (!this.sexe.value)) return;
+    console.log(this.nom);
+    console.log(this.prenom);
+    console.log(this.image);
+    console.log(this.sexe);
+    let eleve = new Eleve();
+    eleve.nom = this.nom.value;
+    eleve.prenom = this.prenom.value;
+    eleve.image = this.image.value;
+    eleve.sexe = this.sexe.value;
+    this.elevesService.addEleve(eleve)
+    .subscribe(reponse => {
+      console.log(reponse.message);
+       // et on navigue vers la page d'accueil qui affiche la liste
+       this.router.navigate(["/assignments/eleves"]);
+    });
+  }*/
+
 
   @Input()
   responses: Array<any>;
@@ -66,6 +110,7 @@ export class AddElevesComponent implements OnInit {
   public uploader: FileUploader;
   private title: string;
 
+  files: any[] = [];
 
   nom = new FormControl('johnatan', [Validators.required]);
   prenom = new FormControl('john', [Validators.required]);
@@ -139,8 +184,25 @@ export class AddElevesComponent implements OnInit {
       // Running in a custom zone forces change detection
       console.log(this.image.value);
       this.zone.run(() => {
- 
+ // Update an existing entry if it's upload hasn't completed yet
+
+        // Find the id of an existing item
+        const existingId = this.responses.reduce((prev, current, index) => {
+          if (current.file.name === fileItem.file.name && !current.status) {
+            return index;
+          }
+          return prev;
+        }, -1);
+        if (existingId > -1) {
+          // Update existing item with new data
+          this.responses[existingId] = Object.assign(this.responses[existingId], fileItem);
+        } else {
+          // Create new response
+          this.responses.push(fileItem);
+        }
       });
+
+      
     };
 
     // Update model on completion of uploading a file
@@ -166,7 +228,11 @@ export class AddElevesComponent implements OnInit {
   }
 
 
-  
+  onChange(event,fileInput,image){
+    console.log(event);
+    console.log(fileInput);
+    console.log(image);
+  }
 
   getUrlFromResponse(){
     this.responses.forEach((response)=>{
@@ -235,5 +301,77 @@ export class AddElevesComponent implements OnInit {
        // et on navigue vers la page d'accueil qui affiche la liste
        this.router.navigate(["/assignments/eleves"]);
     });
+  }
+  
+  
+
+  /**
+   * on file drop handler
+   */
+  onFileDropped($event) {
+    this.prepareFilesList($event);
+  }
+
+  /**
+   * handle file from browsing
+   */
+  fileBrowseHandler(files) {
+    this.prepareFilesList(files);
+  }
+
+  /**
+   * Delete file from files list
+   * @param index (File index)
+   */
+  deleteFile(index: number) {
+    this.files.splice(index, 1);
+  }
+
+  /**
+   * Simulate the upload process
+   */
+  uploadFilesSimulator(index: number) {
+    setTimeout(() => {
+      if (index === this.files.length) {
+        return;
+      } else {
+        const progressInterval = setInterval(() => {
+          if (this.files[index].progress === 100) {
+            clearInterval(progressInterval);
+            this.uploadFilesSimulator(index + 1);
+          } else {
+            this.files[index].progress += 5;
+          }
+        }, 200);
+      }
+    }, 1000);
+  }
+
+  /**
+   * Convert Files list to normal array list
+   * @param files (Files List)
+   */
+  prepareFilesList(files: Array<any>) {
+    for (const item of files) {
+      item.progress = 0;
+      this.files.push(item);
+    }
+    this.uploadFilesSimulator(0);
+  }
+
+  /**
+   * format bytes
+   * @param bytes (File size in bytes)
+   * @param decimals (Decimals point)
+   */
+  formatBytes(bytes, decimals) {
+    if (bytes === 0) {
+      return '0 Bytes';
+    }
+    const k = 1024;
+    const dm = decimals <= 0 ? 0 : decimals || 2;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
 }

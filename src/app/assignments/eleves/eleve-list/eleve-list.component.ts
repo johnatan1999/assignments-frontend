@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -117,4 +117,7 @@ export class EleveListComponent implements OnInit {
   onClickAdd() {
     this.router.navigate(['/assignments/eleves/add']);
   }
+
+
+ 
 }
