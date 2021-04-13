@@ -27,3 +27,8 @@ table {
     display: flex;
     flex-direction: row;
 }
+
+.eleve-data {
+    overflow-y: auto;
+    max-height: 80vh;
+}

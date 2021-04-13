@@ -21,11 +21,13 @@ export class TabbedAssignmentListComponent extends BasicAssignmentList {
   // renduNextPage: number;
   // renduHasNextPage: Boolean;
   // searchRendu = '';
+  renduCharge = ''
   
   // // Non Rendu
   // @ViewChild('scrollerNonRendu') scrollerNonRendu: CdkVirtualScrollViewport;
   // showNonRenduLoader = false;
   assignmentsNonRendu: any;
+  nonRenduCharge = ''
   // assignmentsNonRendu: Assignment[] = [];
   // pageNonRendu = 1;
   // nonRenduNextPage: number;
@@ -40,9 +42,11 @@ export class TabbedAssignmentListComponent extends BasicAssignmentList {
 
   getDocsRendu(docs) {
     this.assignmentsRendu = docs;
+    this.renduCharge = `(${docs.number}/${docs.maxCount})`;
   } 
-
+  
   getDocsNonRendu(docs) {
     this.assignmentsNonRendu = docs;
+    this.nonRenduCharge = `(${docs.number}/${docs.maxCount})`;
   } 
 }

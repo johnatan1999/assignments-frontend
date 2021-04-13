@@ -34,18 +34,6 @@ export class AssignmentWithInfiniteScrollComponent extends BasicAssignmentList {
   ngOnInit() {
     this._getAssignments();
   }
-  
-  ngDoCheck() {
-    // setTimeout(() => {
-    //   if(this.assignmentsDocs) {
-    //     this.assignmentsDocs.emit({
-    //       maxCount: this.totalDocs,
-    //       number: this.assignments.length
-    //     });
-    //     this.assignmentsDocs = null;
-    //   }
-    // }, 2000)
-  }
 
   ngAfterViewInit() {
     this.scroller.elementScrolled().pipe(
@@ -65,7 +53,12 @@ export class AssignmentWithInfiniteScrollComponent extends BasicAssignmentList {
     
     _getAssignments() {
       if(this.stateFilter && (this.stateFilter === BasicAssignmentList.RENDU || BasicAssignmentList.NON_RENDU)) {
-        this.findAssignmentsByState(this.stateFilter, true);
+        this.findAssignmentsByState(this.stateFilter, true, () => {
+          this.assignmentsDocs.emit({
+            maxCount: this.totalDocs,
+            number: this.assignments.length
+          });
+        });
       } else {
         this.getAssignments(true);
       }

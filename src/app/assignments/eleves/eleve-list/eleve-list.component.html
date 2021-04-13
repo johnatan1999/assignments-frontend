@@ -1,5 +1,4 @@
 <mat-card class="card-eleve">
-  <!--<router-outlet></router-outlet>-->
   <mat-toolbar>
     <mat-toolbar-row>
         <h4 style="text-decoration: underline;">Liste des élèves</h4>
@@ -16,7 +15,7 @@
       </div>
     </mat-toolbar-row>
 </mat-toolbar>
-    <div>
+    <div class="eleve-data">
       <table mat-table [dataSource]="eleves">
         <ng-container matColumnDef="image">
           <th mat-header-cell *matHeaderCellDef> Photo de profil </th>

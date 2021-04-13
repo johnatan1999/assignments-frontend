@@ -36,7 +36,7 @@ export abstract class BasicAssignmentList implements OnInit {
         console.log("getAssignments() du service appelé");
     }
 
-    findAssignmentsByState(state, appendData = false) {
+    findAssignmentsByState(state, appendData = false, callback=() => {}) {
         this.assignmentsService.getAssignmentsPagine(this.page, this.limit, state)
         .subscribe(data => {
           this.assignments = appendData ? [...this.assignments, ...data.docs]: data.docs;
@@ -48,10 +48,11 @@ export abstract class BasicAssignmentList implements OnInit {
           this.prevPage = data.prevPage;
           this.hasNextPage = data.hasNextPage;
           this.nextPage = data.nextPage;
+          callback();
         });
     }
 
-    getAssignments(appendData = false) {
+    getAssignments(appendData = false, callback=()=>{}) {
         this.assignmentsService.getAssignmentsPagine(this.page, this.limit)
         .subscribe(data => {
           this.assignments = appendData ? [...this.assignments, ...data.docs]: data.docs;
@@ -63,7 +64,7 @@ export abstract class BasicAssignmentList implements OnInit {
           this.prevPage = data.prevPage;
           this.hasNextPage = data.hasNextPage;
           this.nextPage = data.nextPage;
-          console.log("données reçues");
+          callback();
         });
     }
 

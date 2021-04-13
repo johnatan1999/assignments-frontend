@@ -1,8 +1,8 @@
 <mat-tab-group mat-align-tabs="start">
-    <mat-tab label="Rendu ({{ assignmentsRendu?.number || 0}}/{{ assignmentsRendu?.maxCount || 0}})">
+    <mat-tab label="Rendu {{ renduCharge }}">
         <app-assignment-with-infinite-scroll (assignmentsDocs)="getDocsRendu($event)" [stateFilter]="'rendu'" ></app-assignment-with-infinite-scroll>
     </mat-tab>
-    <mat-tab label="Non rendu ({{ assignmentsNonRendu?.number || 0}}/{{ assignmentsNonRendu?.maxCount || 0 }})">
+    <mat-tab label="Non rendu {{ nonRenduCharge }}">
         <ng-template matTabContent>
             <app-assignment-with-infinite-scroll (assignmentsDocs)="getDocsNonRendu($event)" [stateFilter]="'nonrendu'" ></app-assignment-with-infinite-scroll>
         </ng-template>

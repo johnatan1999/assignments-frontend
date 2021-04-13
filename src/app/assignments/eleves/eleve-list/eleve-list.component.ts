@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Eleve } from 'src/app/shared/model/eleve.model';
 import { ElevesService } from 'src/app/shared/services/eleves.service';
@@ -23,11 +24,11 @@ export interface PeriodicElement {
   {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
 ];*/
 @Component({
-  selector: 'app-eleves',
-  templateUrl: './eleves.component.html',
-  styleUrls: ['./eleves.component.css']
+  selector: 'app-eleve-list',
+  templateUrl: './eleve-list.component.html',
+  styleUrls: ['./eleve-list.component.css']
 })
-export class ElevesComponent implements OnInit {
+export class EleveListComponent implements OnInit {
   displayedColumns: string[] = ['image', 'nom', 'prenom', 'sexe'];
   //dataSource = ELEMENT_DATA;
 
@@ -46,7 +47,10 @@ export class ElevesComponent implements OnInit {
 
 
   constructor(private route:ActivatedRoute,private elevesService : ElevesService,
-    private router:Router) { }
+    private router:Router,
+    private titleService: Title) { 
+      this.titleService.setTitle("Liste des etudiants");
+    }
 
   ngOnInit(): void {
     console.log('AVANT AFFICHAGE');

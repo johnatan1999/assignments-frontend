@@ -52,7 +52,6 @@ import { NoteModalComponent } from './assignments/assignments/list/draggable-ass
 import { LoginComponent } from "./login/login.component";
 import { AuthService } from "./shared/services/auth.service";
 import { ChildGuard } from "./shared/guard/child.guard";
-import { ElevesComponent } from './assignments/eleves/eleves.component';
 import {MatTableModule} from '@angular/material/table';
 import { ProfesseursComponent } from './assignments/professeurs/professeurs.component';
 import { DashboardComponent } from './assignments/dashboard/dashboard.component';
@@ -70,6 +69,9 @@ import { Cloudinary } from 'cloudinary-core';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { EleveAssignmentsComponent } from './assignments/eleves/eleve-assignments/eleve-assignments.component';
 import { AssignmentsGroupComponent } from "./assignments/assignments/assignments-group/assignments-group.component";
+import { EleveOutletComponent } from "./assignments/eleves/eleve-outlet.component";
+import { EleveListComponent } from "./assignments/eleves/eleve-list/eleve-list.component";
+import { ToolBarComponent } from './components/tool-bar/tool-bar.component';
 
 const routes: Routes = [
   { 
@@ -95,11 +97,17 @@ const routes: Routes = [
       },
       { 
         path: "eleves", 
-        component: ElevesComponent,
-      },
-      { 
-        path: "eleves/add", 
-        component: AddElevesComponent,
+        component: EleveOutletComponent,
+        children: [
+          { 
+            path: "", 
+            component: EleveListComponent
+          },    
+          { 
+            path: "add", 
+            component: AddElevesComponent,
+          },
+        ]
       },
       {
         path: "eleves/assignments",
@@ -156,7 +164,6 @@ const routes: Routes = [
     AssignmentCardComponent,
     AssignmentWithInfiniteScrollComponent,
     NoteModalComponent,
-    ElevesComponent,
     ProfesseursComponent,
     DashboardComponent,
     ConfirmDialogComponent,
@@ -165,6 +172,9 @@ const routes: Routes = [
     AddElevesComponent,
     AssignmentsGroupComponent,
     EleveAssignmentsComponent,
+    EleveOutletComponent,
+    EleveListComponent,
+    ToolBarComponent
   ],
   imports: [
     BrowserModule,
