@@ -146,6 +146,16 @@ const routes: Routes = [
       { 
         path: "matieres/cours", 
         component: CoursComponent,
+        children: [
+          { 
+            path: "", 
+            component: MatiereListComponent,
+          },  
+          { 
+            path: "cours/:id", 
+            component: CoursComponent,
+          },
+        ]
       },
       { 
         path: "dashboard", 
