@@ -79,6 +79,10 @@ span{
   /* padding: 0 20px; */
 }
 
+.background-progression-container button {
+  display: none;
+}
+
 .background-progression-container .mat-card {
   width: 99vw;
   border-radius: 0;

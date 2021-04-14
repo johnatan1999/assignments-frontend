@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { assignmentsGeneres } from 'src/dummy-data/assignments.data';
 import { Assignment, EtatAssignment } from '../shared/model/assignment.model';
 import { AssignmentsService } from '../shared/services/assignments.service';
+import { AuthService } from '../shared/services/auth.service';
 import { ElevesService } from '../shared/services/eleves.service';
 import { MatiereService } from '../shared/services/matiere.service';
 import { ProfesseurService } from '../shared/services/professeur.service';
@@ -19,10 +20,13 @@ export class AssignmentsComponent implements OnInit {
   progressionMax = 0;
   tauxProgression = 0;
 
-  showProgression = false;
+  showProgression = true;
   openedSidenav: boolean = true;
 
   backgroundProgression = false;
+
+  isEleve = false;
+  isProf = false;
 
   @ViewChild("sidenav") sidenav: MatSidenav;
   @ViewChild("logo") headerLogo: ElementRef;
@@ -35,7 +39,8 @@ export class AssignmentsComponent implements OnInit {
     private assignmentsService:AssignmentsService) {}
   
   ngOnInit() {
-    
+    this.isEleve = AuthService.isEleve();
+    this.isProf = AuthService.isProf();
   }
 
   logout(){
