@@ -1,0 +1,17 @@
+<!-- <button mat-button [matMenuTriggerFor]="menu"> -->
+<div [matMenuTriggerFor]="menu" class="user-menu">
+    <div class="user-image">
+        <img src="{{ user.user_info.image }}"/>
+    </div>
+    <span>{{ user.user_info.prenom }}</span>
+    <mat-icon>
+        arrow_drop_down
+    </mat-icon>
+</div>
+<!-- </button> -->
+<mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="logout()">
+        <mat-icon>power_settings_new</mat-icon>
+        <span>Deconnexion</span>
+    </button>
+</mat-menu>

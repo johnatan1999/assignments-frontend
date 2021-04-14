@@ -1,0 +1,15 @@
+.forbidden-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+}
+
+h1 {
+    font-size: 128px;
+}
+
+p {
+    font-size: 48px;
+}
