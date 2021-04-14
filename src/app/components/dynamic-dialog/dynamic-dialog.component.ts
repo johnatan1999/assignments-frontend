@@ -5,6 +5,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export interface DynamicDialogData {
   component: any;
+  type: string | 'detail';
   assignment: any;
 }
 @Component({
@@ -14,14 +15,11 @@ export interface DynamicDialogData {
 })
 export class DynamicDialogComponent implements AfterViewInit {
 
-  portalComponent: ComponentPortal<any>;
-
   constructor(public dialogRef: MatDialogRef<DynamicDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DynamicDialogData, public viewContainerRef: ViewContainerRef) {
+    @Inject(MAT_DIALOG_DATA) public data: DynamicDialogData) {
     }
 
   ngAfterViewInit(): void {
-    this.portalComponent = new ComponentPortal(this.data.component);
   }
 
   onClose() {

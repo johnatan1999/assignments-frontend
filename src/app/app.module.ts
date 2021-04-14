@@ -207,7 +207,6 @@ const routes: Routes = [
     CoursComponent,
     ModalComponent,
     ProfesseurOutletComponent,
-    ProfesseurAssignmentComponent
     ProfesseurAssignmentComponent,
     MatiereListComponent,
     CoursDialogComponent,

@@ -1,30 +1,8 @@
-<mat-card class="card-list-assignments">
-    <!-- <mat-toolbar>
-        <mat-toolbar-row>
-            <h4 style="text-decoration: underline;">Liste des assignments</h4>
-            <div class="view-switcher">
-                <span class="current-view-text">{{ currentView }}</span>
-                <button mat-button [matMenuTriggerFor]="menu">
-                    <mat-icon aria-hidden="false">more_vert</mat-icon>
-                </button>
-                <mat-menu #menu="matMenu">
-                    <button mat-menu-item (click)="onClickAdd()">
-                        <mat-icon aria-hidden="false">add</mat-icon>
-                        Ajouter
-                    </button>
-                    <button mat-menu-item [matMenuTriggerFor]="view">
-                        <mat-icon aria-hidden="false" aria-label="view icon">view_module</mat-icon>
-                        Changer la disposition
-                    </button>
-                </mat-menu>
-                <mat-menu #view="matMenu">
-                    <button mat-menu-item (click)="simpleList()">Liste simple</button>
-                    <button mat-menu-item (click)="tabbedList()">Liste avec onglet</button>
-                    <button mat-menu-item (click)="draggableList()">Liste avec element deplacable</button>
-                </mat-menu>
-            </div>
-        </mat-toolbar-row> 
-    </mat-toolbar> -->
+<app-eleve-assignments *ngIf="isEleve"></app-eleve-assignments>
+<app-professeur-assignment *ngIf="isProf"></app-professeur-assignment>
+<mat-card 
+    *ngIf="isAdmin"
+    class="card-list-assignments">
     <app-tool-bar [title]="'Liste des assignments'">
         <span class="current-view-text">{{ currentView }}</span>
         <button mat-button [matMenuTriggerFor]="menu">

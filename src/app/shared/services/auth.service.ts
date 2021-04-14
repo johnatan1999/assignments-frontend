@@ -64,15 +64,6 @@ export class AuthService {
     }
   }
 
-
-  isProf() {
-    return new Promise((resolve, reject) => {
-      const user = JSON.parse(localStorage.getItem("user"));
-      if (!user) return false;
-      resolve(user.role == "prof");
-    });
-  }
-
   isInRoles(roles: String[]) {
     if(!roles) return false;
     const user = JSON.parse(localStorage.getItem("user"));
@@ -93,13 +84,19 @@ export class AuthService {
     return roles.includes(user.role);
   }
 
-  isEleve() {
-    return new Promise((resolve, reject) => {
-      const user = JSON.parse(localStorage.getItem("user"));
+  static isEleve() {
+    const user = AuthService.getUserFromLS();
+    return user && user.role === AuthService.ELEVE;      
+  }
 
-      if (!user) return false;
-      resolve(user.role == "eleve");
-    });
+  static isProf() {
+    const user = AuthService.getUserFromLS();
+    return user && user.role === AuthService.PROFESSEUR;      
+  }
+  
+  static isAdmin() {
+    const user = AuthService.getUserFromLS();
+    return user && user.role === AuthService.ADMIN;      
   }
 
 
