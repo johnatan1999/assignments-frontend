@@ -42,7 +42,7 @@
           <form class="search-form">
             <mat-form-field>
               <mat-label>Recherche</mat-label>
-              <input (keyup)="onSearchAssignmentRendu()" matInput name="searchRendu" [(ngModel)]="searchRendu"/>
+              <input (keyup)="onSearchAssignmentNotee()" matInput name="search" [(ngModel)]="search"/>
             </mat-form-field>
           </form>
           <div class="list-action">
@@ -54,13 +54,13 @@
           [cdkDropListData]="assignments"
           [cdkDropListConnectedTo]="[todoList]"
           class="assignment-list"
-          (cdkDropListDropped)="dropVersRendu($event)">
+          (cdkDropListDropped)="dropVersNote($event)">
           <!-- <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div> -->
           <cdk-virtual-scroll-viewport *ngIf="!showNotedLoader" #scrollerRendu itemSize="75" class="assignment-viewport">
             <mat-list *cdkVirtualFor="let a of assignments" cdkDrag>
               <!-- <mat-list-item  class="assignment-item"> -->
                   <a routerLink="/assignments/detail/{{ a.id }}" style="text-decoration: none;">
-                      <app-assignment-card class="assignment-item" [assignment]="a"></app-assignment-card>
+                      <app-assignment-card class="assignment-item" [hideEditButton]="true" [assignment]="a"></app-assignment-card>
                   </a>
               <!-- </mat-list-item> -->
             </mat-list>

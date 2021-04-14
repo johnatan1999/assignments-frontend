@@ -3,6 +3,7 @@ import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { ThrowStmt } from '@angular/compiler';
 import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, pairwise, throttleTime } from 'rxjs/operators';
 import { Assignment, EtatAssignment } from 'src/app/shared/model/assignment.model';
@@ -40,21 +41,17 @@ export class ProfesseurAssignmentComponent extends BasicAssignmentList {
   constructor(protected assignmentsService:AssignmentsService,
     protected route:ActivatedRoute,
     protected router:Router,public dialog: MatDialog,
-    private ngZone: NgZone) {
+    private ngZone: NgZone, private _snackBar: MatSnackBar) {
       super(assignmentsService, route, router);
     }
     
   ngDoCheck() {
-    // const rendu = this.assignments.find((a) => a.rendu);
-    // const nonRendu = this.assignmentsRendu.find((a) => !a.rendu);
-    // this.assignments = this.assignments.filter((a) => !a.rendu);
-    // this.assignmentsRendu = this.assignmentsRendu.filter((a) => a.rendu);
-    // console.log(this.assignmentsNonRendu.length, this.assignmentsRendu.length, rendu, nonRendu)
-
-    // if(nonRendu)this.assignments.splice(0, 0, nonRendu);
-    // if(rendu)this.assignmentsRendu.splice(0, 0, rendu);
-    console.log(this.assignments)
-    // console.log(this.assignmentsNonRendu.length, this.assignmentsRendu.length)
+    const rendu = this.assignments.find((a) => a.rendu && a.etat !== EtatAssignment.NOTEE);
+    const notee = this.assignmentsRendu.find((a) => a.etat === EtatAssignment.NOTEE);
+    this.assignments = this.assignments.filter((a) => a.etat === EtatAssignment.NOTEE);
+    this.assignmentsRendu = this.assignmentsRendu.filter((a) => a.etat !== EtatAssignment.NOTEE);
+    if(notee) this.assignments.splice(0, 0, notee);
+    if(rendu) this.assignmentsRendu.splice(0, 0, rendu);
   }
   
   ngOnInit() {
@@ -74,7 +71,7 @@ export class ProfesseurAssignmentComponent extends BasicAssignmentList {
       this.ngZone.run(() => {
         if(this.renduHasNextPage) {
           this.pageRendu = this.renduNextPage;
-          this.getAssignmentsRendu();
+          this.getAssignmentsNotee();
         }
       });
     });
@@ -83,11 +80,11 @@ export class ProfesseurAssignmentComponent extends BasicAssignmentList {
       pairwise(),
       filter(([y1, y2]) => (y2 < y1 && y2 < 140)),
       throttleTime(200)
-    ).subscribe(() => {
-      this.ngZone.run(() => {
-        if(this.hasNextPage) {
-          this.page = this.nextPage;
-          this.getAssignmentsNotee();
+      ).subscribe(() => {
+        this.ngZone.run(() => {
+          if(this.hasNextPage) {
+            this.page = this.nextPage;
+            this.getAssignmentsRendu();
         }
       });
     });
@@ -95,32 +92,41 @@ export class ProfesseurAssignmentComponent extends BasicAssignmentList {
 
   onSearchAssignmentRendu() {
     this.pageRendu = 1;
-    this.getAssignmentsRendu();
+    this.getAssignmentsRendu(false);
+  }
+
+  onSearchAssignmentNotee() {
+    this.pageRendu = 1;
+    this.assignmentsService.getAssignmentsPagine(this.pageRendu, this.limit, 'rendu', this.search)
+    .subscribe((data) => {
+      this.assignments = data.docs;
+      this.totalDocs = data.totalDocs;
+    })
   }
   
   getAssignmentsNotee() {
-    this.findAssignmentsByState(EtatAssignment.NOTEE, true, () => {
-    });
+    this.findAssignmentsByState(EtatAssignment.NOTEE, true, () => {});
   }
 
-  getAssignmentsRendu() {
+  getAssignmentsRendu(appendData=true) {
     this.assignmentsService.getAssignmentsPagine(this.pageRendu, this.limit, 'rendu', this.searchRendu)
     .subscribe((data) => {
       this.pageRendu = data.page;
       this.renduHasNextPage = data.hasNextPage;
       this.renduNextPage = data.nextPage;
-      this.assignmentsRendu = this.assignmentsRendu.concat(data.docs);
+      this.assignmentsRendu = appendData ? this.assignmentsRendu.concat(data.docs) : data.docs;
       this.showRenduLoader = false;
       this.totalDocsRendu = data.totalDocs;
     })
   }
   
-  dropVersRendu(event: CdkDragDrop<Assignment[]>) {
+  dropVersNote(event: CdkDragDrop<Assignment[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       const assignment: Assignment = event.previousContainer.data[event.previousIndex];
-      this.assignments[this.assignments.indexOf(assignment)].rendu = true;
+      this.assignmentsRendu[this.assignmentsRendu.indexOf(assignment)].rendu = true;
+      this.assignmentsRendu[this.assignmentsRendu.indexOf(assignment)].etat = EtatAssignment.NOTEE;
       this.openDialog(assignment);
       // transferArrayItem<Assignment>(event.previousContainer.data,
       //                   event.container.data,
@@ -135,13 +141,16 @@ export class ProfesseurAssignmentComponent extends BasicAssignmentList {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       const assignment: Assignment = event.previousContainer.data[event.previousIndex];
-      const assignmentSelectionne = this.assignmentsRendu[this.assignmentsRendu.indexOf(assignment)];
+      const assignmentSelectionne = this.assignments[this.assignments.indexOf(assignment)];
       assignmentSelectionne.rendu = false;
       assignmentSelectionne.note = 0;
+      assignmentSelectionne.etat = 0;
       // this.assignmentsRendu = this.assignmentsRendu.filter((a) => a.rendu);
       // this.assignmentsNonRendu.push(assignmentSelectionne);
       this.assignmentsService.updateAssignment(assignmentSelectionne).subscribe(() => {
-        console.log(`Deplacement de '${assignmentSelectionne.nom}' vers la liste des non-rendus`)
+        this._snackBar.open("Assignment", "Modifiée", {
+          duration: 4000
+        })
       })
       // console.log(event.previousContainer.data[event.previousIndex]);
       // this.openDialog(this.assignments[this.assignments.indexOf(assignment)]);

@@ -17,6 +17,7 @@ export class AssignmentCardComponent implements OnInit {
   @Input() class: String;
   @Input() hideEleve = false;
   @Input() hideState = true;
+  @Input() hideEditButton = false;
   inProgress: Boolean;
   constructor(private dialog: MatDialog,
     private assignmentService: AssignmentsService, 
