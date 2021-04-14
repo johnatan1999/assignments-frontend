@@ -21,34 +21,32 @@
                     <span>{{ assignment.dateDeRendu | date }}</span>
                 </p>
                 <div class="actions">
-                    <ng-container *ngIf="!hideEditButton">
-                        <a [routerLink]="" (click)="onEdit($event)" [matMenuTriggerFor]="menu" class="">
+                    <a [routerLink]="" (click)="onEdit($event)" [matMenuTriggerFor]="menu" class="">
+                        <mat-icon>
+                            edit
+                        </mat-icon>
+                    </a>
+                    <mat-menu #menu="matMenu">
+                        <button *ngIf="!inProgress else pendingState" (click)="onStart($event)" mat-menu-item>
                             <mat-icon>
-                                edit
+                                play_arrow
                             </mat-icon>
-                        </a>
-                        <mat-menu #menu="matMenu">
-                            <button *ngIf="!inProgress else pendingState" (click)="onStart($event)" mat-menu-item>
+                            Commencer
+                        </button>
+                        <ng-template #pendingState>
+                            <button mat-menu-item (click)="onStop($event)" >
                                 <mat-icon>
-                                    play_arrow
+                                    stop
                                 </mat-icon>
-                                Commencer
+                                Arréter
                             </button>
-                            <ng-template #pendingState>
-                                <button mat-menu-item (click)="onStop($event)" >
-                                    <mat-icon>
-                                        stop
-                                    </mat-icon>
-                                    Arréter
-                                </button>
-                            </ng-template>
-                            <button *ngIf="!assignment.rendu" (click)="onValidAssignment($event)" mat-menu-item>
-                                <mat-icon>
-                                    done
-                                </mat-icon>Rendre
-                            </button>
-                        </mat-menu>
-                    </ng-container>
+                        </ng-template>
+                        <button *ngIf="!assignment.rendu" (click)="onValidAssignment($event)" mat-menu-item>
+                            <mat-icon>
+                                done
+                            </mat-icon>Rendre
+                        </button>
+                    </mat-menu>
                     <a [routerLink]="" (click)="onOpenDetail($event)" class="">
                         <mat-icon>
                             notes
