@@ -55,6 +55,7 @@ export class MatiereListComponent implements OnInit {
     this.matiereService.getMatierePagine(this.page, this.limit)
     .subscribe(data => {
       this.matieres = data.docs;
+      console.log(this.matieres);
       this.page = data.page;
       this.limit = data.limit;
       this.totalDocs = data.totalDocs;

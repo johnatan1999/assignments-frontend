@@ -142,10 +142,6 @@ const routes: Routes = [
       { 
         path: "matieres", 
         component: MatiereComponent,
-      },
-      { 
-        path: "matieres/cours", 
-        component: CoursComponent,
         children: [
           { 
             path: "", 

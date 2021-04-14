@@ -1,44 +1,41 @@
 <mat-card>
-<mat-toolbar>
-  <mat-toolbar-row>
-    <h4 style="text-decoration: underline;">Vos cours</h4>
-    <div class="view-switcher">
-      <button mat-button [matMenuTriggerFor]="menu">
-        <mat-icon aria-hidden="false">more_vert</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="openDialog()">
-          <mat-icon aria-hidden="false">add</mat-icon>
-          Ajouter
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <h4 style="text-decoration: underline;">Vos cours</h4>
+      <div class="view-switcher">
+        <button mat-button [matMenuTriggerFor]="menu">
+          <mat-icon aria-hidden="false">more_vert</mat-icon>
         </button>
-      </mat-menu>
-    </div>
-  </mat-toolbar-row>
-</mat-toolbar>
-<mat-grid-list cols="2" rowHeight="2:1">
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="openDialog()">
+            <mat-icon aria-hidden="false">add</mat-icon>
+            Ajouter
+          </button>
+        </mat-menu>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-grid-list cols="2" rowHeight="2:1">
 
-  <mat-grid-tile *ngFor="let cours of listeCours; let i = index">
-    
-    <div id="instructions">
-      <video id="my_video_{{i}}" class="video-js vjs-default-skin" width="600" height="190" controls preload="none"
-        poster='{{cours.pochette}}'
-        data-setup='{ "aspectRatio":"600:190", "playbackRates": [1, 1.5, 2] }'>
-        <source
-          src="{{cours.cours}}"
-          type='video/mp4' />
-        <source src="https://vjs.zencdn.net/v/oceans.webm" type='video/webm' />
-      </video>
-      <h2>{{cours.titre}}</h2>
-      <div class="video-button">
-      <button (click)="playPause('my_video_',i)" mat-raised-button > Play/Pause </button>
-      <button (click)="restart('my_video_',i)" mat-raised-button > Restart </button>
-      <button (click)="skip(-10,'my_video_',i)" mat-raised-button > Rewind </button>
-      <button (click)="skip(10,'my_video_',i)" mat-raised-button > Fastforward </button>
-    </div>
-    </div>
-  </mat-grid-tile>
+    <mat-grid-tile *ngFor="let cours of listeCours; let i = index">
 
-</mat-grid-list>
-<!--<mat-paginator [length]="totalDocs" [pageSize]="4" [hidePageSize]=true (page)="pageEvents($event)">
+      <div id="instructions">
+        <video id="my_video_{{i}}" class="video-js vjs-default-skin" width="600" height="190" controls preload="none"
+          poster='{{cours.pochette}}' data-setup='{ "aspectRatio":"600:190", "playbackRates": [1, 1.5, 2] }'>
+          <source src="{{cours.cours}}" type='video/mp4' />
+          <source src="https://vjs.zencdn.net/v/oceans.webm" type='video/webm' />
+        </video>
+        <h2>{{cours.titre}}</h2>
+        <div class="video-button">
+          <button (click)="playPause('my_video_',i)" mat-raised-button> Play/Pause </button>
+          <button (click)="restart('my_video_',i)" mat-raised-button> Restart </button>
+          <button (click)="skip(-10,'my_video_',i)" mat-raised-button> Rewind </button>
+          <button (click)="skip(10,'my_video_',i)" mat-raised-button> Fastforward </button>
+        </div>
+      </div>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+  <!--<mat-paginator [length]="totalDocs" [pageSize]="4" [hidePageSize]=true (page)="pageEvents($event)">
 </mat-paginator>-->
 </mat-card>

@@ -1,23 +1,27 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, Inject, Input, NgZone, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ActivatedRoute, Route, Router } from '@angular/router';
-import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
-import { Cours } from 'src/app/shared/model/cours.model';
-import { Matiere } from 'src/app/shared/model/matiere.model';
-import { Professeur } from 'src/app/shared/model/professeur.model';
-import { AuthService } from 'src/app/shared/services/auth.service';
-import { CoursService } from 'src/app/shared/services/cours.service';
+import { HttpClient } from "@angular/common/http";
+import { Component, Inject, Input, NgZone, OnInit } from "@angular/core";
+import { FormBuilder, FormControl, Validators } from "@angular/forms";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { ActivatedRoute, Route, Router } from "@angular/router";
+import {
+  FileUploader,
+  FileUploaderOptions,
+  ParsedResponseHeaders,
+} from "ng2-file-upload";
+import { Cours } from "src/app/shared/model/cours.model";
+import { Matiere } from "src/app/shared/model/matiere.model";
+import { Professeur } from "src/app/shared/model/professeur.model";
+import { AuthService } from "src/app/shared/services/auth.service";
+import { CoursService } from "src/app/shared/services/cours.service";
 export interface DialogData {
   titre: string;
-  lienVideo : string;
+  lienVideo: string;
   id: string;
 }
 @Component({
-  selector: 'app-cours-dialog',
-  templateUrl: './cours-dialog.component.html',
-  styleUrls: ['./cours-dialog.component.css']
+  selector: "app-cours-dialog",
+  templateUrl: "./cours-dialog.component.html",
+  styleUrls: ["./cours-dialog.component.css"],
 })
 export class CoursDialogComponent implements OnInit {
   @Input()
@@ -26,34 +30,29 @@ export class CoursDialogComponent implements OnInit {
   public hasBaseDropZoneOver: boolean = false;
   public uploader: FileUploader;
   private title: string;
-  
 
   files: any[] = [];
 
   cover: string;
 
-  titre = new FormControl('cours mobile', [Validators.required]);
-  prenom = new FormControl('john', [Validators.required]);
-  video = new FormControl('cours mobile', [Validators.required]);
-  
- 
+  titre = new FormControl("cours mobile", [Validators.required]);
+  prenom = new FormControl("john", [Validators.required]);
+  video = new FormControl("cours mobile", [Validators.required]);
+
+  cours = new Cours();
   constructor(
-    
     public dialogRef: MatDialogRef<CoursDialogComponent>,
     private zone: NgZone,
-    private http: HttpClient,
-    private coursService:CoursService,private router:Router, private _formBuilder: FormBuilder
+    private coursService: CoursService
   ) {
     this.responses = [];
-    this.title = '';
+    this.title = "";
   }
 
   ngOnInit(): void {
-
-      console.log("getCours() du service appelé");
+    console.log("getCours() du service appelé");
     // Create the file uploader, wire it to upload to your account
     const uploaderOptions: FileUploaderOptions = {
-      
       url: `https://api.cloudinary.com/v1_1/dy528ddbe/upload`,
       // Upload files automatically upon addition to upload queue
       autoUpload: true,
@@ -64,31 +63,31 @@ export class CoursDialogComponent implements OnInit {
       // XHR request headers
       headers: [
         {
-          name: 'X-Requested-With',
-          value: 'XMLHttpRequest'
-        }
-      ]
+          name: "X-Requested-With",
+          value: "XMLHttpRequest",
+        },
+      ],
     };
     this.uploader = new FileUploader(uploaderOptions);
 
     this.uploader.onBuildItemForm = (fileItem: any, form: FormData): any => {
       // Add Cloudinary's unsigned upload preset to the upload form
-      form.append('upload_preset', 's939zbnr');
+      form.append("upload_preset", "s939zbnr");
       // Add built-in and custom tags for displaying the uploaded photo in the list
-      let tags = 'myphotoalbum';
+      let tags = "myphotoalbum";
       if (this.title) {
-        form.append('context', `photo=${this.title}`);
+        form.append("context", `photo=${this.title}`);
         tags = `myphotoalbum,${this.title}`;
       }
       // Upload to a custom folder
       // Note that by default, when uploading via the API, folders are not automatically created in your Media Library.
       // In order to automatically create the folders based on the API requests,
       // please go to your account upload settings and set the 'Auto-create folders' option to enabled.
-      form.append('folder', 'angular_sample');
+      form.append("folder", "angular_sample");
       // Add custom tags
-      form.append('tags', tags);
+      form.append("tags", tags);
       // Add file to upload
-      form.append('file', fileItem);
+      form.append("file", fileItem);
 
       // Use default "withCredentials" value for CORS requests
       fileItem.withCredentials = false;
@@ -96,14 +95,13 @@ export class CoursDialogComponent implements OnInit {
     };
 
     // Insert or update an entry in the responses array
-    const upsertResponse = fileItem => {
-
+    const upsertResponse = (fileItem) => {
       // Run the update in a custom zone since for some reason change detection isn't performed
       // as part of the XHR request to upload the files.
       // Running in a custom zone forces change detection
       console.log(this.video.value);
       this.zone.run(() => {
- // Update an existing entry if it's upload hasn't completed yet
+        // Update an existing entry if it's upload hasn't completed yet
 
         // Find the id of an existing item
         const existingId = this.responses.reduce((prev, current, index) => {
@@ -114,62 +112,65 @@ export class CoursDialogComponent implements OnInit {
         }, -1);
         if (existingId > -1) {
           // Update existing item with new data
-          this.responses[existingId] = Object.assign(this.responses[existingId], fileItem);
+          this.responses[existingId] = Object.assign(
+            this.responses[existingId],
+            fileItem
+          );
         } else {
           // Create new response
           this.responses.push(fileItem);
         }
         this.getUrlFromResponse();
       });
-
-      
     };
 
     // Update model on completion of uploading a file
-    this.uploader.onCompleteItem = (item: any, response: string, status: number, headers: ParsedResponseHeaders) =>
-      upsertResponse(
-        {
-          file: item.file,
-          status,
-          data: JSON.parse(response)
-        }
-      );
+    this.uploader.onCompleteItem = (
+      item: any,
+      response: string,
+      status: number,
+      headers: ParsedResponseHeaders
+    ) =>
+      upsertResponse({
+        file: item.file,
+        status,
+        data: JSON.parse(response),
+      });
 
     // Update model on upload progress event
     this.uploader.onProgressItem = (fileItem: any, progress: any) =>
-      upsertResponse(
-        {
-          file: fileItem.file,
-          progress,
-          data: {}
-        }
-      );
-      
+      upsertResponse({
+        file: fileItem.file,
+        progress,
+        data: {},
+      });
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  getUrlFromResponse(){
-    this.responses.forEach((response)=>{
+  getUrlFromResponse() {
+    this.responses.forEach((response) => {
       let datas = this.getFileProperties(response.data);
-      datas.forEach((data)=>{
+      datas.forEach((data) => {
         let dataSplitted = data.url.split(".");
-        if(dataSplitted[dataSplitted.length-1]=="png" || dataSplitted[dataSplitted.length-1]=="jpeg" || dataSplitted[dataSplitted.length-1]=="jpg" || dataSplitted[dataSplitted.length-1] =="svg"){
-         console.log(data.url);
+        if (
+          dataSplitted[dataSplitted.length - 1] == "png" ||
+          dataSplitted[dataSplitted.length - 1] == "jpeg" ||
+          dataSplitted[dataSplitted.length - 1] == "jpg" ||
+          dataSplitted[dataSplitted.length - 1] == "svg"
+        ) {
+          console.log(data.url);
           this.cover = data.url;
-        }
-        else this.video.setValue(data.url);
-      })
-    })
+        } else this.video.setValue(data.url);
+      });
+    });
   }
 
   updateTitle(value: string) {
     this.title = value;
   }
-
-
 
   fileOverBase(e: any): void {
     this.hasBaseDropZoneOver = e;
@@ -180,56 +181,41 @@ export class CoursDialogComponent implements OnInit {
     if (!fileProperties) {
       return null;
     }
-    return Object.keys(fileProperties)
-      .map((key) => ({ 'key': key, 'value': fileProperties[key] , url:fileProperties['url']}));
+    return Object.keys(fileProperties).map((key) => ({
+      key: key,
+      value: fileProperties[key],
+      url: fileProperties["url"],
+    }));
   }
 
-
   getErrorMessage() {
-    if (this.titre.hasError('required')  || this.video.hasError('required') ) {
-      return 'You must enter a value';
+    if (this.titre.hasError("required") || this.video.hasError("required")) {
+      return "You must enter a value";
     }
   }
 
-  addCours(){
-    
-    if((!this.titre.value) || (!this.video.value) ) return;
+  addCours() {
+    if (!this.titre.value || !this.video.value) return;
     //this.getUrlFromResponse();
     console.log(this.titre.value);
-    
+
     console.log(this.video.value);
 
-    let cours = new Cours();
+    //let cours = new Cours();
     let professeur = new Professeur();
     let user = AuthService.getUserFromLS();
     professeur._id = user.user_info._id;
-    cours.titre = this.titre.value;
-    cours.cours = this.video.value;
-    cours.pochette = this.cover;
-    cours.professeur = professeur;
+    this.cours.titre = this.titre.value;
+    this.cours.cours = this.video.value;
+    this.cours.pochette = this.cover;
+    this.cours.professeur = professeur;
 
-
-    this.coursService.addCours(cours)
-    .subscribe(reponse => {
+    this.coursService.addCours(this.cours).subscribe((reponse) => {
       console.log(reponse.message);
-       // et on navigue vers la page d'accueil qui affiche la liste
-       //this.router.navigate(["/assignments/matieres/cours/"+this.data.id]);
+      // et on navigue vers la page d'accueil qui affiche la liste
+      //this.router.navigate(["/assignments/matieres/cours/"+this.data.id]);
     });
- 
-    /*let eleve = new Eleve();
-    eleve.nom = this.nom.value;
-    eleve.prenom = this.prenom.value;
-    eleve.image = this.image.value;
-    eleve.sexe = this.sexe.value;
-    this.elevesService.addEleve(eleve)
-    .subscribe(reponse => {
-      console.log(reponse.message);
-       // et on navigue vers la page d'accueil qui affiche la liste
-       this.router.navigate(["/assignments/eleves"]);
-    });*/
   }
-  
-  
 
   /**
    * on file drop handler
@@ -253,26 +239,27 @@ export class CoursDialogComponent implements OnInit {
     this.files.splice(index, 1);
   }
 
-
-   // Delete an uploaded image
+  // Delete an uploaded image
   // Requires setting "Return delete token" to "Yes" in your upload preset configuration
   // See also https://support.cloudinary.com/hc/en-us/articles/202521132-How-to-delete-an-image-from-the-client-side-
   deleteImage = function (data: any, index: number) {
-    
     const url = `https://api.cloudinary.com/v1_1/dy528ddbe/delete_by_token`;
-    const headers = new Headers({ 'Content-Type': 'application/json','Access-Control-Allow-Headers':'*','X-Requested-With': 'XMLHttpRequest' });
+    const headers = new Headers({
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Headers": "*",
+      "X-Requested-With": "XMLHttpRequest",
+    });
     const options = { headers: headers };
     const body = {
-      token: data.delete_token
+      token: data.delete_token,
     };
-    this.http.post(url, body, options).subscribe(response => {
+    this.http.post(url, body, options).subscribe((response) => {
       console.log(`Deleted image - ${data.public_id} ${response.result}`);
       // Remove deleted item for responses
       this.responses.splice(index, 1);
     });
   };
 
-  
   /**
    * Simulate the upload process
    */
@@ -312,16 +299,12 @@ export class CoursDialogComponent implements OnInit {
    */
   formatBytes(bytes, decimals) {
     if (bytes === 0) {
-      return '0 Bytes';
+      return "0 Bytes";
     }
     const k = 1024;
     const dm = decimals <= 0 ? 0 : decimals || 2;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
   }
-
-  
-
- 
 }
