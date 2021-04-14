@@ -1,94 +1,44 @@
 <mat-card>
-    <mat-grid-list cols="2" rowHeight="2:1">
-        <mat-grid-tile>
-            <div id="instructions">
-                <video id="my_video_1" class="video-js vjs-default-skin" width="640px" height="267px" controls preload="none"
-                  poster='http://video-js.zencoder.com/oceans-clip.jpg'
-                  data-setup='{ "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }'>
-                  <source src="http://res.cloudinary.com/dy528ddbe/video/upload/v1618299770/angular_sample/gonmduujm4ey6nlbbv2i.mp4" type='video/mp4' />
-                  <source src="https://vjs.zencdn.net/v/oceans.webm" type='video/webm' />
-                </video>
-                <button (click)="playPause()">Play/Pause</button>
-                <button (click)="makeBig()">Big</button>
-                <button (click)="makeSmall()">Small</button>
-                <button (click)="makeNormal()">Normal</button>
-                <button (click)="restart();">Restart</button>
-                <button (click)="skip(-10)">Rewind</button>
-                <button (click)="skip(10)">Fastforward</button>
-              </div>
-              
-              <!--<div class="video">
-                <video controls (click)="toggleVideo()" #videoPlayer>
-                  <source src="https://vjs.zencdn.net/v/oceans.mp4" type="video/mp4" />
-                  Browser not supported
-                </video>
-              </div>-->
-        </mat-grid-tile>
-        <mat-grid-tile>    <div id="instructions">
-            <video id="my_video_2" class="video-js vjs-default-skin" width="640px" height="267px" controls preload="none"
-              poster='http://video-js.zencoder.com/oceans-clip.jpg'
-              data-setup='{ "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }'>
-              <source src="http://res.cloudinary.com/dy528ddbe/video/upload/v1618303287/angular_sample/wpmpljvdfhfwnp8eoxod.mp4" type='video/mp4' />
-              <source src="https://vjs.zencdn.net/v/oceans.webm" type='video/webm' />
-            </video>
-            <button (click)="playPause()">Play/Pause</button>
-            <button (click)="makeBig()">Big</button>
-            <button (click)="makeSmall()">Small</button>
-            <button (click)="makeNormal()">Normal</button>
-            <button (click)="restart();">Restart</button>
-            <button (click)="skip(-10)">Rewind</button>
-            <button (click)="skip(10)">Fastforward</button>
-          </div>
-          
-          <!--<div class="video">
-            <video controls (click)="toggleVideo()" #videoPlayer>
-              <source src="https://vjs.zencdn.net/v/oceans.mp4" type="video/mp4" />
-              Browser not supported
-            </video>
-          </div>--></mat-grid-tile>
-        <mat-grid-tile>    <div id="instructions">
-            <video id="my_video_3" class="video-js vjs-default-skin" width="640px" height="267px" controls preload="none"
-              poster='http://video-js.zencoder.com/oceans-clip.jpg'
-              data-setup='{ "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }'>
-              <source src="https://vjs.zencdn.net/v/oceans.mp4" type='video/mp4' />
-              <source src="https://vjs.zencdn.net/v/oceans.webm" type='video/webm' />
-            </video>
-            <button (click)="playPause()">Play/Pause</button>
-            <button (click)="makeBig()">Big</button>
-            <button (click)="makeSmall()">Small</button>
-            <button (click)="makeNormal()">Normal</button>
-            <button (click)="restart();">Restart</button>
-            <button (click)="skip(-10)">Rewind</button>
-            <button (click)="skip(10)">Fastforward</button>
-          </div>
-          
-          <!--<div class="video">
-            <video controls (click)="toggleVideo()" #videoPlayer>
-              <source src="https://vjs.zencdn.net/v/oceans.mp4" type="video/mp4" />
-              Browser not supported
-            </video>
-          </div>--></mat-grid-tile>
-        <mat-grid-tile>    <div id="instructions">
-            <video id="my_video_4" class="video-js vjs-default-skin" width="640px" height="267px" controls preload="none"
-              poster='http://video-js.zencoder.com/oceans-clip.jpg'
-              data-setup='{ "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }'>
-              <source src="https://vjs.zencdn.net/v/oceans.mp4" type='video/mp4' />
-              <source src="https://vjs.zencdn.net/v/oceans.webm" type='video/webm' />
-            </video>
-            <button (click)="playPause()">Play/Pause</button>
-            <button (click)="makeBig()">Big</button>
-            <button (click)="makeSmall()">Small</button>
-            <button (click)="makeNormal()">Normal</button>
-            <button (click)="restart();">Restart</button>
-            <button (click)="skip(-10)">Rewind</button>
-            <button (click)="skip(10)">Fastforward</button>
-          </div>
-          
-          <!--<div class="video">
-            <video controls (click)="toggleVideo()" #videoPlayer>
-              <source src="https://vjs.zencdn.net/v/oceans.mp4" type="video/mp4" />
-              Browser not supported
-            </video>
-          </div>--></mat-grid-tile>
-    </mat-grid-list>
+<mat-toolbar>
+  <mat-toolbar-row>
+    <h4 style="text-decoration: underline;">Vos cours</h4>
+    <div class="view-switcher">
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon aria-hidden="false">more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="openDialog()">
+          <mat-icon aria-hidden="false">add</mat-icon>
+          Ajouter
+        </button>
+      </mat-menu>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-grid-list cols="2" rowHeight="2:1">
+
+  <mat-grid-tile *ngFor="let cours of listeCours; let i = index">
+    
+    <div id="instructions">
+      <video id="my_video_{{i}}" class="video-js vjs-default-skin" width="600" height="190" controls preload="none"
+        poster='{{cours.pochette}}'
+        data-setup='{ "aspectRatio":"600:190", "playbackRates": [1, 1.5, 2] }'>
+        <source
+          src="{{cours.cours}}"
+          type='video/mp4' />
+        <source src="https://vjs.zencdn.net/v/oceans.webm" type='video/webm' />
+      </video>
+      <h2>{{cours.titre}}</h2>
+      <div class="video-button">
+      <button (click)="playPause('my_video_',i)" mat-raised-button > Play/Pause </button>
+      <button (click)="restart('my_video_',i)" mat-raised-button > Restart </button>
+      <button (click)="skip(-10,'my_video_',i)" mat-raised-button > Rewind </button>
+      <button (click)="skip(10,'my_video_',i)" mat-raised-button > Fastforward </button>
+    </div>
+    </div>
+  </mat-grid-tile>
+
+</mat-grid-list>
+<!--<mat-paginator [length]="totalDocs" [pageSize]="4" [hidePageSize]=true (page)="pageEvents($event)">
+</mat-paginator>-->
 </mat-card>
