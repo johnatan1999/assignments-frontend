@@ -20,7 +20,7 @@ export class AssignmentsComponent implements OnInit {
   progressionMax = 0;
   tauxProgression = 0;
 
-  showProgression = true;
+  showProgression = false;
   openedSidenav: boolean = true;
 
   backgroundProgression = false;
