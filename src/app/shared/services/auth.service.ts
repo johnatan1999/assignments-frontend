@@ -122,6 +122,7 @@ export class AuthService {
 export interface User {
   token: string;
   role: string;
+  name: String;
   _id: string;
   user_info: UserInfo;
 }

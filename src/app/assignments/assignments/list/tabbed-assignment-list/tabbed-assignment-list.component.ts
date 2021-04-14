@@ -33,7 +33,7 @@ export class TabbedAssignmentListComponent extends BasicAssignmentList {
   // nonRenduNextPage: number;
   // nonRenduHasNextPage: Boolean;
   // searchNonRendu = '';
-
+  
   constructor(protected assignmentsService:AssignmentsService,
     protected route:ActivatedRoute,
     protected router:Router) {

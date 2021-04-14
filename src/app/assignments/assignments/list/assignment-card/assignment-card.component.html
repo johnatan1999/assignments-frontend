@@ -9,7 +9,7 @@
                 class="state-flag" 
                 [ngClass]="{
                     'done': assignment.rendu,
-                    'in-progress': assignment.enCours && !assignment.rendu,
+                    'in-progress': assignment.etat === EN_COURS && !assignment.rendu,
                     'not-done': !assignment.rendu && !assignment.enCours 
                 }">
             </div>
@@ -21,7 +21,7 @@
                     <span>{{ assignment.dateDeRendu | date }}</span>
                 </p>
                 <div class="actions">
-                    <a [routerLink]="" (click)="onEdit($event)" [matMenuTriggerFor]="menu" class="">
+                    <a [routerLink]="" *ngIf="!hideEdit" (click)="onEdit($event)" [matMenuTriggerFor]="menu" class="">
                         <mat-icon>
                             edit
                         </mat-icon>

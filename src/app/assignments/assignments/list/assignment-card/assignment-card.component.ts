@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DynamicDialogComponent } from 'src/app/components/dynamic-dialog/dynamic-dialog.component';
@@ -14,10 +14,15 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class AssignmentCardComponent implements OnInit {
 
+  EN_COURS = EtatAssignment.EN_COURS;
+
   @Input() assignment: Assignment;
   @Input() class: String;
   @Input() hideEleve = false;
   @Input() hideState = true;
+  @Input() hideEdit = false;
+  @Output() changeEmitter = new EventEmitter();
+
   inProgress: Boolean;
   constructor(private dialog: MatDialog,
     private assignmentService: AssignmentsService, 
@@ -57,6 +62,7 @@ export class AssignmentCardComponent implements OnInit {
 
   onValidAssignment(event) {
     this.assignment.etat = 0;
+    this.changeEmitter.emit(this.assignment);
     this.assignment.rendu = true;
     this.assignmentService.updateAssignment(this.assignment).subscribe((response) => {
       this._snackBar.open("Assignment", "Modifiée", {

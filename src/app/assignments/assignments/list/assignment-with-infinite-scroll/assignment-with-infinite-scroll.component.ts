@@ -6,6 +6,7 @@ import { filter, map, pairwise, throttleTime } from 'rxjs/operators';
 import { DynamicDialogComponent } from 'src/app/components/dynamic-dialog/dynamic-dialog.component';
 import { Assignment } from 'src/app/shared/model/assignment.model';
 import { AssignmentsService } from 'src/app/shared/services/assignments.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { AssignmentDetailComponent } from '../../assignment-detail/assignment-detail.component';
 import { BasicAssignmentList } from '../basic-assignment-list';
 
@@ -21,6 +22,8 @@ export class AssignmentWithInfiniteScrollComponent extends BasicAssignmentList {
   @Input() protected stateFilter: String;
   @Output() protected assignmentsDocs: EventEmitter<any>;
 
+  hideEditCard = false
+
   constructor(protected assignmentsService: AssignmentsService,
     protected route: ActivatedRoute,
     protected router: Router,
@@ -33,6 +36,7 @@ export class AssignmentWithInfiniteScrollComponent extends BasicAssignmentList {
     
   ngOnInit() {
     this._getAssignments();
+    this.hideEditCard = AuthService.isAdmin();
   }
 
   ngAfterViewInit() {
