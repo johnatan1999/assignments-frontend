@@ -1,0 +1,30 @@
+.user-image {
+    width: 40px;
+    height: 40px;
+    background-color: #ddd;
+    border-radius: 50%;
+    display: flex;
+}
+
+.mat-icon {
+    font-size: 20px;
+    margin-top: 10px;
+    margin-left: 2px;
+}
+
+.user-menu {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.user-menu span {
+    padding-left: 10px;
+    font-size: 14px;
+}
+
+.user-image img {
+    height: 35px;
+    width: auto;
+}

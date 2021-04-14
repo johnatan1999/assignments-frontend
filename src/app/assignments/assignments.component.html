@@ -63,12 +63,13 @@
         </div>
         
         <p style="color:#0081A7">Année scolaire 2021/2022</p>
-        <div>
-          <button mat-raised-button (click)="peuplerBDAvecProgressBar()"> Peupler BD </button>
-        <button mat-button (click)="logout()">
-          <mat-icon aria-hidden="false" aria-label="Example home icon" >power_settings_new</mat-icon>
-        </button>
-      </div>
+        <div style="display: flex; flex-direction: row;">
+          <button mat-raised-button (click)="peuplerBDAvecProgressBar()" style="margin-right: 50px;"> Peupler BD </button>
+          <app-user-menu></app-user-menu>
+          <!-- <button mat-button (click)="logout()">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" >power_settings_new</mat-icon>
+          </button> -->
+        </div>
       </mat-toolbar-row>
     </mat-toolbar>
     

@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { DynamicDialogComponent } from 'src/app/components/dynamic-dialog/dynamic-dialog.component';
 import { Assignment, EtatAssignment } from 'src/app/shared/model/assignment.model';
 import { AssignmentsService } from 'src/app/shared/services/assignments.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-assignment-card',
@@ -25,6 +26,10 @@ export class AssignmentCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.inProgress = this.assignment.etat === EtatAssignment.EN_COURS;
+  }
+
+  ngAfterViewInit() {
+    this.hideEleve = AuthService.isEleve()
   }
 
   onEdit(event) {

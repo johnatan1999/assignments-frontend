@@ -23,7 +23,7 @@ export class ChildGuard implements CanActivateChild {
         } else {
           // On renvoie vers la page d'accueil
           console.log("GUARD : vous n'êtes pas autorisé à naviguer vers cette url (vous n'êtes pas admin))");
-          this.router.navigate(['/login'], { state: { message: "Vous n'êtes pas autorisé à accéder a cette page!" } });
+          this.router.navigate(['/403'], { state: { message: "Vous n'êtes pas autorisé à accéder a cette page!" } });
           return false;
         }
       });

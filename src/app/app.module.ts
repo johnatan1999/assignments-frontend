@@ -79,6 +79,8 @@ import { ProfesseurAssignmentComponent } from './assignments/professeurs/profess
 import { MatiereListComponent } from "./assignments/matiere/matiere-list/matiere-list.component";
 import { CoursDialogComponent } from "./assignments/matiere/cours-dialog/cours-dialog.component";
 
+import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { UserMenuComponent } from './components/user-menu/user-menu.component';
 
 
 const routes: Routes = [
@@ -170,8 +172,11 @@ const routes: Routes = [
   {
     // idem avec  http://localhost:4200/home
     path: "home",
-    component: AssignmentsComponent,
-    canActivate: [AuthGuard],
+    redirectTo: "/assignments"
+  },
+  {
+    path: '403',
+    component: ForbiddenComponent
   }
 ];
 @NgModule({
@@ -209,6 +214,8 @@ const routes: Routes = [
     ProfesseurAssignmentComponent,
     MatiereListComponent,
     CoursDialogComponent,
+    ForbiddenComponent,
+    UserMenuComponent
   ],
   imports: [
     BrowserModule,
