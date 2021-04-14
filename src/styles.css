@@ -45,15 +45,6 @@ a[_primary-color]:hover {
 }
 
 
-.snack-bar {
-    background-color: #ebecf0;
-    color: #0081A7
-}
-
-.snack-bar .mat-button {
-    color: #0081A7
-}
-
 /* width */
 ::-webkit-scrollbar {
     width: 8px;

@@ -76,9 +76,6 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { ModalComponent } from './components/modal/modal.component';
 import { ProfesseurOutletComponent } from './assignments/professeurs/professeur-outlet.component';
 import { ProfesseurAssignmentComponent } from './assignments/professeurs/professeur-assignment/professeur-assignment.component';
-import { MatiereListComponent } from "./assignments/matiere/matiere-list/matiere-list.component";
-import { CoursDialogComponent } from "./assignments/matiere/cours-dialog/cours-dialog.component";
-
 
 
 const routes: Routes = [
@@ -138,16 +135,10 @@ const routes: Routes = [
       { 
         path: "matieres", 
         component: MatiereComponent,
-        children: [
-          { 
-            path: "", 
-            component: MatiereListComponent,
-          },  
-          { 
-            path: "cours/:id", 
-            component: CoursComponent,
-          },
-        ]
+      },
+      { 
+        path: "matieres/cours", 
+        component: CoursComponent,
       },
       { 
         path: "dashboard", 
@@ -206,9 +197,7 @@ const routes: Routes = [
     CoursComponent,
     ModalComponent,
     ProfesseurOutletComponent,
-    ProfesseurAssignmentComponent,
-    MatiereListComponent,
-    CoursDialogComponent,
+    ProfesseurAssignmentComponent
   ],
   imports: [
     BrowserModule,

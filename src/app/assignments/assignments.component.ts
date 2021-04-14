@@ -78,7 +78,7 @@ export class AssignmentsComponent implements OnInit {
           nouvelAssignment.professeur = professeurs[randMatiere];
           nouvelAssignment.eleve = eleves[randEleve];
           nouvelAssignment.note = a.rendu && randNote % 3 === 0  ? randNote : 0;
-          nouvelAssignment.etat = nouvelAssignment.rendu && nouvelAssignment.note > 0  ? EtatAssignment.NOTEE : 0;
+          nouvelAssignment.etat = a.rendu && randNote % 3 === 0  ? EtatAssignment.NOTEE : 0;
           this.progressionMax = assignmentsGeneres.length;
           this.assignmentsService.addAssignment(nouvelAssignment).subscribe(() => {
             this.progression += 1;

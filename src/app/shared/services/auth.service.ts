@@ -65,10 +65,19 @@ export class AuthService {
   }
 
 
+  isProf() {
+    return new Promise((resolve, reject) => {
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (!user) return false;
+      resolve(user.role == "prof");
+    });
+  }
+
   isInRoles(roles: String[]) {
     if(!roles) return false;
-    const user = AuthService.getUserFromLS();
+    const user = JSON.parse(localStorage.getItem("user"));
     return roles.includes(user.role);
+    // return roles.includes(AuthService.ADMIN) || roles.includes(AuthService.ELEVE) || roles.includes(AuthService.PROFESSEUR);
   }
 
   hasRole(route: ActivatedRouteSnapshot) {
@@ -84,20 +93,15 @@ export class AuthService {
     return roles.includes(user.role);
   }
 
-  static isEleve() {
-      const user = AuthService.getUserFromLS();
-      return user && user.role === AuthService.ELEVE;
+  isEleve() {
+    return new Promise((resolve, reject) => {
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      if (!user) return false;
+      resolve(user.role == "eleve");
+    });
   }
 
-  static isProf() {
-    const user = AuthService.getUserFromLS();
-    return user && (user.role === AuthService.PROFESSEUR);
-  }
-
-  static isAdmin() {
-    const user = AuthService.getUserFromLS();
-    return user && (user.role === AuthService.ADMIN);
-  }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

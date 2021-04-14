@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-assignment-list',
@@ -19,15 +18,7 @@ export class AssignmentListComponent implements OnInit {
   static DRAGGABLE_LIST = 1;
   static SIMPLE_LIST = 2;
 
-  isEleve: Boolean;
-  isProfesseur: Boolean;
-  isAdmin: Boolean;
-
-  constructor(private router: Router) {
-    this.isEleve = AuthService.isEleve();
-    this.isAdmin = AuthService.isAdmin();
-    this.isProfesseur = AuthService.isProf();
-  }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.tabbedList();
