@@ -1,5 +1,9 @@
 <mat-card class="card-matiere">
-    <app-tool-bar [title]="'Liste des matières'"></app-tool-bar>
+    <mat-toolbar>
+        <mat-toolbar-row>
+            <h4 style="text-decoration: underline;">Liste des matieres</h4>
+        </mat-toolbar-row>
+    </mat-toolbar>
     <div>
         <table mat-table [dataSource]="matieres">
             <ng-container matColumnDef="image">
@@ -18,7 +22,7 @@
 
             <ng-container matColumnDef="details">
                 <th mat-header-cell *matHeaderCellDef> Details </th>
-                <td mat-cell *matCellDef="let element"><a routerLink="/assignments/matieres/cours" class="back_link">Voir cours</a></td>
+                <td mat-cell *matCellDef="let element"><a [routerLink]="['/assignments/matieres/cours', element._id]"  >Voir cours</a></td>
             </ng-container>
            
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -30,4 +34,3 @@
     </div>
 
 </mat-card>
-<router-outlet></router-outlet>
