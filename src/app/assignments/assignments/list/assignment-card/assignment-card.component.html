@@ -52,6 +52,11 @@
                             notes
                         </mat-icon>
                     </a>
+                    <a [routerLink]="" *ngIf="!hideDelete" (click)="openConfirmDialog($event)" class="">
+                        <mat-icon>
+                            delete
+                        </mat-icon>
+                    </a>
                 </div>
             </div>
             <div *ngIf="assignment.eleve && !hideEleve" class="card-img-container">

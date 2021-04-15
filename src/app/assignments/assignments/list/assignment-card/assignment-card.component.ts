@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { DialogPosition, MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
 import { DynamicDialogComponent } from 'src/app/components/dynamic-dialog/dynamic-dialog.component';
 import { Assignment, EtatAssignment } from 'src/app/shared/model/assignment.model';
 import { AssignmentsService } from 'src/app/shared/services/assignments.service';
@@ -21,7 +22,9 @@ export class AssignmentCardComponent implements OnInit {
   @Input() hideEleve = false;
   @Input() hideState = true;
   @Input() hideEdit = false;
+  @Input() hideDelete = false;
   @Output() changeEmitter = new EventEmitter();
+  @Output() deleteEmitter = new EventEmitter();
 
   inProgress: Boolean;
   constructor(private dialog: MatDialog,
@@ -30,10 +33,11 @@ export class AssignmentCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.inProgress = this.assignment.etat === EtatAssignment.EN_COURS;
+    this.hideDelete = AuthService.isEleve();
   }
 
   ngAfterViewInit() {
-    this.hideEleve = AuthService.isEleve()
+    this.hideEleve = AuthService.isEleve();
   }
 
   onEdit(event) {
@@ -78,6 +82,40 @@ export class AssignmentCardComponent implements OnInit {
       width: '700px',
       data: {
         assignment: this.assignment
+      }
+    })
+  }
+
+  
+  private onDelete() {
+    this.assignmentService
+      .deleteAssignment(this.assignment)
+      .subscribe((reponse) => {
+        console.log(reponse.message);
+        this.deleteEmitter.emit(true);
+        this._snackBar.open("Asssignment", "Suprimmée", {
+          duration: 3000
+        })
+      });
+  }
+
+  openConfirmDialog(event) {
+    event.stopPropagation();
+    const dialogPosition: DialogPosition = {
+      top: '50px'
+    }
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '600px',
+      position: dialogPosition,
+      data: { 
+        yesButton: 'Confirmer', 
+        noButton: 'Annuler', 
+        message: `Veuillez confirmer la suppression de`,
+        object: this.assignment,
+        attribute: 'nom',
+        onConfirm: () => {
+          this.onDelete();
+        }
       }
     })
   }

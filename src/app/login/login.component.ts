@@ -16,8 +16,8 @@ export class LoginComponent implements OnInit {
 
   checkUser: CheckUser = new CheckUser();
   hide = true;
-  email = new FormControl('john@gmail.com', [Validators.required, Validators.email]);
-  password = new FormControl('john', [Validators.required]);
+  email = new FormControl('', [Validators.required, Validators.email]);
+  password = new FormControl('', [Validators.required]);
 
   showLoader = false;
   //  email = new FormControl('vetsorakotobe@gmail.com', [Validators.required, Validators.email]);
