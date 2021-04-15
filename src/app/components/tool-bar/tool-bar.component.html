@@ -1,7 +1,15 @@
 <mat-toolbar>
     <mat-toolbar-row>
-        <h4>{{ title }}</h4>
+        <div style="display: flex; flex-direction: row;">
+            <button *ngIf="showBackButton" mat-button (click)="onClickBackButton()">
+                <mat-icon style="font-weight: 600;">
+                    arrow_back
+                </mat-icon>
+            </button>
+            <h4>{{ title }}</h4>
+        </div>
         <div class="tool-action">
+            <ng-content></ng-content>
             <!-- <button mat-button [matMenuTriggerFor]="menu">
                 <mat-icon aria-hidden="false">more_vert</mat-icon>
             </button>

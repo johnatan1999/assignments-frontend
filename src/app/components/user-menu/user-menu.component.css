@@ -4,6 +4,18 @@
     background-color: #ddd;
     border-radius: 50%;
     display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-image img {
+    height: 30px;
+    width: auto;
+}
+
+.user-image span {
+    font-weight: 600;
+    margin-top: 5px;
 }
 
 .mat-icon {
@@ -22,14 +34,4 @@
 .user-menu span {
     padding-left: 10px;
     font-size: 14px;
-}
-
-.user-image img {
-    height: 35px;
-    width: auto;
-}
-
-.user-image span {
-    font-weight: 600;
-    margin-top: 5px;
 }

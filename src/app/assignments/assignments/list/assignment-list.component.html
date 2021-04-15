@@ -1,14 +1,16 @@
 <app-eleve-assignments *ngIf="isEleve"></app-eleve-assignments>
-<app-professeur-assignment *ngIf="isProf"></app-professeur-assignment>
+<div style="padding: 0 10px; " >
+    <app-professeur-assignment *ngIf="isProf"></app-professeur-assignment>
+</div>
 <mat-card 
     *ngIf="isAdmin"
     class="card-list-assignments">
     <app-tool-bar [title]="'Liste des assignments'">
         <span class="current-view-text">{{ currentView }}</span>
-        <button mat-button [matMenuTriggerFor]="menu">
+        <button mat-button [matMenuTriggerFor]="menu_">
             <mat-icon aria-hidden="false">more_vert</mat-icon>
         </button>
-        <mat-menu #menu="matMenu">
+        <mat-menu #menu_="matMenu">
             <button mat-menu-item (click)="onClickAdd()">
                 <mat-icon aria-hidden="false">add</mat-icon>
                 Ajouter
