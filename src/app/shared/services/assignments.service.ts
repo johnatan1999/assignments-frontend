@@ -20,10 +20,10 @@ export class AssignmentsService {
   constructor(private loggingService:LoggingService, private http:HttpClient,
     private professeurService: ProfesseurService, private eleveService: ElevesService) { }
 
-  uri = "http://localhost:8010/api/assignments";
-  base_uri = "http://localhost:8010/api/";
-  // base_uri = "https://assignments-backend.herokuapp.com/api/"
-  // uri = "https://assignments-backend.herokuapp.com/api/assignments"
+  // uri = "http://localhost:8010/api/assignments";
+  // base_uri = "http://localhost:8010/api/";
+  uri = "https://assignments-backend.herokuapp.com/api/assignments"
+  base_uri = "https://assignments-backend.herokuapp.com/api/"
 
   getAssignments(state=''):Observable<Assignment[]> {
     console.log("Dans le service de gestion des assignments...")
