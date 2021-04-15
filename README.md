@@ -23,23 +23,23 @@ Fonctionnalités de base :
 Fonctionnalités ajoutées :
 	
 1) Drag and drop entre la liste des Assignments non rendus et rendus avec notification en utilisant l'ajout de messages de notification (SnackBar Material)
-Liste : https://material.angular.io/components/table/overview
-Pagination : https://material.angular.io/components/paginator/overview
-Tableau de bord : https://www.primefaces.org/ultima-ng/#
-Drag and drop : https://material.angular.io/cdk/drag-drop/overview
-Notification : https://material.angular.io/components/snack-bar/overview
-Card : https://material.angular.io/components/card/overview
-Popup : https://material.angular.io/components/dialog/overview
-Export excel : https://dev.to/idrisrampurawala/exporting-data-to-excel-and-csv-in-angular-3643
-Upload video : https://cloudinary.com/blog/angular_image_upload
-Stepper : https://material.angular.io/components/stepper/overview
-Playing video : https://stackblitz.com/edit/angular-8-html5-video-player
+- Liste : https://material.angular.io/components/table/overview
+- Pagination : https://material.angular.io/components/paginator/overview
+- Tableau de bord : https://www.primefaces.org/ultima-ng/#
+- Drag and drop : https://material.angular.io/cdk/drag-drop/overview
+- Notification : https://material.angular.io/components/snack-bar/overview
+- Card : https://material.angular.io/components/card/overview
+- Popup : https://material.angular.io/components/dialog/overview
+- Export excel : https://dev.to/idrisrampurawala/exporting-data-to-excel-and-csv-in-angular-3643
+- Upload video : https://cloudinary.com/blog/angular_image_upload
+- Stepper : https://material.angular.io/components/stepper/overview
+- Playing video : https://stackblitz.com/edit/angular-8-html5-video-player
 Admin : 
 1) Ajout d'un tableau de bord affichant:                                                                                                                                          - le nombre d'étudiant, professeur, matières cliquable vers la liste de chacun
 - le nombre d'assignments(rendu, pas rendu et en cours) 
 - un graphe en batonnet sur le taux de réussite par matière
 - un graphe en courbe sur le taux de réussite par professeur
-2) Popup 
+2) Popup (assignments details)
 3) Liste des élèves avec pagination (avec export excel) 
 4) Liste des professeurs avec pagination
 5) Liste des matières avec pagination et option voir cours pour consulter les videos de chacun des cours
