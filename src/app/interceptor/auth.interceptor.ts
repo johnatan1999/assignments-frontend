@@ -13,7 +13,7 @@ export class AuthInterceptor implements HttpInterceptor {
             const token = user.token;
             const cloned = req.clone({
                 headers: req.headers.set("Authorization",
-                    "Bearer " + token).append('UserId', user._id)
+                    "Bearer " + token).append('UserId', user._id).append('Access-Control-Allow-Origin', '*')
             });
 
             return next.handle(cloned);
