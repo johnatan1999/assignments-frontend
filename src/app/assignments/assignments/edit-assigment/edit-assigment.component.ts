@@ -66,11 +66,10 @@ export class EditAssigmentComponent implements OnInit {
     });
 
     this.professeurService.getProfesseurs().subscribe((professeurs: any) => {
-      this.professeurs = professeurs.docs;
+      this.professeurs = professeurs;
     })
     this.elevesService.getEleves()
     .subscribe((eleves: any) => {
-      eleves = eleves.docs;
       this.listeEleves = eleves.map((e) => {
         return new EleveItem(e, false);
       });
