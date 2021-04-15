@@ -1,17 +1,23 @@
 <mat-card class="card-eleve">
   <app-tool-bar [title]="'Liste des élèves'">
+    <button  style="background-color: #0081a7;color:white" mat-button (click)=exportToExcel()>
+      <mat-icon aria-hidden="false">file_download</mat-icon>
+      Export Excel
+    </button>
     <button mat-button [matMenuTriggerFor]="menu">
       <mat-icon aria-hidden="false">more_vert</mat-icon>
     </button>
+    
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)=onClickAdd()>
           <mat-icon aria-hidden="false">add</mat-icon>
           Ajouter
       </button>
+    
     </mat-menu>
   </app-tool-bar>
   <div class="eleve-data">
-    <table mat-table [dataSource]="eleves">
+    <table mat-table [dataSource]="eleves" >
       <ng-container matColumnDef="image">
         <th mat-header-cell *matHeaderCellDef> Photo de profil </th>
         <td mat-cell *matCellDef="let element"> 

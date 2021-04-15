@@ -4,25 +4,15 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Eleve } from 'src/app/shared/model/eleve.model';
 import { ElevesService } from 'src/app/shared/services/eleves.service';
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+import { ExportService } from 'src/app/shared/services/export.service';
+
+export interface ExcelJson {
+  data: Array<any>;
+  header?: Array<string>;
+  skipHeader?: boolean;
+  origin?: string | number;
 }
 
-/*const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];*/
 @Component({
   selector: 'app-eleve-list',
   templateUrl: './eleve-list.component.html',
@@ -30,8 +20,9 @@ export interface PeriodicElement {
 })
 export class EleveListComponent implements OnInit {
   displayedColumns: string[] = ['image', 'nom', 'prenom', 'sexe'];
-  //dataSource = ELEMENT_DATA;
 
+  @ViewChild('userTable') userTable: ElementRef;
+  elevesExport:Eleve[] = [];
   eleves:Eleve[];
   page: number=1;
   limit: number=10;
@@ -48,13 +39,12 @@ export class EleveListComponent implements OnInit {
 
   constructor(private route:ActivatedRoute,private elevesService : ElevesService,
     private router:Router,
-    private titleService: Title) { 
+    private titleService: Title,private exportService: ExportService) { 
       this.titleService.setTitle("Liste des etudiants");
     }
 
   ngOnInit(): void {
     console.log('AVANT AFFICHAGE');
-   
     // on regarde s'il y a page= et limit = dans l'URL
     this.route.queryParams.subscribe(queryParams => {
       console.log("Dans le subscribe des queryParams")
@@ -62,9 +52,33 @@ export class EleveListComponent implements OnInit {
       this.limit = +queryParams.limit || 10;
 
       this.getEleves();
+      this.getAllEleves();
       
     });
       console.log("getEleves() du service appelé");
+  }
+
+
+  exportToExcel(): void {
+    const edata: Array<ExcelJson> = [];
+    // adding more data just to show "how we can keep on adding more data"
+    const bd = {
+      data: [
+        // chart title
+        { A: 'Email', B: 'Nom', C: 'Prenom', D: 'Sexe' }, // table header
+      ],
+      skipHeader: true
+    };
+    this.elevesExport.forEach(user => {
+      bd.data.push({
+        A: String(user.mail),
+        B: user.nom,
+        C: user.prenom,
+        D: user.sexe
+      });
+    });
+    edata.push(bd);
+    this.exportService.exportJsonToExcel(edata, 'user_data_customized');
   }
 
   pageEvents(event: any) {
@@ -90,6 +104,23 @@ export class EleveListComponent implements OnInit {
       this.prevPage = data.prevPage;
       this.hasNextPage = data.hasNextPage;
       this.nextPage = data.nextPage;
+      console.log("données reçues");
+    });
+  }
+
+  getAllEleves() {
+   
+    this.elevesService.getEleves()
+    .subscribe(data => {
+      console.log(data);
+      data.forEach(d => {
+        let eleve = new Eleve();
+        eleve.mail = d.identifiant.email;
+        eleve.nom = d.nom;
+        eleve.prenom = d.prenom;
+        eleve.sexe = d.sexe;
+        this.elevesExport.push(eleve);
+      });
       console.log("données reçues");
     });
   }

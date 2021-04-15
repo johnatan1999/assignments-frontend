@@ -30,7 +30,7 @@ Admin :
 - un graphe en batonnet sur le taux de réussite par matière
 - un graphe en courbe sur le taux de réussite par professeur
 2) Popup 
-3) Liste des élèves avec pagination 
+3) Liste des élèves avec pagination (avec export excel) 
 4) Liste des professeurs avec pagination
 5) Liste des matières avec pagination et option voir cours pour consulter les videos de chacun des cours
 Compte de test : 
