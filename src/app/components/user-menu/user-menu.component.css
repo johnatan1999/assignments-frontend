@@ -32,6 +32,7 @@
 }
 
 .user-menu span {
-    padding-left: 10px;
+    /* padding-left: 10px; */
+    margin-top: 0;
     font-size: 14px;
 }
