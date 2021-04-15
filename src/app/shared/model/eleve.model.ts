@@ -5,4 +5,5 @@ export class Eleve {
     prenom: string;
     image: string;
     sexe: string;
+    mail: string;
 }

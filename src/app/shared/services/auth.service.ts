@@ -127,6 +127,7 @@ export interface User {
   _id: string;
   user_info: UserInfo;
 }
+  
 export interface UserInfo {
   image: string;
   nom: string;
