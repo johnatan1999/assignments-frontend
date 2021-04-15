@@ -25,20 +25,14 @@ Fonctionnalités ajoutées :
 1) Drag and drop entre la liste des Assignments non rendus et rendus avec notification en utilisant l'ajout de messages de notification (SnackBar Material)
 	    
 Admin : 
-1) Ajout d'un tableau de bord affichant: 
-- le nombre d'étudiant, professeur, matières cliquable vers la liste de chacun
+1) Ajout d'un tableau de bord affichant:                                                                                                                                         - le nombre d'étudiant, professeur, matières cliquable vers la liste de chacun
 - le nombre d'assignments(rendu, pas rendu et en cours) 
 - un graphe en batonnet sur le taux de réussite par matière
-- un graphe en courbe sur le taux de réussite par professeur 
-	
-2)Popup 	    
-	
-3)Liste des élèves avec pagination    
-	
-4)Liste des professeurs avec pagination 	    
-	
-5)Liste des matières avec pagination et option voir cours pour consulter les videos de chacun des cours	
-
+- un graphe en courbe sur le taux de réussite par professeur
+2) Popup 
+3) Liste des élèves avec pagination 
+4) Liste des professeurs avec pagination
+5) Liste des matières avec pagination et option voir cours pour consulter les videos de chacun des cours
 Compte de test : 
 - Mail : john@gmail.com
 - Mot de passe : john
