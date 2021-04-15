@@ -1,89 +1,70 @@
 # assignments-frontend
- Projet grails leCoincoin Groupe 3 Madagascar 2021
+ Projet  Groupe  Madagascar 2021
 
 Membres du groupe : 
  
-	        Numéro 31 RAMANANTSALAMA Anthony Tiana 
-	        Numéro 41 RANDRIANARISOA Narindra
-	        Numéro 47 RASOANAIVO Ny Toky Andi
-			Numéro 53 RAVELOJAONA Tokiniaina Mathias
+	        Numéro 11 MANANDRAIBE Nelson Johnatan
 	        Numéro 24 RAKOTOBE Holiarisoa Vetso Nombana
 	    
 
 Fonctionnalités de base :
 	
-1) Connexion et déconnexion au backend -> accès pour les admin et moderateur
+1) Connexion et déconnexion au frontend (à l'aide de Json Web Tokens (JWT) ) -> accès pour les admin, professeur et élèves
 	
-2) CRUD annonces
+2) Ajout de nouvelles propriétés au modèle des Assignments
 	
-3) CRUD utilisateurs
+3) Amélioration de l'affichage des Assignments
 	
-4) Gestion de la sécurité -> admin peut tout faire et moderateur peut tout modifier mais ne peut pas créer ni 
-supprimer
+4) Utilisation de deux onglets séparés selon qu'ils ont été rendus ou pas encore rendus
 	
-5) Ergonomie correcte avec menu, cacher les casts, affichage des images
+5) Utilisation d'un formulaire de type Stepper (formulaire en plusieurs étapes) pour l'ajout d'Assignments (éventuellement pour la modification)
 	
-6) API Rest avec une collection Postman avec les méthodes GET/ POST/ PUT/ PATCH/ DELETE pour les utilisateurs et 
-les annonces avec les entêtes JSON et XML
 
 Fonctionnalités ajoutées :
 	
-1) Recherche multicritères sur les utilisateurs
+1) Drag and drop entre la liste des Assignments non rendus et rendus avec notification en utilisant l'ajout de messages de notification (SnackBar Material)
 	    
-	        Recherche sur leur nom
-	        Recherche sur le statut de compte désactivé ou non
-	        Possibilité de modifier directement le statut d'un utilisateur depuis la liste des utilisateurs
-	    
+Admin : 
+1) Ajout d'un tableau de bord affichant: 
+- le nombre d'étudiant, professeur, matières cliquable vers la liste de chacun
+- le nombre d'assignments(rendu, pas rendu et en cours) 
+- un graphe en batonnet sur le taux de réussite par matière
+- un graphe en courbe sur le taux de réussite par professeur 
 	
-2) Recherche pour pouvoir filtrer les annonces sur leur titre / description
+2)Popup 	    
 	
-3)Conception et développement d'un tableau de bord
-	    
-	        Statistiques sur le nombre d'articles créés
-	        Statistiques sur le nombre d'utilisateurs existants
-	        Statistiques sur le nombre d'images créés
-	        Graphe sur le nombre d'articles produits par intervalle de jours avec fitre et par années
-	        Graphe sur le nombre d'articles produits par mois durant les années
-	        Graphe sur le nombre d'articles produits par jours de la semaine durant les années avec possibilité de filtrer par nois
-	        Graphe sur les auteurs qui produisent le plus d'articles avec possibilité de choisir le mois de l'année , et le nombre d'auteurs à afficher
-	    
+3)Liste des élèves avec pagination    
 	
-4)Ecran gallerie
-	    
-	        Gestion avançée et regroupement des illustrations
-	        Possibilité de basculer à la fiche de l'annonce correspondante
-	        Possibilité d'effacer directement l'illustration
-	        Recherche multicritère par auteurs , mot-clé ou possibilité de trier et choisir une rangée de date entre la date d'ajout de l'image et celle de l'annonce
-	    
+4)Liste des professeurs avec pagination 	    
 	
-5)Import et export csv pour les utilisateurs 
-	    
-	        Import uniquement pour l'admin
-	        fichier test pour l'import dans racine/testupload.csv
-	    
-	
-6)Export CSV pour les annonces
-	
-7)API Rest avec une collection Postman avec les méthodes GET/ POST/ DELETE pour les illustrations avec les entêtes JSON et XML
-	
-8)Sécurité pour les différentes fonctions de l'API REST
-	
-9)Intégration du cdn cloudinary à l'application afin de stocker les images dans le Cloud
-	
-10) Déploiement sur Heroku à l'adresse http://grails13fikambanana.herokuapp.com/projet
+5)Liste des matières avec pagination et option voir cours pour consulter les videos de chacun des cours	
 
-	
- Compte de test : 
-	 
-	        Nom : admin
-	        Mot de passe : password
+Compte de test : 
+- Mail : john@gmail.com
+- Mot de passe : john
 
-    
-11)Ajout de plusieurs fonctionnalités de l'application ( comme l'ajout d'illustrations à une annonce)
-    
-12)Gestion à part des illustrations sur la page d'édition des annonces avec support de multiples images pour une seule annonce , possibilité d'ajouter ou de supprimer les images
+Professeur :
+1) Ajout d'un cours (upload du cours video avec une pochette)
+2) Noter les devoirs des élèves 
+    		
+Compte de test : 
+- Mail : vetsorakotobe@gmail.com
+- Mot de passe : password
+
+Elèves : 
+1) recevoir un assignments
+2) commencer un assignments
+3) rendre un assignments
+    		
+Compte de test : 
+- Mail : catleeslowan@gmail.com
+- Mot de passe : password
     
 Pour lancer le projet chez vous :
-    
-    Ouvrez le projet avec IntelliJ Ultimate
-    Faites "run" après la synchronisation des dépendances gradle
+
+    cloner les projets sur votre machine
+    installer les modules sur les deux projets avec npm i 
+    Ouvrer le projet avec Visual Studio Code
+    aller dans le fichier PATH\assignments-frontend\src\app\shared\services\basic.service.ts et modifier le base_uri en http://localhost:8010/api
+    démarrer le serveur node PATH\assignments-backend, ouvrez une invite de commande dessous et taper node server.js
+    démarrer la partie front PATH\assignments-frontend ouvrez une invite de commande dessous et taper ng server 
