@@ -8,6 +8,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { NoteModalComponent } from './note-modal/note-modal.component';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { filter, map, pairwise, throttleTime } from 'rxjs/operators';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-draggable-assignment-list',
@@ -36,11 +37,14 @@ export class DraggableAssignmentListComponent extends BasicAssignmentList {
   nonRenduHasNextPage: Boolean;
   searchNonRendu = '';
 
+  hideEdit = false;
+
   constructor(protected assignmentsService:AssignmentsService,
     protected route:ActivatedRoute,
     protected router:Router,public dialog: MatDialog,
     private ngZone: NgZone) {
       super(assignmentsService, route, router);
+      this.hideEdit = AuthService.isAdmin() || AuthService.isProf();
     }
     
   ngDoCheck() {

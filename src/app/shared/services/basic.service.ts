@@ -3,9 +3,9 @@ import { LoggingService } from "./login.service";
 
 export class BasicService {
 
-    static base_uri = "http://localhost:8010/api";
+    // static base_uri = "http://localhost:8010/api";
+    static base_uri = "https://assignments-backend.herokuapp.com/api"
     // uri = "https://assignments-backend.herokuapp.com/api/assignments"
-    // static base_uri = "https://assignments-backend.herokuapp.com/api"
 
     // constructor(protected loggingService:LoggingService, 
     //             protected http:HttpClient) { }

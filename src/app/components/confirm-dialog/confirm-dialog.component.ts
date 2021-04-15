@@ -8,6 +8,8 @@ export interface ConfirmDialogData {
   message: String | 'Confirmer ?';
   onConfirm: Function | (() => {});
   onAbort: Function | (() => {});
+  object: any;
+  attribute: string;
 }
 
 @Component({
@@ -17,9 +19,13 @@ export interface ConfirmDialogData {
 })
 export class ConfirmDialogComponent {
 
+  target: String;
+
   constructor(
     public dialogRef: MatDialogRef<ConfirmDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ConfirmDialogData) {
+      if(data.object)
+        this.target = data.object[data.attribute];
     }
 
 
