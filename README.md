@@ -6,7 +6,7 @@ Membres du groupe :
 	        Numéro 11 MANANDRAIBE Nelson Johnatan
 	        Numéro 24 RAKOTOBE Holiarisoa Vetso Nombana
 	    
-
+Chemin du video : /assignment.mp4
 Fonctionnalités de base :
 	
 1) Connexion et déconnexion au frontend (à l'aide de Json Web Tokens (JWT) ) -> accès pour les administrateurs, professeurs et élèves
