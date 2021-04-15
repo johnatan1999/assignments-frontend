@@ -28,8 +28,17 @@
 }
 
 .img-container img {
-    width: 150px;
-    min-height: 150px;
+    width: 100px;
+    min-height: 100px;
     height: auto;
     border-radius: 50%;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+:host /deep/ .form .mat-dialog-container {
+    overflow: hidden;
 }

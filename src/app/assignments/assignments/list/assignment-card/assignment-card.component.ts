@@ -23,8 +23,8 @@ export class AssignmentCardComponent implements OnInit {
   @Input() hideState = true;
   @Input() hideEdit = false;
   @Input() hideDelete = false;
-  @Output() changeEmitter = new EventEmitter();
-  @Output() deleteEmitter = new EventEmitter();
+  @Output() removeEmitter = new EventEmitter();
+  @Input() editCallback = (a: Assignment) => {};
 
   inProgress: Boolean;
   constructor(private dialog: MatDialog,
@@ -66,9 +66,9 @@ export class AssignmentCardComponent implements OnInit {
 
   onValidAssignment(event) {
     this.assignment.etat = 0;
-    this.changeEmitter.emit(this.assignment);
     this.assignment.rendu = true;
     this.assignmentService.updateAssignment(this.assignment).subscribe((response) => {
+      if(this.editCallback) this.editCallback(this.assignment);
       this._snackBar.open("Assignment", "Modifiée", {
         duration: 2000
       })
@@ -88,15 +88,15 @@ export class AssignmentCardComponent implements OnInit {
 
   
   private onDelete() {
-    this.assignmentService
-      .deleteAssignment(this.assignment)
-      .subscribe((reponse) => {
-        console.log(reponse.message);
-        this.deleteEmitter.emit(true);
-        this._snackBar.open("Asssignment", "Suprimmée", {
-          duration: 3000
-        })
-      });
+    this.removeEmitter.emit(this.assignment);
+    // this.assignmentService
+    //   .deleteAssignment(this.assignment)
+    //   .subscribe((reponse) => {
+    //     console.log(reponse.message);
+    //     this._snackBar.open("Asssignment", "Suprimmée", {
+    //       duration: 3000
+    //     })
+    //   });
   }
 
   openConfirmDialog(event) {

@@ -169,6 +169,17 @@ export class DraggableAssignmentListComponent extends BasicAssignmentList {
     }
   }
 
+  onRemoveAssignment(assignment: Assignment) {
+    console.log("##", this.assignmentsNonRendu.length, assignment)
+    this.assignmentsNonRendu = this.assignmentsNonRendu.filter((a) => a._id !== assignment._id);
+    console.log("##->", this.assignmentsNonRendu.length)
+    this.assignmentsRendu = this.assignmentsRendu.filter((a) => a._id !== assignment._id);
+  }
+
+  onUpdateAssignment(assignment: Assignment) {
+    
+  }
+
   openDialog(assignment: Assignment): void {
     const dialogRef = this.dialog.open(NoteModalComponent, {
       width: '500px',

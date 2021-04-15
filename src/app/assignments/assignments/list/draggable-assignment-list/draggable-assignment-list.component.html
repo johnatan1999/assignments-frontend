@@ -60,7 +60,7 @@
           <mat-list *cdkVirtualFor="let a of assignmentsRendu" cdkDrag>
             <!-- <mat-list-item  class="assignment-item"> -->
                 <a routerLink="/assignments/detail/{{ a.id }}" style="text-decoration: none;">
-                    <app-assignment-card [hideEdit]="hideEdit" class="assignment-item" [assignment]="a"></app-assignment-card>
+                    <app-assignment-card (removeEmitter)="onRemoveAssignment($event)" [editCallback]="onUpdateAssignment" [hideEdit]="hideEdit" class="assignment-item" [assignment]="a"></app-assignment-card>
                 </a>
             <!-- </mat-list-item> -->
           </mat-list>

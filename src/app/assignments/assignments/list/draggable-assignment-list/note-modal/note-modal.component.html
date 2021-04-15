@@ -10,8 +10,12 @@
     </div>
     <form class="form">
         <mat-form-field>
-        <mat-label>Saisissez une note</mat-label>
-        <input matInput min="0" max="20" [(ngModel)]="note" type="number" name="note">
+            <mat-label>Saisissez une note</mat-label>
+            <input matInput min="0" max="20" [(ngModel)]="note" type="number" name="note">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Remarque</mat-label>
+            <textarea matInput [(ngModel)]="remarque"></textarea>
         </mat-form-field>
         <div mat-dialog-actions >
             <button mat-raised-button style="margin: auto;" mat-button (click)="onClose()">Close</button>
