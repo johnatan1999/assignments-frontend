@@ -4,10 +4,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { catchError, retry } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRouteSnapshot } from '@angular/router';
+import { BasicService } from './basic.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class AuthService extends BasicService {
 
   public static ADMIN = "admin";
 
@@ -19,7 +20,7 @@ export class AuthService {
 
   public static HOME_ADMIN = "/assignments/dashboard";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http:HttpClient) { super(); }
 
   logIn(login, password) {
     // typiquement, acceptera en paramètres un login et un password
@@ -37,7 +38,7 @@ export class AuthService {
 
     const headers = { 'Content-Type': 'application/json' };
     const body = JSON.stringify(user);
-    return this.http.post<any>('http://localhost:8010/api/login', body, { 'headers': headers })
+    return this.http.post<any>(this.getUri('/login'), body, { 'headers': headers })
       .pipe(
         retry(3),
         catchError(this.handleError) //fonction mandray fonction
