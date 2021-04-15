@@ -66,10 +66,8 @@ export class AssignmentsComponent implements OnInit {
     this.showProgression = true;
     this.eleveService.getEleves()
     .subscribe((eleves: any) => {
-      eleves = eleves.docs;
       this.professeurService.getProfesseurs()
       .subscribe((professeurs: any) => {
-        professeurs = professeurs.docs;
         assignmentsGeneres.forEach((a) => {
           const nouvelAssignment = new Assignment();
           const randEleve = Math.floor(Math.random() * eleves.length);

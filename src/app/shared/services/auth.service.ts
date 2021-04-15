@@ -40,7 +40,7 @@ export class AuthService extends BasicService {
     const body = JSON.stringify(user);
     return this.http.post<any>(this.getUri('/login'), body, { 'headers': headers })
       .pipe(
-        retry(3),
+        retry(1),
         catchError(this.handleError) //fonction mandray fonction
       );
   }

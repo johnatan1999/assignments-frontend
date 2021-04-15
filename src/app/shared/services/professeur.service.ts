@@ -18,7 +18,7 @@ export class ProfesseurService extends BasicService {
     static PATH = '/professeurs';
 
     getProfesseurs():Observable<Professeur[]> {
-        return this.http.get<Professeur[]>(this.getUri(ProfesseurService.PATH));
+        return this.http.get<Professeur[]>(this.getUri('/all-professeurs'));
     }
 
     addProfesseur(professeur: Professeur):Observable<any> {

@@ -27,7 +27,7 @@ export class ElevesService extends BasicService {
   getEleves():Observable<any[]> {
     console.log("Dans le service de gestion des Eleves...")
     //return of(this.Eleves);
-    return this.http.get<Eleve[]>(this.getUri(this.PATH));
+    return this.http.get<Eleve[]>(this.getUri('/all-eleves'));
   }
 
   getElevesPagine(page:number, limit:number):Observable<any> {
