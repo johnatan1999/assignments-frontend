@@ -18,6 +18,7 @@ Fonctionnalités de base :
 4) Utilisation de deux onglets séparés selon qu'ils ont été rendus ou pas encore rendus
 	
 5) Utilisation d'un formulaire de type Stepper (formulaire en plusieurs étapes) pour l'ajout d'Assignments (éventuellement pour la modification)
+                                                                                                                                                                                 6) Peupler BD
 	
 
 Fonctionnalités ajoutées :
