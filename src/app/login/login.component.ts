@@ -16,11 +16,13 @@ export class LoginComponent implements OnInit {
 
   checkUser: CheckUser = new CheckUser();
   hide = true;
- // email = new FormControl('john@gmail.com', [Validators.required, Validators.email]);
- // password = new FormControl('john', [Validators.required]);
-   email = new FormControl('vetsorakotobe@gmail.com', [Validators.required, Validators.email]);
+  email = new FormControl('john@gmail.com', [Validators.required, Validators.email]);
+  password = new FormControl('john', [Validators.required]);
+
+  showLoader = false;
+  //  email = new FormControl('vetsorakotobe@gmail.com', [Validators.required, Validators.email]);
   // email = new FormControl('catleeslowan@gmail.com', [Validators.required, Validators.email]);
-     password = new FormControl('password', [Validators.required]);
+    //  password = new FormControl('password', [Validators.required]);
   
 
   constructor(private authService:AuthService, private router:Router) {
@@ -54,22 +56,16 @@ export class LoginComponent implements OnInit {
     // si je suis pas loggé, je me loggue, sinon, si je suis
     // loggé je me déloggue et j'affiche la page d'accueil
     if((!this.email.value) || (!this.password.value)) return;
-   /* if(this.authService.loggedIn) {
-      // je suis loggé
-      // et bien on se déloggue
-      this.authService.logOut();
-      // on navigue vers la page d'accueil
-      this.router.navigate(["/home"]);
-    } else {*/
-      // je ne suis pas loggé, je me loggue
-
+      this.showLoader = true;
       this.authService.logIn(this.email.value, this.password.value).subscribe((data) => {
         if(data.auth)
         {
           localStorage.setItem("user",JSON.stringify(data.user));
           this.router.navigate([this.authService.getHomePage()]);
+          this.showLoader = false;
         } 
       }, (error) => {
+        this.showLoader = false;
         this.checkUser.state = true;
       });
   }
