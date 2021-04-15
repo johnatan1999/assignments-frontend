@@ -1,4 +1,4 @@
-# assignments-frontend
+# assignments-frontend ([Demo](https://assignments-frontend.herokuapp.com/))
  Projet Assignments Groupe 5 Madagascar 2021
 
 Membres du groupe : 
@@ -56,9 +56,9 @@ Compte de test :
     
 Pour lancer le projet chez vous :
 
-    - cloner les projets sur votre machine
-    - installer les modules sur les deux projets avec npm i 
-    - Ouvrer le projet avec Visual Studio Code
+    - clonez les projets sur votre machine
+    - installez les modules sur les deux projets avec npm i 
+    - Ouvrez le projet avec Visual Studio Code
     - aller dans le fichier PATH\assignments-frontend\src\app\shared\services\basic.service.ts et modifier le base_uri en http://localhost:8010/api
     - démarrer le serveur node PATH\assignments-backend, ouvrez une invite de commande dessous et taper node server.js
     - démarrer la partie front PATH\assignments-frontend ouvrez une invite de commande dessous et taper ng server 
